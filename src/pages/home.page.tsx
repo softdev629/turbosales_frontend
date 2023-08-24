@@ -13,9 +13,11 @@ import { ReactComponent as ClientsIcon } from "../assets/images/ico_clients.svg"
 import Footer from "../components/Footer";
 import { useState } from "react";
 import NewClientModal from "../components/modals/newclient.modal";
+import PitchModal from "../components/modals/pitch.modal";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
+  const [openPitch, setOpenPitch] = useState(false);
 
   const actions = [
     {
@@ -28,6 +30,9 @@ const HomePage = () => {
     {
       icon: <PitchIcon width={48} height={48} fill="#ea2049" />,
       text: "Pitch",
+      click: () => {
+        setOpenPitch(true);
+      },
     },
     {
       icon: <TestDriveIcon width={48} height={48} fill="#ea2049" />,
@@ -108,6 +113,7 @@ const HomePage = () => {
       </Container>
       <Box>
         <NewClientModal setOpen={setOpenNewClient} open={openNewClient} />
+        <PitchModal setOpen={setOpenPitch} open={openPitch} />
       </Box>
     </>
   );

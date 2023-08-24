@@ -363,10 +363,14 @@ const NewClientModal = (props: {
                 </FormGroup>
               </FormControl>
               <Stack flexDirection="row" justifyContent="center" gap={2} mt={4}>
-                <LoadingButton type="submit" variant="contained">
+                <LoadingButton type="submit" variant="contained" fullWidth>
                   Confirm
                 </LoadingButton>
-                <Button variant="outlined" onClick={() => props.setOpen(false)}>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  onClick={() => props.setOpen(false)}
+                >
                   Cancel
                 </Button>
               </Stack>

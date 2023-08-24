@@ -96,12 +96,15 @@ const Header = () => {
             alt="Logo"
             width={210}
             height={60}
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            sx={{ mr: 2 }}
           />
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            justifyContent="flex-end"
+          >
             <IconButton
-              size="large"
+              size="small"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
@@ -235,15 +238,8 @@ const Header = () => {
               </Menu>
             </Menu>
           </Box>
-          <Box
-            component="img"
-            src={LogoIcon}
-            alt="Logo"
-            width={210}
-            height={60}
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-          />
-          <Box flexGrow={1} />
+
+          <Box sx={{ display: { xs: "none", md: "flex" } }} flexGrow={1} />
           <Box sx={{ display: { xs: "none", md: "flex" } }} gap={3}>
             {navLinks.map((navLink, index) => (
               <Button
