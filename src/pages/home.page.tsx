@@ -14,10 +14,12 @@ import Footer from "../components/Footer";
 import { useState } from "react";
 import NewClientModal from "../components/modals/newclient.modal";
 import PitchModal from "../components/modals/pitch.modal";
+import TestDriveModal from "../components/modals/testdrive.modal";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
   const [openPitch, setOpenPitch] = useState(false);
+  const [openTestDrive, setOpenTestDrive] = useState(false);
 
   const actions = [
     {
@@ -37,6 +39,9 @@ const HomePage = () => {
     {
       icon: <TestDriveIcon width={48} height={48} fill="#ea2049" />,
       text: "Test Drive",
+      click: () => {
+        setOpenTestDrive(true);
+      },
     },
     {
       icon: <SoldIcon width={48} height={48} fill="#ea2049" />,
@@ -114,6 +119,7 @@ const HomePage = () => {
       <Box>
         <NewClientModal setOpen={setOpenNewClient} open={openNewClient} />
         <PitchModal setOpen={setOpenPitch} open={openPitch} />
+        <TestDriveModal setOpen={setOpenTestDrive} open={openTestDrive} />
       </Box>
     </>
   );

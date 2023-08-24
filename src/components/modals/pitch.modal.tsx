@@ -6,10 +6,6 @@ import {
   Typography,
   TextField,
   FormControl,
-  FormLabel,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
   Stack,
   Button,
   InputLabel,
@@ -17,14 +13,14 @@ import {
   MenuItem,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { object, string, boolean, TypeOf, date } from "zod";
+import { useForm } from "react-hook-form";
+import { object, string, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { fromDayjsToDate } from "../../util";
 
 const style = {
@@ -55,17 +51,17 @@ const PitchModal = (props: {
   });
 
   const {
-    handleSubmit,
+    // handleSubmit,
     register,
     setValue,
-    formState: { errors },
+    // formState: { errors },
   } = methods;
 
-  const onSubmitHandler: SubmitHandler<NewPatchSaveSchema> = (
-    values: NewPatchSaveSchema
-  ) => {
-    console.log(values);
-  };
+  // const onSubmitHandler: SubmitHandler<NewPatchSaveSchema> = (
+  //   values: NewPatchSaveSchema
+  // ) => {
+  //   console.log(values);
+  // };
 
   return (
     <Modal
