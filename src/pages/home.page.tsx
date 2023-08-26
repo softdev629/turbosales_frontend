@@ -1,6 +1,5 @@
+import { useState } from "react";
 import { Container, Box, Typography, Button, Stack } from "@mui/material";
-
-import Header from "../components/Header";
 
 import { ReactComponent as NewClientIcon } from "../assets/images/ico_new_client.svg";
 import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
@@ -10,18 +9,18 @@ import { ReactComponent as TrainingIcon } from "../assets/images/ico_training.sv
 import { ReactComponent as ScheduleIcon } from "../assets/images/ico_schedule.svg";
 import { ReactComponent as CommissionIcon } from "../assets/images/ico_commisions.svg";
 import { ReactComponent as ClientsIcon } from "../assets/images/ico_clients.svg";
-import Footer from "../components/Footer";
-import { useState } from "react";
 import NewClientModal from "../components/modals/newclient.modal";
 import PitchModal from "../components/modals/pitch.modal";
 import TestDriveModal from "../components/modals/testdrive.modal";
 import SoldModal from "../components/modals/sold.modal";
+import TrainingModal from "../components/modals/training.modal";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
   const [openPitch, setOpenPitch] = useState(false);
   const [openTestDrive, setOpenTestDrive] = useState(false);
   const [openSold, setOpenSold] = useState(false);
+  const [openTraining, setOpenTraining] = useState(false);
 
   const actions = [
     {
@@ -55,6 +54,9 @@ const HomePage = () => {
     {
       icon: <TrainingIcon width={48} height={48} fill="#ea2049" />,
       text: "Training",
+      click: () => {
+        setOpenTraining(true);
+      },
     },
     {
       icon: <ScheduleIcon width={48} height={48} fill="#ea2049" />,
@@ -73,7 +75,6 @@ const HomePage = () => {
   return (
     <>
       <Container maxWidth="xl" sx={{ p: { xs: 0 } }}>
-        <Header />
         <Box
           sx={{
             borderBottomLeftRadius: { md: 40, xs: 0 },
@@ -119,13 +120,13 @@ const HomePage = () => {
             ))}
           </Stack>
         </Box>
-        <Footer />
       </Container>
       <Box>
         <NewClientModal setOpen={setOpenNewClient} open={openNewClient} />
         <PitchModal setOpen={setOpenPitch} open={openPitch} />
         <TestDriveModal setOpen={setOpenTestDrive} open={openTestDrive} />
         <SoldModal setOpen={setOpenSold} open={openSold} />
+        <TrainingModal setOpen={setOpenTraining} open={openTraining} />
       </Box>
     </>
   );
