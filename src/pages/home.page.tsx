@@ -14,6 +14,8 @@ import PitchModal from "../components/modals/pitch.modal";
 import TestDriveModal from "../components/modals/testdrive.modal";
 import SoldModal from "../components/modals/sold.modal";
 import TrainingModal from "../components/modals/training.modal";
+import { useAppSelector } from "../redux/store";
+import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
@@ -21,6 +23,7 @@ const HomePage = () => {
   const [openTestDrive, setOpenTestDrive] = useState(false);
   const [openSold, setOpenSold] = useState(false);
   const [openTraining, setOpenTraining] = useState(false);
+  const user = useAppSelector((state) => state.userState.user);
 
   const actions = [
     {
@@ -71,6 +74,8 @@ const HomePage = () => {
       text: "Clients",
     },
   ];
+
+  if (user?.role === "admin") return <Navigate to="/admin/hq_dashboard" />;
 
   return (
     <>

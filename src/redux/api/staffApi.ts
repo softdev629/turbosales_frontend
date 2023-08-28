@@ -1,16 +1,16 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
-import { NewClientSaveInput } from "../../components/modals/newclient.modal";
 import { IGenericResponse } from "./types";
+import { NewStaffSaveSchema } from "../../components/modals/staff.modal";
 
-export const clientApi = createApi({
-  reducerPath: "clientApi",
+export const staffApi = createApi({
+  reducerPath: "staffApi",
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
-    addClient: builder.mutation<IGenericResponse, NewClientSaveInput>({
+    addStaff: builder.mutation<IGenericResponse, NewStaffSaveSchema>({
       query(data) {
         return {
-          url: "clients",
+          url: "staffs",
           method: "POST",
           body: data,
           credentials: "include",
@@ -19,3 +19,5 @@ export const clientApi = createApi({
     }),
   }),
 });
+
+export const { useAddStaffMutation } = staffApi;

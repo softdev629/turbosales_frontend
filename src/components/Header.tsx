@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -14,30 +14,39 @@ import {
   ArrowRight,
   Menu as MenuIcon,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import LogoIcon from "../assets/images/logo_savvi.svg";
-import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { useLogoutUserMutation } from "../redux/api/authApi";
+import { logout } from "../redux/features/userSlice";
 
 const navLinks = [
   {
     text: "Home",
     to: "/",
+    restrict: ["sales", "manager"],
   },
   {
     text: "Commissions",
     to: "/commissions",
+    restrict: ["instructor", "sales", "manager"],
   },
   {
     text: "Schedule",
     to: "/schedule",
+    restrict: ["instructor", "sales", "manager"],
   },
   {
     text: "My Clients",
     to: "/my_clients",
+    restrict: ["sales", "manager"],
   },
   {
     text: "Dashboard",
     to: "/dashboard",
+    restrict: ["manager"],
   },
 ];
 
@@ -45,42 +54,52 @@ const moreLinks = [
   {
     text: "Center Clients",
     to: "/center_clients",
+    restrict: ["sales", "manager"],
   },
   {
     text: "Center Settings",
     to: "/center_settings",
+    restrict: ["manager"],
   },
   {
     text: "HQ Clients",
     to: "/admin/hqcenters",
+    restrict: ["admin"],
   },
   {
     text: "HQ Centers",
     to: "/admin/hq_centers",
+    restrict: ["admin"],
   },
   {
     text: "HQ Dashboard",
     to: "/admin/hq_dashboard",
+    restrict: ["admin"],
   },
   {
     text: "HQ Settings",
     to: "/admin/hq_settings",
+    restrict: ["admin"],
   },
   {
     text: "Account",
     to: "/account",
+    restrict: ["instructor", "sales", "manager", "admin"],
   },
   {
     text: "Contact",
     to: "/contact",
+    restrict: ["instructor", "sales", "manager"],
   },
   {
     text: "Terms",
     to: "/terms",
+    restrict: ["instructor", "sales", "manager", "admin"],
   },
   {
     text: "Log Out",
     to: "/",
+    restrict: ["instructor", "sales", "manager", "admin"],
   },
 ];
 
@@ -99,8 +118,26 @@ const Header = () => {
   );
   const openMore = Boolean(moreEl);
   const openLang = Boolean(langEl);
+  const user = useAppSelector((state) => state.userState.user);
+  const dispatch = useAppDispatch();
+  const [logoutUser, logoutState] = useLogoutUserMutation();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (logoutState.isSuccess) {
+      dispatch(logout());
+      navigate("/login");
+    }
+    if (logoutState.isError) {
+      if (Array.isArray((logoutState.error as any).data.error))
+        (logoutState.error as any).data.error.forEach((el: any) =>
+          toast.error(el.message)
+        );
+      else toast.error((logoutState.error as any).data.message);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [logoutState]);
 
   return (
     <>
@@ -153,33 +190,39 @@ const Header = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {navLinks.map((navLink, index) => (
-                  <MenuItem
-                    sx={{
-                      color: "black",
-                      textTransform: "none",
-                    }}
-                    key={`nav_link_${index}`}
-                    onClick={() => navigate(navLink.to)}
-                  >
-                    {navLink.text}
+                {user &&
+                  navLinks.map(
+                    (navLink, index) =>
+                      navLink.restrict.includes(user?.role as string) && (
+                        <MenuItem
+                          sx={{
+                            color: "black",
+                            textTransform: "none",
+                          }}
+                          key={`nav_link_${index}`}
+                          onClick={() => navigate(navLink.to)}
+                        >
+                          {navLink.text}
+                        </MenuItem>
+                      )
+                  )}
+                {user && (
+                  <MenuItem>
+                    <Button
+                      id="more-button"
+                      aria-controls={openMore ? "more-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={openMore ? "true" : undefined}
+                      onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                        setMoreEl(event?.currentTarget)
+                      }
+                      sx={{ color: "black", textTransform: "none" }}
+                      endIcon={openMore ? <ArrowDropDown /> : <ArrowRight />}
+                    >
+                      More
+                    </Button>
                   </MenuItem>
-                ))}
-                <MenuItem>
-                  <Button
-                    id="more-button"
-                    aria-controls={openMore ? "more-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={openMore ? "true" : undefined}
-                    onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                      setMoreEl(event?.currentTarget)
-                    }
-                    sx={{ color: "black", textTransform: "none" }}
-                    endIcon={openMore ? <ArrowDropDown /> : <ArrowRight />}
-                  >
-                    More
-                  </Button>
-                </MenuItem>
+                )}
                 <Menu
                   id="more-menu"
                   anchorEl={moreEl}
@@ -193,22 +236,30 @@ const Header = () => {
                     },
                   }}
                 >
-                  {moreLinks.map((moreLink, index) => (
-                    <MenuItem
-                      key={`more_link_${index}`}
-                      sx={{
-                        "&:hover": {
-                          bgcolor: "#595959",
-                          color: "white",
-                          transitionDuration: "1s",
-                        },
-                        color: "#595959",
-                      }}
-                      onClick={() => navigate(moreLink.to)}
-                    >
-                      {moreLink.text}
-                    </MenuItem>
-                  ))}
+                  {user &&
+                    moreLinks.map(
+                      (moreLink, index) =>
+                        moreLink.restrict.includes(user?.role as string) && (
+                          <MenuItem
+                            key={`more_link_${index}`}
+                            sx={{
+                              "&:hover": {
+                                bgcolor: "#595959",
+                                color: "white",
+                                transitionDuration: "1s",
+                              },
+                              color: "#595959",
+                            }}
+                            onClick={() => {
+                              if (moreLink.text !== "Log Out")
+                                navigate(moreLink.to);
+                              else logoutUser();
+                            }}
+                          >
+                            {moreLink.text}
+                          </MenuItem>
+                        )
+                    )}
                 </Menu>
                 <MenuItem>
                   <Button
@@ -263,31 +314,38 @@ const Header = () => {
 
             <Box sx={{ display: { xs: "none", md: "flex" } }} flexGrow={1} />
             <Box sx={{ display: { xs: "none", md: "flex" } }} gap={3}>
-              {navLinks.map((navLink, index) => (
+              {user &&
+                navLinks.map(
+                  (navLink, index) =>
+                    navLink.restrict.includes(user?.role as string) && (
+                      <Button
+                        sx={{
+                          color: "black",
+                          textTransform: "none",
+                        }}
+                        key={`nav_link_${index}`}
+                        onClick={() => navigate(navLink.to)}
+                      >
+                        {navLink.text}
+                      </Button>
+                    )
+                )}
+              {user && (
                 <Button
-                  sx={{
-                    color: "black",
-                    textTransform: "none",
-                  }}
-                  key={`nav_link_${index}`}
-                  onClick={() => navigate(navLink.to)}
+                  id="more-button"
+                  aria-controls={openMore ? "more-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMore ? "true" : undefined}
+                  onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                    setMoreEl(event?.currentTarget)
+                  }
+                  sx={{ color: "black", textTransform: "none" }}
+                  endIcon={openMore ? <ArrowDropDown /> : <ArrowRight />}
                 >
-                  {navLink.text}
+                  More
                 </Button>
-              ))}
-              <Button
-                id="more-button"
-                aria-controls={openMore ? "more-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={openMore ? "true" : undefined}
-                onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                  setMoreEl(event?.currentTarget)
-                }
-                sx={{ color: "black", textTransform: "none" }}
-                endIcon={openMore ? <ArrowDropDown /> : <ArrowRight />}
-              >
-                More
-              </Button>
+              )}
+
               <Menu
                 id="more-menu"
                 anchorEl={moreEl}
@@ -301,22 +359,30 @@ const Header = () => {
                   },
                 }}
               >
-                {moreLinks.map((moreLink, index) => (
-                  <MenuItem
-                    key={`more_link_${index}`}
-                    sx={{
-                      "&:hover": {
-                        bgcolor: "#595959",
-                        color: "white",
-                        transitionDuration: "1s",
-                      },
-                      color: "#595959",
-                    }}
-                    onClick={() => navigate(moreLink.to)}
-                  >
-                    {moreLink.text}
-                  </MenuItem>
-                ))}
+                {user &&
+                  moreLinks.map(
+                    (moreLink, index) =>
+                      moreLink.restrict.includes(user?.role as string) && (
+                        <MenuItem
+                          key={`more_link_${index}`}
+                          sx={{
+                            "&:hover": {
+                              bgcolor: "#595959",
+                              color: "white",
+                              transitionDuration: "1s",
+                            },
+                            color: "#595959",
+                          }}
+                          onClick={() => {
+                            if (moreLink.text !== "Log Out")
+                              navigate(moreLink.to);
+                            else logoutUser();
+                          }}
+                        >
+                          {moreLink.text}
+                        </MenuItem>
+                      )
+                  )}
               </Menu>
               <Button
                 id="lang-button"

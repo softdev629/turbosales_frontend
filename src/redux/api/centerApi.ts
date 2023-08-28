@@ -1,20 +1,20 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import customFetchBase from "./customFetchBase";
 import { ICenters, IGenericResponse } from "./types";
 import { NewCenterSaveSchema } from "../../components/modals/center.modal";
 
-const BASE_URL = process.env.REACT_APP_SERVER_ENDPOINT;
-
 export const centerApi = createApi({
   reducerPath: "centerApi",
-  baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/center` }),
+  baseQuery: customFetchBase,
   tagTypes: ["Center"],
   endpoints: (builder) => ({
     addCenter: builder.mutation<IGenericResponse, NewCenterSaveSchema>({
       query(data) {
         return {
-          url: "",
+          url: "centers",
           method: "POST",
           body: data,
+          credentials: "include",
         };
       },
       invalidatesTags: [{ type: "Center", id: "LIST" }],
@@ -31,7 +31,8 @@ export const centerApi = createApi({
     >({
       query({ page, rowsPerPage, country, level, search }) {
         return {
-          url: `?page=${page}&rowsPerPage=${rowsPerPage}&country=${country}&level=${level}&search=${search}`,
+          url: `centers?page=${page}&rowsPerPage=${rowsPerPage}&country=${country}&level=${level}&search=${search}`,
+          credentials: "include",
         };
       },
       providesTags: [{ type: "Center", id: "LIST" }],

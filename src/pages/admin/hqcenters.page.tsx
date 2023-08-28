@@ -464,7 +464,7 @@ export const countries: readonly CountryType[] = [
   { code: "ZW", label: "Zimbabwe", phone: "263" },
 ];
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
@@ -474,7 +474,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
@@ -484,7 +484,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-interface TablePaginationActionsProps {
+export interface TablePaginationActionsProps {
   count: number;
   page: number;
   rowsPerPage: number;
@@ -494,7 +494,7 @@ interface TablePaginationActionsProps {
   ) => void;
 }
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
+export function TablePaginationActions(props: TablePaginationActionsProps) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -576,6 +576,7 @@ const HQCentersPage = () => {
 
   useEffect(() => {
     getClients({ page, rowsPerPage, country, level, search });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, country, level, search, rowsPerPage]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -584,8 +585,6 @@ const HQCentersPage = () => {
     : page > 0
     ? Math.max(0, (1 + page) * rowsPerPage - getState.data.filtered_counts)
     : 0;
-
-  console.log();
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
