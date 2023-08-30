@@ -15,12 +15,18 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  Controller,
+} from "react-hook-form";
 import { object, TypeOf, string } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
-import { useAddStaffMutation } from "../../redux/api/staffApi";
+import { useAddStaffMutation } from "../../redux/api/userApi";
+import { useAppSelector } from "../../redux/store";
 
 const style = {
   position: "absolute" as "absolute",
@@ -37,7 +43,7 @@ const style = {
 };
 
 const newStaffSchema = object({
-  center_id: string().min(1, "Center ID is required."),
+  center_id: string().min(1, "Center ID is required.").optional(),
   name: string().min(1, "Name is required."),
   mobile: string()
     .min(1, "Mobile is required")
@@ -56,6 +62,7 @@ const StaffModal = (props: {
   open: boolean;
 }) => {
   const [addStaff, addState] = useAddStaffMutation();
+  const user = useAppSelector((state) => state.userState.user);
 
   useEffect(() => {
     if (addState.isSuccess) {
@@ -65,8 +72,6 @@ const StaffModal = (props: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addState]);
 
-  useEffect(() => {}, [props.open]);
-
   const methods = useForm<NewStaffSaveSchema>({
     resolver: zodResolver(newStaffSchema),
   });
@@ -74,6 +79,7 @@ const StaffModal = (props: {
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors },
   } = methods;
 
@@ -109,20 +115,28 @@ const StaffModal = (props: {
               <Typography color="primary.main" variant="h5" textAlign="center">
                 NEW STAFF
               </Typography>
-              <TextField
-                {...register("center_id")}
-                defaultValue="Country-xxx-A00"
-                label="Center ID"
-                size="small"
-                disabled
-                sx={{
-                  ".Mui-disabled": {
-                    bgcolor: "rgba(217, 217,217, .41)",
-                  },
-                }}
-                error={!!errors["center_id"]}
-                helperText={errors["center_id"]?.message}
+              <Controller
+                control={control}
+                name="center_id"
+                defaultValue={user?.center_id}
+                render={({ field: { onChange, value } }) => (
+                  <TextField
+                    label="Center ID"
+                    size="small"
+                    disabled
+                    sx={{
+                      ".Mui-disabled": {
+                        bgcolor: "rgba(217, 217,217, .41)",
+                      },
+                    }}
+                    value={value}
+                    onChange={onChange}
+                    error={!!errors["center_id"]}
+                    helperText={errors["center_id"]?.message}
+                  />
+                )}
               />
+
               <TextField
                 {...register("name")}
                 label="Name"
@@ -162,26 +176,34 @@ const StaffModal = (props: {
                 <FormLabel id="role-radio-buttons-group-label">
                   Type of Staff
                 </FormLabel>
-                <RadioGroup
-                  aria-labelledby="role-radio-buttons-group-label"
-                  defaultValue="instructor"
-                >
-                  <FormControlLabel
-                    value="manager"
-                    control={<Radio />}
-                    label="Manager"
-                  />
-                  <FormControlLabel
-                    value="instructor"
-                    control={<Radio />}
-                    label="Instructor"
-                  />
-                  <FormControlLabel
-                    value="sales"
-                    control={<Radio />}
-                    label="Sales Rep"
-                  />
-                </RadioGroup>
+                <Controller
+                  control={control}
+                  name="role"
+                  defaultValue="sales"
+                  render={({ field: { onChange, value } }) => (
+                    <RadioGroup
+                      aria-labelledby="role-radio-buttons-group-label"
+                      value={value}
+                      onChange={onChange}
+                    >
+                      <FormControlLabel
+                        value="manager"
+                        control={<Radio />}
+                        label="Manager"
+                      />
+                      <FormControlLabel
+                        value="instructor"
+                        control={<Radio />}
+                        label="Instructor"
+                      />
+                      <FormControlLabel
+                        value="sales"
+                        control={<Radio />}
+                        label="Sales Rep"
+                      />
+                    </RadioGroup>
+                  )}
+                />
               </FormControl>
             </Stack>
             <Box display="flex" gap={2} mt={4}>

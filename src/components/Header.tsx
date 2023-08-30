@@ -200,7 +200,10 @@ const Header = () => {
                             textTransform: "none",
                           }}
                           key={`nav_link_${index}`}
-                          onClick={() => navigate(navLink.to)}
+                          onClick={() => {
+                            navigate(navLink.to);
+                            setAnchorElNav(null);
+                          }}
                         >
                           {navLink.text}
                         </MenuItem>
@@ -251,6 +254,7 @@ const Header = () => {
                               color: "#595959",
                             }}
                             onClick={() => {
+                              setMoreEl(null);
                               if (moreLink.text !== "Log Out")
                                 navigate(moreLink.to);
                               else logoutUser();
@@ -345,22 +349,21 @@ const Header = () => {
                   More
                 </Button>
               )}
-
-              <Menu
-                id="more-menu"
-                anchorEl={moreEl}
-                open={openMore}
-                onClose={() => setMoreEl(null)}
-                MenuListProps={{ "aria-labelledby": "more-button" }}
-                sx={{
-                  ".MuiMenu-paper": {
-                    border: "1px solid #d9d9d9",
-                    boxShadow: "none",
-                  },
-                }}
-              >
-                {user &&
-                  moreLinks.map(
+              {user && (
+                <Menu
+                  id="more-menu"
+                  anchorEl={moreEl}
+                  open={openMore}
+                  onClose={() => setMoreEl(null)}
+                  MenuListProps={{ "aria-labelledby": "more-button" }}
+                  sx={{
+                    ".MuiMenu-paper": {
+                      border: "1px solid #d9d9d9",
+                      boxShadow: "none",
+                    },
+                  }}
+                >
+                  {moreLinks.map(
                     (moreLink, index) =>
                       moreLink.restrict.includes(user?.role as string) && (
                         <MenuItem
@@ -374,6 +377,7 @@ const Header = () => {
                             color: "#595959",
                           }}
                           onClick={() => {
+                            setMoreEl(null);
                             if (moreLink.text !== "Log Out")
                               navigate(moreLink.to);
                             else logoutUser();
@@ -383,7 +387,9 @@ const Header = () => {
                         </MenuItem>
                       )
                   )}
-              </Menu>
+                </Menu>
+              )}
+
               <Button
                 id="lang-button"
                 aria-controls={openLang ? "lang-menu" : undefined}

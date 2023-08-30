@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Container,
@@ -11,34 +11,50 @@ import {
   TableRow,
   TableFooter,
   TableBody,
+  TableCell,
+  TablePagination,
 } from "@mui/material";
 
 import {
-  //   TablePaginationActions,
+  TablePaginationActions,
   StyledTableCell,
-  //   StyledTableRow,
+  StyledTableRow,
 } from "./admin/hqcenters.page";
 import StaffModal from "../components/modals/staff.modal";
-import { useState } from "react";
+import { useLazyGetStaffQuery } from "../redux/api/userApi";
 
 const CenterSettingsPage = () => {
   const [openStaff, setOpenStaff] = useState(false);
-  //   const [page, setPage] = useState(0);
-  //   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  //   const handleChangePage = (
-  //     event: React.MouseEvent<HTMLButtonElement> | null,
-  //     newPage: number
-  //   ) => {
-  //     setPage(newPage);
-  //   };
+  const [getStaff, getState] = useLazyGetStaffQuery();
 
-  //   const handleChangeRowsPerPage = (
-  //     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  //   ) => {
-  //     setRowsPerPage(parseInt(event.target.value, 10));
-  //     setPage(0);
-  //   };
+  useEffect(() => {
+    getStaff({ page, rowsPerPage });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, rowsPerPage]);
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows = !getState.data
+    ? rowsPerPage
+    : page > 0
+    ? Math.max(0, (1 + page) * rowsPerPage - getState.data.total_counts)
+    : 0;
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <>
@@ -65,34 +81,37 @@ const CenterSettingsPage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* {getState.data?.centers &&
-                getState.data.centers.map((row, index) => (
+              {getState.data?.users &&
+                getState.data.users.map((row, index) => (
                   <StyledTableRow key={`table_row_${index}`}>
                     <StyledTableCell component="th" scope="row">
-                      {row.center_id}
+                      {row.name}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {`${row.address.city} ${row.address.country}`}
+                      {row.role.toUpperCase()[0]}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.referer_center_id}
+                      {new Date(row.createdAt).toLocaleDateString("en-Us", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                      })}
                     </StyledTableCell>
-                    <StyledTableCell align="center"></StyledTableCell>
-                    <StyledTableCell align="center"></StyledTableCell>
+                    <StyledTableCell align="center">FREEZE</StyledTableCell>
                   </StyledTableRow>
                 ))}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )} */}
+              )}
             </TableBody>
             <TableFooter>
               <TableRow>
-                {/* <TablePagination
+                <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={5}
-                  count={!getState.data ? 0 : getState.data.filtered_counts}
+                  count={!getState.data ? 0 : getState.data.total_counts}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
@@ -104,7 +123,7 @@ const CenterSettingsPage = () => {
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                   ActionsComponent={TablePaginationActions}
-                /> */}
+                />
               </TableRow>
             </TableFooter>
           </Table>
