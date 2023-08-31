@@ -9,7 +9,7 @@ import { ReactComponent as TrainingIcon } from "../assets/images/ico_training.sv
 import { ReactComponent as ScheduleIcon } from "../assets/images/ico_schedule.svg";
 import { ReactComponent as CommissionIcon } from "../assets/images/ico_commisions.svg";
 import { ReactComponent as ClientsIcon } from "../assets/images/ico_clients.svg";
-import NewClientModal from "../components/modals/newclient.modal";
+import ClientModal from "../components/modals/client.modal";
 import PitchModal from "../components/modals/pitch.modal";
 import TestDriveModal from "../components/modals/testdrive.modal";
 import SoldModal from "../components/modals/sold.modal";
@@ -127,7 +127,7 @@ const HomePage = () => {
         </Box>
       </Container>
       <Box>
-        <NewClientModal setOpen={setOpenNewClient} open={openNewClient} />
+        <ClientModal setOpen={setOpenNewClient} open={openNewClient} />
         <PitchModal setOpen={setOpenPitch} open={openPitch} />
         <TestDriveModal setOpen={setOpenTestDrive} open={openTestDrive} />
         <SoldModal setOpen={setOpenSold} open={openSold} />

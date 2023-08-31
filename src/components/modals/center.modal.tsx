@@ -77,7 +77,15 @@ const CenterModal = (props: {
   useEffect(() => {
     if (addState.isSuccess) {
       toast.success(addState.data.message);
+      reset();
       props.setOpen(false);
+    }
+    if (addState.isError) {
+      if (Array.isArray((addState.error as any).data.error))
+        (addState.error as any).data.error.forEach((el: any) =>
+          toast.error(el.message)
+        );
+      else toast.error((addState.error as any).data.message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addState]);
@@ -89,6 +97,7 @@ const CenterModal = (props: {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = methods;
 
@@ -250,13 +259,6 @@ const CenterModal = (props: {
                 error={!!errors["zip_code"]}
                 helperText={errors["zip_code"]?.message}
               />
-              {/* <TextField
-                {...register("country")}
-                label="Country"
-                size="small"
-                error={!!errors["country"]}
-                helperText={errors["country"]?.message}
-              /> */}
               <Autocomplete
                 id="country-select-demo"
                 sx={{ width: 300 }}

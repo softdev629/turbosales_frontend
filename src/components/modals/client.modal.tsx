@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Modal,
   Backdrop,
@@ -12,11 +13,22 @@ import {
   Checkbox,
   Stack,
   Button,
+  Autocomplete,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import {
+  useForm,
+  SubmitHandler,
+  FormProvider,
+  Controller,
+} from "react-hook-form";
 import { object, string, boolean, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+
+import { useAddClientMutation } from "../../redux/api/clientApi";
+import { useAppSelector } from "../../redux/store";
+import { countries } from "../../pages/admin/hqcenters.page";
 
 const style = {
   position: "absolute" as "absolute",
@@ -33,7 +45,7 @@ const style = {
 
 const newClientInfoSchema = object({
   center_id: string().min(1, "Client ID is required.").optional(),
-  referal_link: string()
+  sales_rep_referal_link: string()
     .min(1, "Sales rep referal link is required.")
     .optional(),
   name: string().min(1, "Name is required"),
@@ -56,10 +68,42 @@ const newClientInfoSchema = object({
 
 export type NewClientSaveInput = TypeOf<typeof newClientInfoSchema>;
 
-const NewClientModal = (props: {
+const ClientModal = (props: {
   setOpen: (flag: boolean) => void;
   open: boolean;
 }) => {
+  const [salesReferalLink, setSalesReferalLink] = useState("");
+  const user = useAppSelector((state) => state.userState.user);
+
+  const [addClient, addState] = useAddClientMutation();
+
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
+      {
+        credentials: "include",
+      }
+    )
+      .then((res) => res.json())
+      .then((data: { sales_rep_referal_link: string }) =>
+        setSalesReferalLink(data.sales_rep_referal_link)
+      );
+  }, [props.open]);
+
+  useEffect(() => {
+    if (addState.isSuccess) {
+      toast.success(addState.data.message);
+    }
+    if (addState.isError) {
+      console.log(addState.error);
+      if (Array.isArray((addState.error as any).data.error))
+        (addState.error as any).data.error.forEach((el: any) =>
+          toast.error(el.message)
+        );
+      else toast.error((addState.error as any).data.message);
+    }
+  }, [addState]);
+
   const methods = useForm<NewClientSaveInput>({
     resolver: zodResolver(newClientInfoSchema),
   });
@@ -67,13 +111,17 @@ const NewClientModal = (props: {
   const {
     handleSubmit,
     register,
+    control,
+    reset,
     formState: { errors },
   } = methods;
 
   const onSubmitHandler: SubmitHandler<NewClientSaveInput> = (
     values: NewClientSaveInput
   ) => {
-    console.log(values);
+    addClient(values);
+    reset();
+    props.setOpen(false);
   };
 
   return (
@@ -111,48 +159,55 @@ const NewClientModal = (props: {
             >
               <Box display="flex" gap={2} flexWrap="wrap">
                 <Box width={288}>
-                  {/* <Typography textAlign="center" mb={1}>
-                  Center ID
-                </Typography> */}
-                  <TextField
-                    {...register("center_id")}
-                    label="Center ID"
-                    error={!!errors["center_id"]}
-                    required
-                    helperText={errors["center_id"]?.message}
-                    fullWidth
-                    size="small"
-                    disabled
-                    sx={{
-                      ".Mui-disabled": {
-                        bgcolor: "rgba(217, 217,217, .41)",
-                      },
-                      ".MuiInputBase-input": {
-                        textAlign: "center",
-                      },
-                    }}
-                    defaultValue="33-1-A01"
+                  <Controller
+                    control={control}
+                    name="center_id"
+                    defaultValue={user?.center_id}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        label="Center ID"
+                        size="small"
+                        disabled
+                        sx={{
+                          ".Mui-disabled": {
+                            bgcolor: "rgba(217, 217,217, .41)",
+                          },
+                        }}
+                        value={value}
+                        onChange={onChange}
+                        error={!!errors["center_id"]}
+                        helperText={errors["center_id"]?.message}
+                        fullWidth
+                      />
+                    )}
                   />
                 </Box>
                 <Box width={288}>
-                  <TextField
-                    {...register("referal_link")}
-                    required
-                    label="Sales Rep Referral Link"
-                    error={!!errors["referal_link"]}
-                    helperText={errors["referal_link"]?.message}
-                    fullWidth
-                    size="small"
-                    disabled
-                    sx={{
-                      ".Mui-disabled": {
-                        bgcolor: "rgba(217, 217,217, .41)",
-                      },
-                      ".MuiInputBase-input": {
-                        textAlign: "center",
-                      },
-                    }}
-                    defaultValue="33-1-A01-S03"
+                  <Controller
+                    control={control}
+                    name="sales_rep_referal_link"
+                    defaultValue={salesReferalLink}
+                    render={({ field: { onChange, value } }) => (
+                      <TextField
+                        required
+                        label="Sales Rep Referral Link"
+                        error={!!errors["sales_rep_referal_link"]}
+                        helperText={errors["sales_rep_referal_link"]?.message}
+                        fullWidth
+                        size="small"
+                        disabled
+                        sx={{
+                          ".Mui-disabled": {
+                            bgcolor: "rgba(217, 217,217, .41)",
+                          },
+                          ".MuiInputBase-input": {
+                            textAlign: "center",
+                          },
+                        }}
+                        value={value}
+                        onChange={onChange}
+                      />
+                    )}
                   />
                 </Box>
               </Box>
@@ -310,19 +365,39 @@ const NewClientModal = (props: {
                     />
                   </Box>
                   <Box width={288}>
-                    <TextField
-                      label="Country"
-                      {...register("country")}
-                      error={!!errors["country"]}
-                      helperText={errors["country"]?.message}
-                      fullWidth
+                    <Autocomplete
+                      id="country-select-demo"
+                      options={countries}
+                      autoHighlight
                       size="small"
-                      sx={{
-                        ".MuiInputBase-input": {
-                          textAlign: "center",
-                        },
-                      }}
-                      placeholder="Enter country here."
+                      getOptionLabel={(option) => option.label}
+                      renderOption={(props, option) => (
+                        <Box
+                          component="li"
+                          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                          {...props}
+                        >
+                          <img
+                            loading="lazy"
+                            width="20"
+                            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                            alt=""
+                          />
+                          {option.label}
+                        </Box>
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          {...register("country")}
+                          {...params}
+                          label="Choose a country"
+                          inputProps={{
+                            ...params.inputProps,
+                            autoComplete: "new-password", // disable autocomplete and autofill
+                          }}
+                        />
+                      )}
                     />
                   </Box>
                 </Box>
@@ -382,4 +457,4 @@ const NewClientModal = (props: {
   );
 };
 
-export default NewClientModal;
+export default ClientModal;

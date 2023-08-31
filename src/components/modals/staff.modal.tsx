@@ -67,7 +67,15 @@ const StaffModal = (props: {
   useEffect(() => {
     if (addState.isSuccess) {
       toast.success(addState.data.message);
+      reset();
       props.setOpen(false);
+    }
+    if (addState.isError) {
+      if (Array.isArray((addState.error as any).data.error))
+        (addState.error as any).data.error.forEach((el: any) =>
+          toast.error(el.message)
+        );
+      else toast.error((addState.error as any).data.message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addState]);
@@ -80,6 +88,7 @@ const StaffModal = (props: {
     handleSubmit,
     register,
     control,
+    reset,
     formState: { errors },
   } = methods;
 

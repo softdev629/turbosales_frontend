@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
-import { NewClientSaveInput } from "../../components/modals/newclient.modal";
+import { NewClientSaveInput } from "../../components/modals/client.modal";
 import { IGenericResponse } from "./types";
 
 export const clientApi = createApi({
@@ -19,3 +19,5 @@ export const clientApi = createApi({
     }),
   }),
 });
+
+export const { useAddClientMutation } = clientApi;
