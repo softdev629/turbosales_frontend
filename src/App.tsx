@@ -12,6 +12,10 @@ import CenterSettingsPage from "./pages/centersettings.page";
 import LoginPage from "./pages/login.page";
 import RequireUser from "./components/RequireUser";
 import UnauthorizedPage from "./pages/unauthorized.page";
+import ContactPage from "./pages/contact.page";
+import AccountPage from "./pages/account.page";
+import HQSettingsPage from "./pages/admin/hqsettings.page";
+import HQDashboardPage from "./pages/admin/hqdashboard.page";
 
 const theme = createTheme({
   palette: {
@@ -38,11 +42,22 @@ function App() {
               <Route path="center_settings" element={<CenterSettingsPage />} />
             </Route>
             <Route
+              element={
+                <RequireUser
+                  allowedRoles={["manager", "sales", "instructor"]}
+                />
+              }
+            >
+              <Route path="contact" element={<ContactPage />} />
+              <Route path="account" element={<AccountPage />} />
+            </Route>
+            <Route
               path="admin"
               element={<RequireUser allowedRoles={["admin"]} />}
             >
               <Route path="hq_centers" element={<HQCentersPage />} />
-              <Route path="hq_dashboard" />
+              <Route path="hq_dashboard" element={<HQDashboardPage />} />
+              <Route path="hq_settings" element={<HQSettingsPage />} />
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="unauthorized" element={<UnauthorizedPage />} />

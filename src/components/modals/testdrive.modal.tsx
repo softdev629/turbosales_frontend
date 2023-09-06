@@ -13,7 +13,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useForm } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { object, string, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
@@ -21,6 +21,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Dayjs } from "dayjs";
+
 import { fromDayjsToDate } from "../../util";
 
 const style = {
@@ -51,17 +52,18 @@ const TestDriveModal = (props: {
   });
 
   const {
-    // handleSubmit,
+    handleSubmit,
     register,
     setValue,
-    // formState: { errors },
+    control,
+    formState: { errors },
   } = methods;
 
-  // const onSubmitHandler: SubmitHandler<NewTestDriveSaveSchema> = (
-  //   values: NewTestDriveSaveSchema
-  // ) => {
-  //   console.log(values);
-  // };
+  const onSubmitHandler: SubmitHandler<NewTestDriveSaveSchema> = (
+    values: NewTestDriveSaveSchema
+  ) => {
+    console.log(values);
+  };
 
   return (
     <Modal
@@ -102,7 +104,7 @@ const TestDriveModal = (props: {
                 <Select
                   labelId="client-name-label"
                   id="client-name-select"
-                  label="Age"
+                  label="Select client"
                   size="small"
                   defaultValue=""
                 >
