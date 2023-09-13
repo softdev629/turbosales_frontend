@@ -13,6 +13,10 @@ import {
   TableBody,
   TableCell,
   TablePagination,
+  SvgIcon,
+  FormControl,
+  Select,
+  MenuItem,
 } from "@mui/material";
 
 import {
@@ -23,12 +27,33 @@ import {
 import StaffModal from "../components/modals/staff.modal";
 import { useLazyGetStaffQuery } from "../redux/api/userApi";
 
+import { ReactComponent as PlusIcon } from "../assets/images/ico_plus.svg";
+import { ReactComponent as MinusIcon } from "../assets/images/ico_minus.svg";
+import {
+  useGetCenterSettingsQuery,
+  useUpdateCenterSettingsMutation,
+} from "../redux/api/centerApi";
+import { ICenterSettings } from "../redux/api/types";
+import FullScreenLoader from "../components/FullscreenLoader";
+
 const CenterSettingsPage = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [settings, setSettings] = useState<ICenterSettings>();
 
   const [getStaff, getState] = useLazyGetStaffQuery();
+
+  const getSettings = useGetCenterSettingsQuery();
+  const [updateSettings, updateState] = useUpdateCenterSettingsMutation();
+
+  useEffect(() => {
+    setSettings(getSettings.data);
+  }, [getSettings]);
+
+  useEffect(() => {
+    if (settings) updateSettings(settings);
+  }, [settings]);
 
   useEffect(() => {
     getStaff({ page, rowsPerPage });
@@ -56,10 +81,786 @@ const CenterSettingsPage = () => {
     setPage(0);
   };
 
+  if (!settings) return <FullScreenLoader />;
+
   return (
     <>
       <Container>
-        <Box display="flex" justifyContent="space-between">
+        <Typography color="primary.main" variant="h4" textAlign="center">
+          AI Center Settings
+        </Typography>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Box
+            borderRadius={6}
+            mt={6}
+            bgcolor="rgba(217, 217, 217, 0.2)"
+            p={4}
+            maxWidth={1000}
+            width="100%"
+          >
+            <Typography color="primary.main" variant="h5" textAlign="center">
+              ROOMS & WORKSPACES
+            </Typography>
+            <Box display="flex" justifyContent="space-between" mt={4}>
+              <Box
+                border="1px solid #D9D9D9"
+                bgcolor="#FFF"
+                p={2}
+                width="40%"
+                borderRadius={4}
+              >
+                <Typography textAlign="center">Meeting Rooms</Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Rooms</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          meeting_rooms: settings.meeting_rooms + 1,
+                        });
+                      }}
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+
+                    {settings?.meeting_rooms}
+                    <Box
+                      onClick={() => {
+                        if (settings.meeting_rooms > 1) {
+                          setSettings({
+                            ...settings,
+                            meeting_rooms: settings.meeting_rooms - 1,
+                          });
+                        }
+                      }}
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Duration</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.meeting_duration}
+                        onChange={(event) => {
+                          if (settings) {
+                            setSettings({
+                              ...settings,
+                              meeting_duration: parseFloat(
+                                event.target.value as string
+                              ),
+                            });
+                          }
+                        }}
+                      >
+                        <MenuItem value={1}>1 hour</MenuItem>
+                        <MenuItem value={1.5}>1.5 hours</MenuItem>
+                        <MenuItem value={2}>2 hours</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                border="1px solid #D9D9D9"
+                bgcolor="#FFF"
+                p={2}
+                width="40%"
+                borderRadius={4}
+              >
+                <Typography textAlign="center">Workstations</Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Workstations</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          workstations: settings.workstations + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.workstations}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.workstations > 1)
+                          setSettings({
+                            ...settings,
+                            workstations: settings.workstations - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Duration</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.workstation_duration}
+                        onChange={(event) => {
+                          setSettings({
+                            ...settings,
+                            workstation_duration: parseFloat(
+                              event.target.value as string
+                            ),
+                          });
+                        }}
+                      >
+                        <MenuItem value={2}>2 hour</MenuItem>
+                        <MenuItem value={2.5}>2.5 hours</MenuItem>
+                        <MenuItem value={3}>3 hours</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box
+            borderRadius={6}
+            mt={6}
+            bgcolor="rgba(217, 217, 217, 0.2)"
+            p={4}
+            maxWidth={1000}
+            width="100%"
+          >
+            <Typography color="primary.main" variant="h5" textAlign="center">
+              OPERATING HOURS
+            </Typography>
+            <Box display="flex" justifyContent="center" mt={4}>
+              <Box
+                border="1px solid #D9D9D9"
+                bgcolor="#FFF"
+                p={4}
+                width="100%"
+                borderRadius={4}
+                display="flex"
+                flexDirection="column"
+                gap={3}
+              >
+                {settings.operating_hours.map((row, index) => (
+                  <Box
+                    display="flex"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    key={`operating_hour_${index}`}
+                  >
+                    <Typography width="20%">{row.day}</Typography>
+                    <Box width="20%">
+                      <FormControl fullWidth>
+                        <Select
+                          labelId="client-name-label"
+                          id="client-name-select"
+                          size="small"
+                          value={row.start}
+                          onChange={(event) => {
+                            setSettings({
+                              ...settings,
+                              operating_hours: settings.operating_hours.map(
+                                (
+                                  item: {
+                                    day: string;
+                                    start: string;
+                                    end: string;
+                                  },
+                                  item_index
+                                ) =>
+                                  item_index === index
+                                    ? {
+                                        ...item,
+                                        start: event.target.value as string,
+                                      }
+                                    : item
+                              ),
+                            });
+                          }}
+                        >
+                          <MenuItem value={"9:00"}>9:00</MenuItem>
+                          <MenuItem value={"9.30"}>9:30</MenuItem>
+                          <MenuItem value={"10:00"}>10:00</MenuItem>
+                          <MenuItem value={"10.30"}>10:30</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
+                    <Box width="20%">
+                      <FormControl fullWidth>
+                        <Select
+                          labelId="client-name-label"
+                          id="client-name-select"
+                          size="small"
+                          value={row.end}
+                          onChange={(event) => {
+                            setSettings({
+                              ...settings,
+                              operating_hours: settings.operating_hours.map(
+                                (
+                                  item: {
+                                    day: string;
+                                    start: string;
+                                    end: string;
+                                  },
+                                  item_index
+                                ) =>
+                                  item_index === index
+                                    ? {
+                                        ...item,
+                                        end: event.target.value as string,
+                                      }
+                                    : item
+                              ),
+                            });
+                          }}
+                        >
+                          <MenuItem value={"18:00"}>18:00</MenuItem>
+                          <MenuItem value={"18.30"}>18:30</MenuItem>
+                          <MenuItem value={"19:00"}>19:00</MenuItem>
+                          <MenuItem value={"10.30"}>10:30</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          </Box>
+
+          <Box
+            borderRadius={6}
+            mt={6}
+            bgcolor="rgba(217, 217, 217, 0.2)"
+            p={4}
+            maxWidth={1000}
+            width="100%"
+          >
+            <Typography color="primary.main" variant="h5" textAlign="center">
+              COMMISSIONS
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              mt={4}
+              flexWrap="wrap"
+              gap={4}
+            >
+              <Box
+                width="30%"
+                border="1px solid #D9D9D9"
+                bgcolor="rgba(234, 32, 73, 0.1)"
+                borderRadius={6}
+                p={2}
+                textAlign="center"
+              >
+                <Typography>
+                  Manager:
+                  <br />
+                  per Membership
+                </Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Amount</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          manager_membership_amount:
+                            settings.manager_membership_amount + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.manager_membership_amount}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.manager_membership_amount > 1)
+                          setSettings({
+                            ...settings,
+                            manager_membership_amount:
+                              settings.manager_membership_amount - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Type</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.manager_membership_type}
+                        onChange={(event) =>
+                          setSettings({
+                            ...settings,
+                            manager_membership_type: event.target
+                              .value as string,
+                          })
+                        }
+                      >
+                        <MenuItem value={"€"}>€</MenuItem>
+                        <MenuItem value={"%"}>%</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                width="30%"
+                border="1px solid #D9D9D9"
+                bgcolor="rgba(234, 32, 73, 0.1)"
+                borderRadius={6}
+                p={2}
+                textAlign="center"
+              >
+                <Typography>
+                  Manager:
+                  <br />
+                  per AI Center
+                </Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Amount</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          manager_aicenter_amount:
+                            settings.manager_aicenter_amount + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.manager_aicenter_amount}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.manager_aicenter_amount > 1)
+                          setSettings({
+                            ...settings,
+                            manager_aicenter_amount:
+                              settings.manager_aicenter_amount - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Type</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.manager_aicenter_type}
+                        onChange={(event) =>
+                          setSettings({
+                            ...settings,
+                            manager_aicenter_type: event.target.value as string,
+                          })
+                        }
+                      >
+                        <MenuItem value={"€"}>€</MenuItem>
+                        <MenuItem value={"%"}>%</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                width="30%"
+                border="1px solid #D9D9D9"
+                bgcolor="rgba(133, 220, 255, 0.2)"
+                borderRadius={6}
+                p={2}
+                textAlign="center"
+              >
+                <Typography>
+                  Sales Rep:
+                  <br />
+                  per Membership
+                </Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Amount</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          salesrep_membership_amount:
+                            settings.salesrep_membership_amount + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.salesrep_membership_amount}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.salesrep_membership_amount > 1)
+                          setSettings({
+                            ...settings,
+                            salesrep_membership_amount:
+                              settings.salesrep_membership_amount - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Type</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.salesrep_membership_type}
+                        onChange={(event) => {
+                          setSettings({
+                            ...settings,
+                            salesrep_membership_type: event.target
+                              .value as string,
+                          });
+                        }}
+                      >
+                        <MenuItem value={"€"}>€</MenuItem>
+                        <MenuItem value={"%"}>%</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                width="30%"
+                border="1px solid #D9D9D9"
+                bgcolor="rgba(133, 220, 255, 0.2)"
+                borderRadius={6}
+                p={2}
+                textAlign="center"
+              >
+                <Typography>
+                  Sales Rep:
+                  <br />
+                  per AI Center
+                </Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Amount</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          salesrep_aicenter_amount:
+                            settings.salesrep_aicenter_amount + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.salesrep_aicenter_amount}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.salesrep_aicenter_amount > 1)
+                          setSettings({
+                            ...settings,
+                            salesrep_aicenter_amount:
+                              settings.salesrep_aicenter_amount - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Type</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.salesrep_aicenter_type}
+                        onChange={(event) =>
+                          setSettings({
+                            ...settings,
+                            salesrep_aicenter_type: event.target
+                              .value as string,
+                          })
+                        }
+                      >
+                        <MenuItem value={"€"}>€</MenuItem>
+                        <MenuItem value={"%"}>%</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                width="30%"
+                border="1px solid #D9D9D9"
+                bgcolor="rgba(76, 195, 102, 0.2)"
+                borderRadius={6}
+                p={2}
+                textAlign="center"
+              >
+                <Typography>
+                  Manager:
+                  <br />
+                  per Membership
+                </Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Amount</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          instructor_membership_amount:
+                            settings.instructor_membership_amount + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.instructor_membership_amount}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.instructor_membership_amount > 1)
+                          setSettings({
+                            ...settings,
+                            instructor_membership_amount:
+                              settings.instructor_membership_amount - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Type</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.instructor_membership_type}
+                        onChange={(event) =>
+                          setSettings({
+                            ...settings,
+                            instructor_membership_type: event.target
+                              .value as string,
+                          })
+                        }
+                      >
+                        <MenuItem value={"€"}>€</MenuItem>
+                        <MenuItem value={"%"}>%</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                width="30%"
+                border="1px solid #D9D9D9"
+                bgcolor="rgba(76, 195, 102, 0.2)"
+                borderRadius={6}
+                p={2}
+                textAlign="center"
+              >
+                <Typography>
+                  Manager:
+                  <br />
+                  per Membership
+                </Typography>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Amount</Typography>
+                  <Box
+                    display="flex"
+                    flexGrow={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        setSettings({
+                          ...settings,
+                          instructor_aicenter_amount:
+                            settings.instructor_aicenter_amount + 1,
+                        });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <PlusIcon />
+                      </SvgIcon>
+                    </Box>
+                    {settings.instructor_aicenter_amount}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => {
+                        if (settings.instructor_aicenter_amount > 1)
+                          setSettings({
+                            ...settings,
+                            instructor_aicenter_amount:
+                              settings.instructor_aicenter_amount - 1,
+                          });
+                      }}
+                    >
+                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
+                        <MinusIcon />
+                      </SvgIcon>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box display="flex" alignItems="center" mt={2}>
+                  <Typography flexGrow={1}>Type</Typography>
+                  <Box flexGrow={1}>
+                    <FormControl fullWidth>
+                      <Select
+                        labelId="client-name-label"
+                        id="client-name-select"
+                        size="small"
+                        value={settings.instructor_aicenter_type}
+                        onChange={(event) =>
+                          setSettings({
+                            ...settings,
+                            instructor_aicenter_type: event.target
+                              .value as string,
+                          })
+                        }
+                      >
+                        <MenuItem value={"€"}>€</MenuItem>
+                        <MenuItem value={"%"}>%</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+
+        <Box display="flex" justifyContent="space-between" mt={10}>
           <Typography variant="h4" color="primary.main">
             STAFF
           </Typography>

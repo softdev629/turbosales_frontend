@@ -1,4 +1,14 @@
-import { Container, Box, Typography, Stack, SvgIcon } from "@mui/material";
+import {
+  Container,
+  Box,
+  Typography,
+  Stack,
+  SvgIcon,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
 import { ReactComponent as BoxIcon } from "../../assets/images/ico_box.svg";
 import WhiteMoneyBagIcon from "../../assets/images/ico_white_money_bag.svg";
@@ -9,6 +19,7 @@ import { ReactComponent as FrenchiseIcon } from "../../assets/images/ico_franchi
 import { ReactComponent as MarketingIcon } from "../../assets/images/ico_marketing.svg";
 import { ReactComponent as GiftIcon } from "../../assets/images/ico_gift.svg";
 import MoneyBagIcon from "../../assets/images/ico_moneybag.svg";
+import { ReactComponent as ContactIcon } from "../../assets/images/ico_contact.svg";
 
 const HQDashboardPage = () => {
   return (
@@ -235,6 +246,56 @@ const HQDashboardPage = () => {
             >
               €10K
             </Typography>
+          </Box>
+        </Box>
+
+        <Box width="70%" border="1px solid #D9D9D9" mt={6} p={3}>
+          <Box display="flex">
+            <Typography variant="h5" color="primary.main" flexGrow={1}>
+              Commissions
+            </Typography>
+            <Box width={192} mr={7}>
+              <FormControl fullWidth>
+                <InputLabel id="client-name-label" size="small">
+                  AI Center
+                </InputLabel>
+                <Select
+                  labelId="client-name-label"
+                  id="client-name-select"
+                  label="AI Center"
+                  size="small"
+                  defaultValue=""
+                >
+                  <MenuItem value={10}>Sales Rep 1</MenuItem>
+                  <MenuItem value={20}>Sales Rep 2</MenuItem>
+                  <MenuItem value={30}>Instructor 3</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <SvgIcon sx={{ fill: "#ea2049", width: 30, height: 35 }}>
+              <ContactIcon />
+            </SvgIcon>
+          </Box>
+          <Box
+            display="flex"
+            textAlign="center"
+            bgcolor="rgba(217, 217, 217, 0.2)"
+            py={1}
+          >
+            <Typography width="20%">Sales Date</Typography>
+            <Typography width="25%">Company</Typography>
+            <Typography width="20%">AI Center</Typography>
+            <Typography width="20%">Amount</Typography>
+            <Typography width="15%">Paid</Typography>
+          </Box>
+          <Box display="flex" py={1}>
+            <Typography width="20%" color="primary.main">
+              2023-02-13
+            </Typography>
+            <Typography width="25%">ABC</Typography>
+            <Typography width="20%">Amy Adams</Typography>
+            <Typography width="20%">€300</Typography>
+            <Typography width="15%"></Typography>
           </Box>
         </Box>
       </Container>

@@ -78,16 +78,17 @@ const ClientModal = (props: {
   const [addClient, addState] = useAddClientMutation();
 
   useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
-      {
-        credentials: "include",
-      }
-    )
-      .then((res) => res.json())
-      .then((data: { sales_rep_referal_link: string }) =>
-        setSalesReferalLink(data.sales_rep_referal_link)
-      );
+    if (props.open)
+      fetch(
+        `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
+        {
+          credentials: "include",
+        }
+      )
+        .then((res) => res.json())
+        .then((data: { sales_rep_referal_link: string }) =>
+          setSalesReferalLink(data.sales_rep_referal_link)
+        );
   }, [props.open]);
 
   useEffect(() => {
@@ -366,7 +367,7 @@ const ClientModal = (props: {
                   </Box>
                   <Box width={288}>
                     <Autocomplete
-                      id="country-select-demo"
+                      id="country-select-demo-2"
                       options={countries}
                       autoHighlight
                       size="small"

@@ -260,7 +260,7 @@ const CenterModal = (props: {
                 helperText={errors["zip_code"]?.message}
               />
               <Autocomplete
-                id="country-select-demo"
+                id="country-select-demo-1"
                 sx={{ width: 300 }}
                 options={countries}
                 autoHighlight

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container, Box, Typography, Button, Stack } from "@mui/material";
 
 import { ReactComponent as NewClientIcon } from "../assets/images/ico_new_client.svg";
-import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
+// import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
 import { ReactComponent as TestDriveIcon } from "../assets/images/ico_test_drive.svg";
 import { ReactComponent as SoldIcon } from "../assets/images/ico_sold.svg";
 import { ReactComponent as TrainingIcon } from "../assets/images/ico_training.svg";
@@ -10,7 +10,7 @@ import { ReactComponent as ScheduleIcon } from "../assets/images/ico_schedule.sv
 import { ReactComponent as CommissionIcon } from "../assets/images/ico_commisions.svg";
 import { ReactComponent as ClientsIcon } from "../assets/images/ico_clients.svg";
 import ClientModal from "../components/modals/client.modal";
-import PitchModal from "../components/modals/pitch.modal";
+// import PitchModal from "../components/modals/pitch.modal";
 import TestDriveModal from "../components/modals/testdrive.modal";
 import SoldModal from "../components/modals/sold.modal";
 import TrainingModal from "../components/modals/training.modal";
@@ -19,7 +19,7 @@ import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
-  const [openPitch, setOpenPitch] = useState(false);
+  // const [openPitch, setOpenPitch] = useState(false);
   const [openTestDrive, setOpenTestDrive] = useState(false);
   const [openSold, setOpenSold] = useState(false);
   const [openTraining, setOpenTraining] = useState(false);
@@ -33,13 +33,13 @@ const HomePage = () => {
         setOpenNewClient(true);
       },
     },
-    {
-      icon: <PitchIcon width={48} height={48} fill="#ea2049" />,
-      text: "Pitch",
-      click: () => {
-        setOpenPitch(true);
-      },
-    },
+    // {
+    //   icon: <PitchIcon width={48} height={48} fill="#ea2049" />,
+    //   text: "Pitch",
+    //   click: () => {
+    //     setOpenPitch(true);
+    //   },
+    // },
     {
       icon: <TestDriveIcon width={48} height={48} fill="#ea2049" />,
       text: "Test Drive",
@@ -128,7 +128,7 @@ const HomePage = () => {
       </Container>
       <Box>
         <ClientModal setOpen={setOpenNewClient} open={openNewClient} />
-        <PitchModal setOpen={setOpenPitch} open={openPitch} />
+        {/* <PitchModal setOpen={setOpenPitch} open={openPitch} /> */}
         <TestDriveModal setOpen={setOpenTestDrive} open={openTestDrive} />
         <SoldModal setOpen={setOpenSold} open={openSold} />
         <TrainingModal setOpen={setOpenTraining} open={openTraining} />
