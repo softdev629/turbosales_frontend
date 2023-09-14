@@ -52,7 +52,7 @@ const newClientInfoSchema = object({
   title: string().min(1, "Title is required"),
   mobile: string()
     .min(1, "Mobile is required")
-    .regex(/^([0-9]{1,5})?\s([0-9]{10,11})$/, "Invalid mobile format."),
+    .regex(/^\+\d{1,3} \d+$/, "Invalid mobile format."),
   email: string().min(1, "Email is required").email("Invalid email format"),
   company: string().optional(),
   website: string().url("Invalid url format").optional(),
@@ -78,17 +78,16 @@ const ClientModal = (props: {
   const [addClient, addState] = useAddClientMutation();
 
   useEffect(() => {
-    if (props.open)
-      fetch(
-        `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
-        {
-          credentials: "include",
-        }
-      )
-        .then((res) => res.json())
-        .then((data: { sales_rep_referal_link: string }) =>
-          setSalesReferalLink(data.sales_rep_referal_link)
-        );
+    fetch(
+      `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
+      {
+        credentials: "include",
+      }
+    )
+      .then((res) => res.json())
+      .then((data: { sales_rep_referal_link: string }) =>
+        setSalesReferalLink(data.sales_rep_referal_link)
+      );
   }, [props.open]);
 
   useEffect(() => {

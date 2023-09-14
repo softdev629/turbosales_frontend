@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
 import { NewClientSaveInput } from "../../components/modals/client.modal";
-import { IGenericResponse } from "./types";
+import { IClient, IGenericResponse } from "./types";
 
 export const clientApi = createApi({
   reducerPath: "clientApi",
@@ -17,7 +17,17 @@ export const clientApi = createApi({
         };
       },
     }),
+    getClients: builder.query<IClient[], void>({
+      query() {
+        return {
+          url: "clients",
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: IClient[] }) => result.data,
+    }),
   }),
 });
 
-export const { useAddClientMutation } = clientApi;
+export const { useAddClientMutation, useGetClientsQuery } = clientApi;

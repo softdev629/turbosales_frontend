@@ -47,7 +47,7 @@ const newStaffSchema = object({
   name: string().min(1, "Name is required."),
   mobile: string()
     .min(1, "Mobile is required")
-    .regex(/^([0-9]{1,5})?\s([0-9]{10,11})$/, "Invalid mobile format."),
+    .regex(/^\+\d{1,3} \d+$/, "Invalid mobile format."),
   email: string().min(1, "Email is required").email("Invalid email format"),
   password: string()
     .min(1, "Password is required")

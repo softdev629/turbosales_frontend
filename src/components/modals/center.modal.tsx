@@ -44,7 +44,7 @@ const newCenterSchema = object({
   owner_name: string().min(1, "Owner Name is required."),
   owner_mobile: string()
     .min(1, "Owner mobile is required")
-    .regex(/^([0-9]{1,5})?\s([0-9]{10,11})$/, "Invalid mobile format."),
+    .regex(/^\+\d{1,3} \d+$/, "Invalid mobile format."),
   owner_email: string()
     .min(1, "Owner email is required")
     .email("Invalid email format"),

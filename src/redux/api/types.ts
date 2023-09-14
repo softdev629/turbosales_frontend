@@ -49,3 +49,29 @@ export interface ICenterSettings {
   instructor_aicenter_amount: number;
   instructor_aicenter_type: string;
 }
+
+export interface IAddress {
+  street: string;
+  city: string;
+  zip_code: string;
+  country: string;
+}
+
+export interface IClient {
+  _id: string;
+  center_id: string;
+  sales_rep_referal_link: string;
+  name: string;
+  title: string;
+  mobile: string;
+  email: string;
+  company: string;
+  website: string;
+  address: IAddress;
+  business_activity: string;
+  check_annual: boolean;
+  check_ai_center: boolean;
+  check_international: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
