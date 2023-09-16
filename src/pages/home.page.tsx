@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Box, Typography, Button, Stack } from "@mui/material";
+import { Navigate } from "react-router-dom";
 
 import { ReactComponent as NewClientIcon } from "../assets/images/ico_new_client.svg";
 // import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
@@ -9,13 +10,17 @@ import { ReactComponent as TrainingIcon } from "../assets/images/ico_training.sv
 import { ReactComponent as ScheduleIcon } from "../assets/images/ico_schedule.svg";
 import { ReactComponent as CommissionIcon } from "../assets/images/ico_commisions.svg";
 import { ReactComponent as ClientsIcon } from "../assets/images/ico_clients.svg";
+
 import ClientModal from "../components/modals/client.modal";
 // import PitchModal from "../components/modals/pitch.modal";
 import TestDriveModal from "../components/modals/testdrive.modal";
 import SoldModal from "../components/modals/sold.modal";
 import TrainingModal from "../components/modals/training.modal";
 import { useAppSelector } from "../redux/store";
-import { Navigate } from "react-router-dom";
+import {
+  useGetCenterSettingsQuery,
+  useLazyGetCenterSettingsQuery,
+} from "../redux/api/centerApi";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
@@ -24,6 +29,12 @@ const HomePage = () => {
   const [openSold, setOpenSold] = useState(false);
   const [openTraining, setOpenTraining] = useState(false);
   const user = useAppSelector((state) => state.userState.user);
+
+  const [getCenterSettings] = useLazyGetCenterSettingsQuery();
+
+  useEffect(() => {
+    getCenterSettings();
+  }, [setOpenTestDrive]);
 
   const actions = [
     {

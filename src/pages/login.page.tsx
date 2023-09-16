@@ -64,7 +64,7 @@ const SigninPage = () => {
     <>
       <Container>
         <Typography variant="h5" textAlign="center" mt={6}>
-          Welcome back Savvi team!
+          Welcome back Xavvi team!
         </Typography>
         <Typography color="primary.main" variant="h4" textAlign="center" my={6}>
           LOG IN

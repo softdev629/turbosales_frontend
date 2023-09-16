@@ -45,7 +45,7 @@ const CenterSettingsPage = () => {
   const [getStaff, getState] = useLazyGetStaffQuery();
 
   const getSettings = useGetCenterSettingsQuery();
-  const [updateSettings, updateState] = useUpdateCenterSettingsMutation();
+  const [updateSettings] = useUpdateCenterSettingsMutation();
 
   useEffect(() => {
     setSettings(getSettings.data);
@@ -53,6 +53,7 @@ const CenterSettingsPage = () => {
 
   useEffect(() => {
     if (settings) updateSettings(settings);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 
   useEffect(() => {

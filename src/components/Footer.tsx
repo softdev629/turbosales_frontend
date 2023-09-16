@@ -7,7 +7,7 @@ import {
   Container,
 } from "@mui/material";
 
-import LogoIcon from "../assets/images/logo_savvi.svg";
+import LogoIcon from "../assets/images/logo_xavvi.svg";
 
 const Footer = () => {
   return (
@@ -49,7 +49,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Typography mb={3} fontWeight={700}>
-                  Savvi
+                  Xavvi
                 </Typography>
                 <Typography fontWeight={400} mb={1}>
                   Tabivere alevik, Voldi tee 9,

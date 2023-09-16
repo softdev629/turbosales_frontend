@@ -17,7 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import LogoIcon from "../assets/images/logo_savvi.svg";
+import LogoIcon from "../assets/images/logo_xavvi.svg";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { useLogoutUserMutation } from "../redux/api/authApi";
 import { logout } from "../redux/features/userSlice";

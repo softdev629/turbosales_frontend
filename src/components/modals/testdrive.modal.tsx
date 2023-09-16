@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Modal,
   Backdrop,
@@ -16,17 +15,21 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { object, string, TypeOf } from "zod";
+import { object, string, array, TypeOf, number } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Dayjs } from "dayjs";
+import { toast } from "react-toastify";
 
-import { fromDayjsToDate } from "../../util";
+import { divideIntervals, fromDayjsToDate } from "../../util";
 import { useGetClientsQuery } from "../../redux/api/clientApi";
 import { IClient } from "../../redux/api/types";
+import { useAppSelector } from "../../redux/store";
+import { useEffect, useState } from "react";
+import { useCreateTestdriveMutation } from "../../redux/api/testdriveApi";
 
 const style = {
   position: "absolute" as "absolute",
@@ -46,6 +49,13 @@ const newTestDriveSchema = object({
   client: string().min(1, "Client field is required."),
   company: string().min(1, "Company is required"),
   date: string().min(1, "Date is required."),
+  time_room: array(
+    object({
+      start: string(),
+      end: string(),
+      room: number(),
+    })
+  ),
 });
 
 export type NewTestDriveSaveSchema = TypeOf<typeof newTestDriveSchema>;
@@ -54,7 +64,14 @@ const TestDriveModal = (props: {
   setOpen: (flag: boolean) => void;
   open: boolean;
 }) => {
+  const [booking, setBooking] = useState<
+    { start: string; end: string; room: number }[]
+  >([]);
+  const [date, setDate] = useState<Dayjs>();
+
   const getState = useGetClientsQuery();
+  const [createTestdrive, createState] = useCreateTestdriveMutation();
+  const settings = useAppSelector((state) => state.centerState.settings);
 
   const methods = useForm<NewTestDriveSaveSchema>({
     resolver: zodResolver(newTestDriveSchema),
@@ -64,15 +81,23 @@ const TestDriveModal = (props: {
     handleSubmit,
     register,
     setValue,
-    getValues,
-    control,
+    reset,
     formState: { errors },
   } = methods;
+
+  useEffect(() => {
+    if (createState.isSuccess) {
+      toast.success(createState.data.message);
+      reset();
+      props.setOpen(false);
+    }
+  }, [createState]);
 
   const onSubmitHandler: SubmitHandler<NewTestDriveSaveSchema> = (
     values: NewTestDriveSaveSchema
   ) => {
     console.log(values);
+    createTestdrive(values);
   };
 
   return (
@@ -200,8 +225,26 @@ const TestDriveModal = (props: {
                         <DateCalendar
                           sx={{ bgcolor: "white", width: "100%", height: 300 }}
                           onChange={(value: Dayjs | null) => {
-                            if (value) {
+                            if (value && settings) {
+                              let default_time_room = [];
+                              if (settings) {
+                                const intervals = divideIntervals(
+                                  settings.operating_hours[value.day()].start,
+                                  settings.operating_hours[value.day()].end,
+                                  settings.meeting_duration
+                                );
+                                for (let i = 0; i < intervals.length; ++i) {
+                                  default_time_room.push({
+                                    start: intervals[i].start,
+                                    end: intervals[i].end,
+                                    room: -1,
+                                  });
+                                }
+                                setBooking([...default_time_room]);
+                                setValue("time_room", default_time_room);
+                              }
                               setValue("date", fromDayjsToDate(value));
+                              setDate(value);
                             }
                           }}
                         />
@@ -214,100 +257,53 @@ const TestDriveModal = (props: {
                     sx={{ bgcolor: "white", width: "90%" }}
                     size="small"
                   />
-
-                  <Stack
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    width="100%"
-                    px={2}
-                  >
-                    <Typography
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                    >
-                      09:00
-                    </Typography>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                      bgcolor="rgba(76, 195, 102, 0.4)"
-                    >
-                      A
-                    </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                      bgcolor="rgba(225, 71, 71, 0.4)"
-                    >
-                      B
-                    </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                      bgcolor="rgba(76, 195, 102, 0.4)"
-                    >
-                      C
-                    </Box>
-                  </Stack>
-
-                  <Stack
-                    flexDirection="row"
-                    justifyContent="space-between"
-                    width="100%"
-                    px={2}
-                  >
-                    <Typography
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                    >
-                      10:00
-                    </Typography>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                      bgcolor="rgba(225, 71, 71, 0.4)"
-                    >
-                      A
-                    </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                      bgcolor="rgba(76, 195, 102, 0.4)"
-                    >
-                      B
-                    </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="15%"
-                      height="45px"
-                      bgcolor="rgba(76, 195, 102, 0.4)"
-                    >
-                      C
-                    </Box>
-                  </Stack>
+                  <Box width="100%">
+                    {booking.map((item, item_index) => (
+                      <Box
+                        display="flex"
+                        width="100%"
+                        px={2}
+                        py={1}
+                        justifyContent="space-between"
+                        key={`booking_item_${item_index}`}
+                        alignItems="center"
+                      >
+                        <Typography width="15%">{item.start}</Typography>
+                        <Stack
+                          flexDirection="row"
+                          justifyContent="flex-start"
+                          width="75%"
+                          flexWrap="wrap"
+                          gap={1}
+                        >
+                          {Array.from({
+                            length: settings?.meeting_rooms as number,
+                          }).map((_, index) => (
+                            <Box
+                              key={`room_1_${index}`}
+                              width="15%"
+                              height="45px"
+                              bgcolor={
+                                index === booking[item_index].room - 1
+                                  ? "rgba(225, 71, 71, 0.4)"
+                                  : "rgba(76, 195, 102, 0.4)"
+                              }
+                              display="flex"
+                              justifyContent="center"
+                              alignItems="center"
+                              onClick={(event) => {
+                                booking[item_index].room = index + 1;
+                                setBooking([...booking]);
+                                setValue("time_room", booking);
+                              }}
+                            >
+                              {index + 1}
+                            </Box>
+                          ))}
+                        </Stack>
+                      </Box>
+                    ))}
+                  </Box>
                 </Stack>
               </Stack>
               <Box
@@ -319,11 +315,21 @@ const TestDriveModal = (props: {
               >
                 <Typography fontWeight={600}>Test Drive Meeting</Typography>
                 <br />
-                <Typography>2023-08-17, 09:00 - 10:00</Typography>
-                <Typography>Room C</Typography>
+                {booking.map((item, index) =>
+                  item.room !== -1 ? (
+                    <Box key={`booking_history_item_${index}`}>
+                      <Typography>
+                        {date &&
+                          `${date.year()}-${date.month() + 1}-${date.date()}`}
+                        , {item.start} - {item.end}
+                      </Typography>
+                      <Typography>Room {item.room}</Typography>
+                    </Box>
+                  ) : null
+                )}
               </Box>
               <Box display="flex" gap={2} mt={4}>
-                <LoadingButton variant="contained" fullWidth>
+                <LoadingButton variant="contained" fullWidth type="submit">
                   Confirm
                 </LoadingButton>
                 <Button

@@ -171,7 +171,7 @@ const TrainingModal = (props: {
                 <Typography width="15%">09:00 to 12:00</Typography>
                 <Stack
                   flexDirection="row"
-                  justifyContent="flex-start"
+                  justifyContent="space-between"
                   width="80%"
                   flexWrap="wrap"
                   gap={1}

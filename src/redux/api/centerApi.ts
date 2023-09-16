@@ -2,11 +2,12 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
 import { ICenterSettings, ICenters, IGenericResponse } from "./types";
 import { NewCenterSaveSchema } from "../../components/modals/center.modal";
+import { setSettings } from "../features/centerSlice";
 
 export const centerApi = createApi({
   reducerPath: "centerApi",
   baseQuery: customFetchBase,
-  tagTypes: ["Center"],
+  tagTypes: ["Center", "Settings"],
   endpoints: (builder) => ({
     addCenter: builder.mutation<IGenericResponse, NewCenterSaveSchema>({
       query(data) {
@@ -45,6 +46,12 @@ export const centerApi = createApi({
           credentials: "include",
         };
       },
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setSettings(data));
+        } catch (error) {}
+      },
     }),
     updateCenterSettings: builder.mutation<{ status: string }, ICenterSettings>(
       {
@@ -65,5 +72,6 @@ export const {
   useAddCenterMutation,
   useLazyGetCentersQuery,
   useGetCenterSettingsQuery,
+  useLazyGetCenterSettingsQuery,
   useUpdateCenterSettingsMutation,
 } = centerApi;
