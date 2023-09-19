@@ -44,10 +44,6 @@ export interface ICenterSettings {
   salesrep_membership_type: string;
   salesrep_aicenter_amount: number;
   salesrep_aicenter_type: string;
-  instructor_membership_amount: number;
-  instructor_membership_type: string;
-  instructor_aicenter_amount: number;
-  instructor_aicenter_type: string;
 }
 
 export interface IAddress {

@@ -17,6 +17,7 @@ import {
   FormControl,
   Select,
   MenuItem,
+  TextField,
 } from "@mui/material";
 
 import {
@@ -100,87 +101,9 @@ const CenterSettingsPage = () => {
             width="100%"
           >
             <Typography color="primary.main" variant="h5" textAlign="center">
-              ROOMS & WORKSPACES
+              WORKSTATIONS
             </Typography>
-            <Box display="flex" justifyContent="space-between" mt={4}>
-              <Box
-                border="1px solid #D9D9D9"
-                bgcolor="#FFF"
-                p={2}
-                width="40%"
-                borderRadius={4}
-              >
-                <Typography textAlign="center">Meeting Rooms</Typography>
-                <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Rooms</Typography>
-                  <Box
-                    display="flex"
-                    flexGrow={1}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Box
-                      onClick={() => {
-                        setSettings({
-                          ...settings,
-                          meeting_rooms: settings.meeting_rooms + 1,
-                        });
-                      }}
-                      display="flex"
-                      alignItems="center"
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-
-                    {settings?.meeting_rooms}
-                    <Box
-                      onClick={() => {
-                        if (settings.meeting_rooms > 1) {
-                          setSettings({
-                            ...settings,
-                            meeting_rooms: settings.meeting_rooms - 1,
-                          });
-                        }
-                      }}
-                      display="flex"
-                      alignItems="center"
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Duration</Typography>
-                  <Box flexGrow={1}>
-                    <FormControl fullWidth>
-                      <Select
-                        labelId="client-name-label"
-                        id="client-name-select"
-                        size="small"
-                        value={settings.meeting_duration}
-                        onChange={(event) => {
-                          if (settings) {
-                            setSettings({
-                              ...settings,
-                              meeting_duration: parseFloat(
-                                event.target.value as string
-                              ),
-                            });
-                          }
-                        }}
-                      >
-                        <MenuItem value={1}>1 hour</MenuItem>
-                        <MenuItem value={1.5}>1.5 hours</MenuItem>
-                        <MenuItem value={2}>2 hours</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </Box>
-              </Box>
+            <Box display="flex" justifyContent="center" mt={4}>
               <Box
                 border="1px solid #D9D9D9"
                 bgcolor="#FFF"
@@ -402,41 +325,25 @@ const CenterSettingsPage = () => {
                   <Box
                     display="flex"
                     flexGrow={1}
+                    width="50%"
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
+                    <TextField
+                      size="small"
+                      sx={{ ".MuiInputBase-input": { textAlign: "center" } }}
+                      value={settings.manager_membership_amount}
+                      onChange={(event) => {
                         setSettings({
                           ...settings,
-                          manager_membership_amount:
-                            settings.manager_membership_amount + 1,
+                          manager_membership_amount: Number.isNaN(
+                            parseInt(event.target.value)
+                          )
+                            ? 0
+                            : parseInt(event.target.value),
                         });
                       }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-                    {settings.manager_membership_amount}
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        if (settings.manager_membership_amount > 1)
-                          setSettings({
-                            ...settings,
-                            manager_membership_amount:
-                              settings.manager_membership_amount - 1,
-                          });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
+                    />
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
@@ -481,41 +388,25 @@ const CenterSettingsPage = () => {
                   <Box
                     display="flex"
                     flexGrow={1}
+                    width="50%"
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
+                    <TextField
+                      size="small"
+                      sx={{ ".MuiInputBase-input": { textAlign: "center" } }}
+                      value={settings.manager_aicenter_amount}
+                      onChange={(event) => {
                         setSettings({
                           ...settings,
-                          manager_aicenter_amount:
-                            settings.manager_aicenter_amount + 1,
+                          manager_aicenter_amount: Number.isNaN(
+                            parseInt(event.target.value)
+                          )
+                            ? 0
+                            : parseInt(event.target.value),
                         });
                       }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-                    {settings.manager_aicenter_amount}
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        if (settings.manager_aicenter_amount > 1)
-                          setSettings({
-                            ...settings,
-                            manager_aicenter_amount:
-                              settings.manager_aicenter_amount - 1,
-                          });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
+                    />
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
@@ -559,41 +450,23 @@ const CenterSettingsPage = () => {
                   <Box
                     display="flex"
                     flexGrow={1}
+                    width="50%"
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
+                    <TextField
+                      size="small"
+                      sx={{ ".MuiInputBase-input": { textAlign: "center" } }}
+                      value={settings.salesrep_membership_amount}
+                      onChange={(event) => {
                         setSettings({
                           ...settings,
-                          salesrep_membership_amount:
-                            settings.salesrep_membership_amount + 1,
+                          salesrep_membership_amount: parseInt(
+                            event.target.value
+                          ),
                         });
                       }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-                    {settings.salesrep_membership_amount}
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        if (settings.salesrep_membership_amount > 1)
-                          setSettings({
-                            ...settings,
-                            salesrep_membership_amount:
-                              settings.salesrep_membership_amount - 1,
-                          });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
+                    />
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
@@ -638,41 +511,25 @@ const CenterSettingsPage = () => {
                   <Box
                     display="flex"
                     flexGrow={1}
+                    width="50%"
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
+                    <TextField
+                      size="small"
+                      sx={{ ".MuiInputBase-input": { textAlign: "center" } }}
+                      value={settings.salesrep_aicenter_amount}
+                      onChange={(event) => {
                         setSettings({
                           ...settings,
-                          salesrep_aicenter_amount:
-                            settings.salesrep_aicenter_amount + 1,
+                          salesrep_aicenter_amount: Number.isNaN(
+                            parseInt(event.target.value)
+                          )
+                            ? 0
+                            : parseInt(event.target.value),
                         });
                       }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-                    {settings.salesrep_aicenter_amount}
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        if (settings.salesrep_aicenter_amount > 1)
-                          setSettings({
-                            ...settings,
-                            salesrep_aicenter_amount:
-                              settings.salesrep_aicenter_amount - 1,
-                          });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
+                    />
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
@@ -688,164 +545,6 @@ const CenterSettingsPage = () => {
                           setSettings({
                             ...settings,
                             salesrep_aicenter_type: event.target
-                              .value as string,
-                          })
-                        }
-                      >
-                        <MenuItem value={"€"}>€</MenuItem>
-                        <MenuItem value={"%"}>%</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </Box>
-              </Box>
-              <Box
-                width="30%"
-                border="1px solid #D9D9D9"
-                bgcolor="rgba(76, 195, 102, 0.2)"
-                borderRadius={6}
-                p={2}
-                textAlign="center"
-              >
-                <Typography>
-                  Manager:
-                  <br />
-                  per Membership
-                </Typography>
-                <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Amount</Typography>
-                  <Box
-                    display="flex"
-                    flexGrow={1}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        setSettings({
-                          ...settings,
-                          instructor_membership_amount:
-                            settings.instructor_membership_amount + 1,
-                        });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-                    {settings.instructor_membership_amount}
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        if (settings.instructor_membership_amount > 1)
-                          setSettings({
-                            ...settings,
-                            instructor_membership_amount:
-                              settings.instructor_membership_amount - 1,
-                          });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Type</Typography>
-                  <Box flexGrow={1}>
-                    <FormControl fullWidth>
-                      <Select
-                        labelId="client-name-label"
-                        id="client-name-select"
-                        size="small"
-                        value={settings.instructor_membership_type}
-                        onChange={(event) =>
-                          setSettings({
-                            ...settings,
-                            instructor_membership_type: event.target
-                              .value as string,
-                          })
-                        }
-                      >
-                        <MenuItem value={"€"}>€</MenuItem>
-                        <MenuItem value={"%"}>%</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </Box>
-              </Box>
-              <Box
-                width="30%"
-                border="1px solid #D9D9D9"
-                bgcolor="rgba(76, 195, 102, 0.2)"
-                borderRadius={6}
-                p={2}
-                textAlign="center"
-              >
-                <Typography>
-                  Manager:
-                  <br />
-                  per Membership
-                </Typography>
-                <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Amount</Typography>
-                  <Box
-                    display="flex"
-                    flexGrow={1}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        setSettings({
-                          ...settings,
-                          instructor_aicenter_amount:
-                            settings.instructor_aicenter_amount + 1,
-                        });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <PlusIcon />
-                      </SvgIcon>
-                    </Box>
-                    {settings.instructor_aicenter_amount}
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      onClick={() => {
-                        if (settings.instructor_aicenter_amount > 1)
-                          setSettings({
-                            ...settings,
-                            instructor_aicenter_amount:
-                              settings.instructor_aicenter_amount - 1,
-                          });
-                      }}
-                    >
-                      <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
-                        <MinusIcon />
-                      </SvgIcon>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Type</Typography>
-                  <Box flexGrow={1}>
-                    <FormControl fullWidth>
-                      <Select
-                        labelId="client-name-label"
-                        id="client-name-select"
-                        size="small"
-                        value={settings.instructor_aicenter_type}
-                        onChange={(event) =>
-                          setSettings({
-                            ...settings,
-                            instructor_aicenter_type: event.target
                               .value as string,
                           })
                         }

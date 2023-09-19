@@ -91,6 +91,7 @@ const TestDriveModal = (props: {
       reset();
       props.setOpen(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createState]);
 
   const onSubmitHandler: SubmitHandler<NewTestDriveSaveSchema> = (
@@ -329,7 +330,12 @@ const TestDriveModal = (props: {
                 )}
               </Box>
               <Box display="flex" gap={2} mt={4}>
-                <LoadingButton variant="contained" fullWidth type="submit">
+                <LoadingButton
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                  loading={createState.isLoading}
+                >
                   Confirm
                 </LoadingButton>
                 <Button

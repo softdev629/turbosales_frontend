@@ -6,6 +6,7 @@ import { centerApi } from "./api/centerApi";
 import { authApi } from "./api/authApi";
 import { userApi } from "./api/userApi";
 import { testdriveApi } from "./api/testdriveApi";
+import { soldApi } from "./api/soldApi";
 
 import userSlice from "./features/userSlice";
 import centerSlice from "./features/centerSlice";
@@ -17,6 +18,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [testdriveApi.reducerPath]: testdriveApi.reducer,
+    [soldApi.reducerPath]: soldApi.reducer,
     userState: userSlice,
     centerState: centerSlice,
   },
@@ -28,6 +30,7 @@ export const store = configureStore({
       authApi.middleware,
       userApi.middleware,
       testdriveApi.middleware,
+      soldApi.middleware,
     ]),
 });
 

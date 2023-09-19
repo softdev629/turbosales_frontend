@@ -6,7 +6,7 @@ import { ReactComponent as NewClientIcon } from "../assets/images/ico_new_client
 // import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
 import { ReactComponent as TestDriveIcon } from "../assets/images/ico_test_drive.svg";
 import { ReactComponent as SoldIcon } from "../assets/images/ico_sold.svg";
-import { ReactComponent as TrainingIcon } from "../assets/images/ico_training.svg";
+// import { ReactComponent as TrainingIcon } from "../assets/images/ico_training.svg";
 import { ReactComponent as ScheduleIcon } from "../assets/images/ico_schedule.svg";
 import { ReactComponent as CommissionIcon } from "../assets/images/ico_commisions.svg";
 import { ReactComponent as ClientsIcon } from "../assets/images/ico_clients.svg";
@@ -17,10 +17,7 @@ import TestDriveModal from "../components/modals/testdrive.modal";
 import SoldModal from "../components/modals/sold.modal";
 import TrainingModal from "../components/modals/training.modal";
 import { useAppSelector } from "../redux/store";
-import {
-  useGetCenterSettingsQuery,
-  useLazyGetCenterSettingsQuery,
-} from "../redux/api/centerApi";
+import { useLazyGetCenterSettingsQuery } from "../redux/api/centerApi";
 
 const HomePage = () => {
   const [openNewClient, setOpenNewClient] = useState(false);
@@ -34,6 +31,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getCenterSettings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setOpenTestDrive]);
 
   const actions = [
@@ -65,13 +63,13 @@ const HomePage = () => {
         setOpenSold(true);
       },
     },
-    {
-      icon: <TrainingIcon width={48} height={48} fill="#ea2049" />,
-      text: "Training",
-      click: () => {
-        setOpenTraining(true);
-      },
-    },
+    // {
+    //   icon: <TrainingIcon width={48} height={48} fill="#ea2049" />,
+    //   text: "Training",
+    //   click: () => {
+    //     setOpenTraining(true);
+    //   },
+    // },
     {
       icon: <ScheduleIcon width={48} height={48} fill="#ea2049" />,
       text: "Schedule",
