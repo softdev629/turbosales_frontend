@@ -16,6 +16,8 @@ import ContactPage from "./pages/contact.page";
 import AccountPage from "./pages/account.page";
 import HQSettingsPage from "./pages/admin/hqsettings.page";
 import HQDashboardPage from "./pages/admin/hqdashboard.page";
+import CommissionsPage from "./pages/commissions.page";
+import MyClientPage from "./pages/myclients.page";
 
 const theme = createTheme({
   palette: {
@@ -50,6 +52,12 @@ function App() {
             >
               <Route path="contact" element={<ContactPage />} />
               <Route path="account" element={<AccountPage />} />
+              <Route path="commissions" element={<CommissionsPage />} />
+            </Route>
+            <Route
+              element={<RequireUser allowedRoles={["sales", "manager"]} />}
+            >
+              <Route path="my_clients" element={<MyClientPage />} />
             </Route>
             <Route
               path="admin"

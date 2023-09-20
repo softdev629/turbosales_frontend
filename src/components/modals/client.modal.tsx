@@ -308,7 +308,7 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter website here."
+                      placeholder="Please include https:// in your url."
                     />
                   </Box>
                 </Box>

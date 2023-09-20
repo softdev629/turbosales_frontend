@@ -53,7 +53,7 @@ const newTestDriveSchema = object({
     object({
       start: string(),
       end: string(),
-      room: number(),
+      workstations: array(number()),
     })
   ),
 });
@@ -65,7 +65,7 @@ const TestDriveModal = (props: {
   open: boolean;
 }) => {
   const [booking, setBooking] = useState<
-    { start: string; end: string; room: number }[]
+    { start: string; end: string; workstations: Array<number> }[]
   >([]);
   const [date, setDate] = useState<Dayjs>();
 
@@ -238,7 +238,7 @@ const TestDriveModal = (props: {
                                   default_time_room.push({
                                     start: intervals[i].start,
                                     end: intervals[i].end,
-                                    room: -1,
+                                    workstations: [],
                                   });
                                 }
                                 setBooking([...default_time_room]);
@@ -278,14 +278,14 @@ const TestDriveModal = (props: {
                           gap={1}
                         >
                           {Array.from({
-                            length: settings?.meeting_rooms as number,
+                            length: settings?.workstations as number,
                           }).map((_, index) => (
                             <Box
                               key={`room_1_${index}`}
                               width="15%"
                               height="45px"
                               bgcolor={
-                                index === booking[item_index].room - 1
+                                booking[item_index].workstations.includes(index)
                                   ? "rgba(225, 71, 71, 0.4)"
                                   : "rgba(76, 195, 102, 0.4)"
                               }
@@ -293,7 +293,18 @@ const TestDriveModal = (props: {
                               justifyContent="center"
                               alignItems="center"
                               onClick={(event) => {
-                                booking[item_index].room = index + 1;
+                                if (
+                                  booking[item_index].workstations.includes(
+                                    index
+                                  )
+                                )
+                                  booking[item_index].workstations = booking[
+                                    item_index
+                                  ].workstations.filter(
+                                    (workstation) => workstation !== index
+                                  );
+                                else
+                                  booking[item_index].workstations.push(index);
                                 setBooking([...booking]);
                                 setValue("time_room", booking);
                               }}
@@ -317,14 +328,16 @@ const TestDriveModal = (props: {
                 <Typography fontWeight={600}>Test Drive Meeting</Typography>
                 <br />
                 {booking.map((item, index) =>
-                  item.room !== -1 ? (
-                    <Box key={`booking_history_item_${index}`}>
+                  item.workstations.length !== 0 ? (
+                    <Box key={`booking_history_item_${index}`} sx={{ mb: 1 }}>
                       <Typography>
                         {date &&
                           `${date.year()}-${date.month() + 1}-${date.date()}`}
                         , {item.start} - {item.end}
                       </Typography>
-                      <Typography>Room {item.room}</Typography>
+                      <Typography>
+                        Room {item.workstations.join(",")}
+                      </Typography>
                     </Box>
                   ) : null
                 )}
