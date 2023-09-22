@@ -65,7 +65,7 @@ const Footer = () => {
           </Box>
           <Divider sx={{ my: 4, borderColor: "#ea2049" }} />
           <Typography textAlign="center">
-            © 2023 Savvi, All Rights Reserved.
+            © 2023 Xavvi, All Rights Reserved.
           </Typography>
         </Container>
       </Box>

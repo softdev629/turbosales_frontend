@@ -63,7 +63,7 @@ const moreLinks = [
   },
   {
     text: "HQ Clients",
-    to: "/admin/hqcenters",
+    to: "/admin/hq_clients",
     restrict: ["admin"],
   },
   {
@@ -84,7 +84,7 @@ const moreLinks = [
   {
     text: "Account",
     to: "/account",
-    restrict: ["instructor", "sales", "manager", "admin"],
+    restrict: ["instructor", "sales", "manager"],
   },
   {
     text: "Contact",

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Box, Typography, Button, Stack } from "@mui/material";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { ReactComponent as NewClientIcon } from "../assets/images/ico_new_client.svg";
 // import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
@@ -25,7 +25,9 @@ const HomePage = () => {
   const [openTestDrive, setOpenTestDrive] = useState(false);
   const [openSold, setOpenSold] = useState(false);
   const [openTraining, setOpenTraining] = useState(false);
+
   const user = useAppSelector((state) => state.userState.user);
+  const navigate = useNavigate();
 
   const [getCenterSettings] = useLazyGetCenterSettingsQuery();
 
@@ -73,14 +75,23 @@ const HomePage = () => {
     {
       icon: <ScheduleIcon width={48} height={48} fill="#ea2049" />,
       text: "Schedule",
+      click: () => {
+        navigate("/schedule");
+      },
     },
     {
       icon: <CommissionIcon width={48} height={48} fill="#ea2049" />,
       text: "Commission",
+      click: () => {
+        navigate("/commissions");
+      },
     },
     {
       icon: <ClientsIcon width={48} height={48} fill="#ea2049" />,
       text: "Clients",
+      click: () => {
+        navigate("/my_clients");
+      },
     },
   ];
 

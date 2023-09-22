@@ -6,6 +6,7 @@ import { IClient, IGenericResponse } from "./types";
 export const clientApi = createApi({
   reducerPath: "clientApi",
   baseQuery: customFetchBase,
+  tagTypes: ["Client"],
   endpoints: (builder) => ({
     addClient: builder.mutation<IGenericResponse, NewClientSaveInput>({
       query(data) {
@@ -16,6 +17,7 @@ export const clientApi = createApi({
           credentials: "include",
         };
       },
+      invalidatesTags: [{ type: "Client", id: "LIST" }],
     }),
     getClients: builder.query<IClient[], void>({
       query() {
@@ -26,6 +28,7 @@ export const clientApi = createApi({
         };
       },
       transformResponse: (result: { data: IClient[] }) => result.data,
+      providesTags: [{ type: "Client", id: "LIST" }],
     }),
   }),
 });
