@@ -71,3 +71,13 @@ export interface IClient {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ITestdrive {
+  _id: string;
+  client: IClient;
+  date: Date;
+  time_rooms: { start: string; end: string; workstations: number[] }[];
+  staff: IUser;
+  createdAt: Date;
+  updatedAt: Date;
+}

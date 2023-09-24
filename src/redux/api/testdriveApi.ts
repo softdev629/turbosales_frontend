@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
-import { IGenericResponse } from "./types";
+import { IGenericResponse, ITestdrive } from "./types";
 import { NewTestDriveSaveSchema } from "../../components/modals/testdrive.modal";
 
 export const testdriveApi = createApi({
@@ -21,7 +21,17 @@ export const testdriveApi = createApi({
         invalidatesTags: [{ type: "Testdrive", id: "LIST" }],
       }
     ),
+    getTestdriveByDate: builder.query<ITestdrive[], { date: string }>({
+      query({ date }) {
+        return {
+          url: `testdrives/date?date=${date}`,
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: ITestdrive[] }) => result.data,
+    }),
   }),
 });
 
-export const { useCreateTestdriveMutation } = testdriveApi;
+export const { useCreateTestdriveMutation, useLazyGetTestdriveByDateQuery } =
+  testdriveApi;

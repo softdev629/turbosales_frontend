@@ -29,7 +29,10 @@ import { useGetClientsQuery } from "../../redux/api/clientApi";
 import { IClient } from "../../redux/api/types";
 import { useAppSelector } from "../../redux/store";
 import { useEffect, useState } from "react";
-import { useCreateTestdriveMutation } from "../../redux/api/testdriveApi";
+import {
+  useCreateTestdriveMutation,
+  useLazyGetTestdriveByDateQuery,
+} from "../../redux/api/testdriveApi";
 
 const style = {
   position: "absolute" as "absolute",
@@ -67,10 +70,13 @@ const TestDriveModal = (props: {
   const [booking, setBooking] = useState<
     { start: string; end: string; workstations: Array<number> }[]
   >([]);
+  const [availables, setAvailables] = useState<Array<Array<number>>>([]);
   const [date, setDate] = useState<Dayjs>();
 
   const getState = useGetClientsQuery();
   const [createTestdrive, createState] = useCreateTestdriveMutation();
+  const [getTestdriveByDate, getTestdriveState] =
+    useLazyGetTestdriveByDateQuery();
   const settings = useAppSelector((state) => state.centerState.settings);
 
   const methods = useForm<NewTestDriveSaveSchema>({
@@ -94,10 +100,49 @@ const TestDriveModal = (props: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createState]);
 
+  useEffect(() => {
+    if (getTestdriveState.isSuccess) {
+      const testdrives = getTestdriveState.data;
+      let booked_workstations: Array<Array<number>> = [];
+      for (let i in testdrives) {
+        if (i === "0") {
+          for (let j in testdrives[i].time_rooms)
+            booked_workstations.push(testdrives[i].time_rooms[j].workstations);
+        } else {
+          for (let j in testdrives[i].time_rooms)
+            booked_workstations[parseInt(i)] = [
+              ...booked_workstations[parseInt(i)],
+              ...testdrives[i].time_rooms[j].workstations,
+            ];
+        }
+      }
+      let temporary: Array<Array<number>> = [];
+      if (booked_workstations.length === 0) {
+        temporary = [
+          ...booking.map((_) => [
+            ...Array.from({
+              length: settings?.workstations as number,
+            }).map((_, index) => index),
+          ]),
+        ];
+      }
+      for (let i in booked_workstations) {
+        temporary.push(
+          Array.from({
+            length: settings?.workstations as number,
+          })
+            .map((_, index) => index)
+            .filter((value) => !booked_workstations[i].includes(value))
+        );
+      }
+      setAvailables([...temporary]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getTestdriveState]);
+
   const onSubmitHandler: SubmitHandler<NewTestDriveSaveSchema> = (
     values: NewTestDriveSaveSchema
   ) => {
-    console.log(values);
     createTestdrive(values);
   };
 
@@ -228,11 +273,16 @@ const TestDriveModal = (props: {
                           onChange={(value: Dayjs | null) => {
                             if (value && settings) {
                               let default_time_room = [];
+                              let temporary = [];
                               if (settings) {
                                 const intervals = divideIntervals(
-                                  settings.operating_hours[value.day()].start,
-                                  settings.operating_hours[value.day()].end,
-                                  settings.meeting_duration
+                                  settings.operating_hours[
+                                    (value.day() + 6) % 7
+                                  ].start,
+                                  settings.operating_hours[
+                                    (value.day() + 6) % 7
+                                  ].end,
+                                  settings.workstation_duration
                                 );
                                 for (let i = 0; i < intervals.length; ++i) {
                                   default_time_room.push({
@@ -240,11 +290,20 @@ const TestDriveModal = (props: {
                                     end: intervals[i].end,
                                     workstations: [],
                                   });
+                                  temporary.push([
+                                    ...Array.from({
+                                      length: settings?.workstations as number,
+                                    }).map((_, index) => index),
+                                  ]);
                                 }
+                                setAvailables([...temporary]);
                                 setBooking([...default_time_room]);
                                 setValue("time_room", default_time_room);
                               }
                               setValue("date", fromDayjsToDate(value));
+                              getTestdriveByDate({
+                                date: fromDayjsToDate(value),
+                              });
                               setDate(value);
                             }
                           }}
@@ -269,50 +328,59 @@ const TestDriveModal = (props: {
                         key={`booking_item_${item_index}`}
                         alignItems="center"
                       >
-                        <Typography width="15%">{item.start}</Typography>
-                        <Stack
-                          flexDirection="row"
-                          justifyContent="flex-start"
-                          width="75%"
-                          flexWrap="wrap"
-                          gap={1}
-                        >
-                          {Array.from({
-                            length: settings?.workstations as number,
-                          }).map((_, index) => (
-                            <Box
-                              key={`room_1_${index}`}
-                              width="15%"
-                              height="45px"
-                              bgcolor={
-                                booking[item_index].workstations.includes(index)
-                                  ? "rgba(225, 71, 71, 0.4)"
-                                  : "rgba(76, 195, 102, 0.4)"
-                              }
-                              display="flex"
-                              justifyContent="center"
-                              alignItems="center"
-                              onClick={(event) => {
-                                if (
-                                  booking[item_index].workstations.includes(
-                                    index
-                                  )
-                                )
-                                  booking[item_index].workstations = booking[
-                                    item_index
-                                  ].workstations.filter(
-                                    (workstation) => workstation !== index
-                                  );
-                                else
-                                  booking[item_index].workstations.push(index);
-                                setBooking([...booking]);
-                                setValue("time_room", booking);
-                              }}
-                            >
-                              {index + 1}
-                            </Box>
-                          ))}
-                        </Stack>
+                        {availables[item_index] &&
+                          availables[item_index].length !== 0 && (
+                            <>
+                              <Typography width="15%">{item.start}</Typography>
+                              <Stack
+                                flexDirection="row"
+                                justifyContent="flex-start"
+                                width="75%"
+                                flexWrap="wrap"
+                                gap={1}
+                              >
+                                {availables[item_index].map((value, index) => (
+                                  <Box
+                                    key={`room_${item_index}_${index}`}
+                                    width="15%"
+                                    height="45px"
+                                    bgcolor={
+                                      booking[item_index].workstations.includes(
+                                        value
+                                      )
+                                        ? "rgba(225, 71, 71, 0.4)"
+                                        : "rgba(76, 195, 102, 0.4)"
+                                    }
+                                    display="flex"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    onClick={(event) => {
+                                      if (
+                                        booking[
+                                          item_index
+                                        ].workstations.includes(value)
+                                      )
+                                        booking[item_index].workstations =
+                                          booking[
+                                            item_index
+                                          ].workstations.filter(
+                                            (workstation) =>
+                                              workstation !== value
+                                          );
+                                      else
+                                        booking[item_index].workstations.push(
+                                          value
+                                        );
+                                      setBooking([...booking]);
+                                      setValue("time_room", booking);
+                                    }}
+                                  >
+                                    {value + 1}
+                                  </Box>
+                                ))}
+                              </Stack>
+                            </>
+                          )}
                       </Box>
                     ))}
                   </Box>
@@ -324,6 +392,8 @@ const TestDriveModal = (props: {
                 mt={4}
                 py={2}
                 borderRadius={4}
+                width={288}
+                px={4}
               >
                 <Typography fontWeight={600}>Test Drive Meeting</Typography>
                 <br />
@@ -335,8 +405,12 @@ const TestDriveModal = (props: {
                           `${date.year()}-${date.month() + 1}-${date.date()}`}
                         , {item.start} - {item.end}
                       </Typography>
-                      <Typography>
-                        Room {item.workstations.join(",")}
+                      <Typography sx={{ overflowWrap: "break-word" }}>
+                        Room{" "}
+                        {item.workstations
+                          .sort((a, b) => a - b)
+                          .map((value) => value + 1)
+                          .join(",")}
                       </Typography>
                     </Box>
                   ) : null
