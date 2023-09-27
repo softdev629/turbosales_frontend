@@ -13,6 +13,7 @@ import { object, string, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { useLoginUserMutation } from "../redux/api/authApi";
 
@@ -26,6 +27,7 @@ const loginUserSchema = object({
 export type LoginUserSchema = TypeOf<typeof loginUserSchema>;
 
 const SigninPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loginUser, loginState] = useLoginUserMutation();
 
@@ -64,10 +66,10 @@ const SigninPage = () => {
     <>
       <Container>
         <Typography variant="h5" textAlign="center" mt={6}>
-          Welcome back Xavvi team!
+          {t("login.title")}
         </Typography>
         <Typography color="primary.main" variant="h4" textAlign="center" my={6}>
-          LOG IN
+          {t("login.log_in")}
         </Typography>
         <Box
           component="form"
@@ -80,15 +82,19 @@ const SigninPage = () => {
             <Stack width={300} gap={3}>
               <TextField
                 {...register("email")}
-                label="Email"
+                label={t("home.common.email")}
                 placeholder="Enter your email here."
                 size="small"
                 error={!!errors["email"]}
-                helperText={errors["email"]?.message}
+                helperText={
+                  errors["email"]?.message
+                    ? t("home.common.email_required")
+                    : null
+                }
               />
               <TextField
                 {...register("password")}
-                label="Password"
+                label={t("login.password")}
                 type="password"
                 placeholder="Enter your email here."
                 size="small"
@@ -96,7 +102,7 @@ const SigninPage = () => {
                 helperText={errors["password"]?.message}
               />
               <LoadingButton variant="contained" type="submit">
-                CONFIRM
+                {t("login.confirm")}
               </LoadingButton>
               <Link
                 textAlign="center"
@@ -107,7 +113,7 @@ const SigninPage = () => {
                   navigate("/forgot-password");
                 }}
               >
-                FORGOT PASSWORD
+                {t("login.forgot_password")}
               </Link>
             </Stack>
           </FormProvider>

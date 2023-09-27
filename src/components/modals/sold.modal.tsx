@@ -32,6 +32,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Dayjs } from "dayjs";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { fromDayjsToDate } from "../../util";
 import { useGetClientsQuery } from "../../redux/api/clientApi";
@@ -77,6 +78,8 @@ const SoldModal = (props: {
 
   const user = useAppSelector((state) => state.userState.user);
   const settings = useAppSelector((state) => state.centerState.settings);
+
+  const { t } = useTranslation();
 
   const methods = useForm<NewSoldSaveSchema>({
     resolver: zodResolver(newSoldSchema),
@@ -136,14 +139,13 @@ const SoldModal = (props: {
                   textAlign="center"
                   mt={2}
                 >
-                  SALE COMPLETED
+                  {t("home.sold_modal.sold_title")}
                 </Typography>
                 <Typography color="primary.main" textAlign="center" width={288}>
-                  Congratulations! You made a sale. Please input the info to
-                  process your commission.
+                  {t("home.sold_modal.sold_congrats")}
                 </Typography>
                 <Typography textAlign="center">
-                  All fields are required
+                  {t("home.common.required")}
                 </Typography>
                 <TextField
                   {...register("referal_link")}
@@ -159,13 +161,13 @@ const SoldModal = (props: {
                 <Box width={288}>
                   <FormControl fullWidth>
                     <InputLabel id="client-name-label" size="small">
-                      Select client
+                      {t("home.testdrive_modal.select_client")}
                     </InputLabel>
                     <Select
                       {...register("client")}
                       labelId="client-name-label"
                       id="client-name-select"
-                      label="Select client"
+                      label={t("home.testdrive_modal.select_client")}
                       size="small"
                       defaultValue=""
                       onChange={(event) => {
@@ -193,7 +195,7 @@ const SoldModal = (props: {
                 </Box>
                 <TextField
                   {...register("company")}
-                  placeholder="Company"
+                  placeholder={t("home.common.company") as string}
                   size="small"
                   disabled
                   sx={{
@@ -211,11 +213,11 @@ const SoldModal = (props: {
                   gap={2}
                   alignItems="center"
                 >
-                  <Typography>Purchase Date</Typography>
+                  <Typography>{t("home.sold_modal.purchase_date")}</Typography>
 
                   <TextField
                     {...register("date")}
-                    placeholder="Date"
+                    placeholder={t("home.testdrive_modal.date") as string}
                     sx={{ bgcolor: "white", width: "90%" }}
                     size="small"
                   />
@@ -239,13 +241,13 @@ const SoldModal = (props: {
               <Box width={288} mt={3}>
                 <FormControl fullWidth>
                   <InputLabel id="product-label" size="small">
-                    Select product
+                    {t("home.sold_modal.product")}
                   </InputLabel>
                   <Select
                     {...register("product")}
                     labelId="product-label"
                     id="product-select"
-                    label="Select product"
+                    label={t("home.sold_modal.product")}
                     size="small"
                     defaultValue=""
                     onChange={(event) => {
@@ -336,7 +338,7 @@ const SoldModal = (props: {
               <Box width={288} mt={3}>
                 <TextField
                   {...register("commission_rate")}
-                  placeholder="Commissions Rate"
+                  placeholder={t("home.sold_modal.commission_rate") as string}
                   size="small"
                   disabled
                   fullWidth
@@ -354,7 +356,7 @@ const SoldModal = (props: {
               <Box width={288} mt={3}>
                 <TextField
                   {...register("amount")}
-                  label="Amount"
+                  label={t("home.sold_modal.amount")}
                   size="small"
                   fullWidth
                   onChange={(event) => {
@@ -387,7 +389,7 @@ const SoldModal = (props: {
               <Box width={288} mt={3}>
                 <TextField
                   {...register("commissions")}
-                  placeholder="Commissions"
+                  placeholder={t("header.commissions") as string}
                   size="small"
                   disabled
                   fullWidth
@@ -415,7 +417,7 @@ const SoldModal = (props: {
                   id="payment-radio-buttons-group-label"
                   sx={{ fontWeight: 600, mb: 2 }}
                 >
-                  Payment Type
+                  {t("home.sold_modal.payment_type")}
                 </FormLabel>
                 <Controller
                   control={control}
@@ -432,17 +434,17 @@ const SoldModal = (props: {
                       <FormControlLabel
                         value="credit"
                         control={<Radio />}
-                        label="Credit Card"
+                        label={t("home.sold_modal.credit_card")}
                       />
                       <FormControlLabel
                         value="bank"
                         control={<Radio />}
-                        label="Bank Transfer"
+                        label={t("home.sold_modal.bank_transfer")}
                       />
                       <FormControlLabel
                         value="cash"
                         control={<Radio />}
-                        label="Cash"
+                        label={t("home.sold_modal.cash")}
                       />
                     </RadioGroup>
                   )}
@@ -451,14 +453,14 @@ const SoldModal = (props: {
 
               <Box display="flex" gap={2} mt={4}>
                 <LoadingButton variant="contained" fullWidth type="submit">
-                  Confirm
+                  {t("home.common.confirm")}
                 </LoadingButton>
                 <Button
                   variant="outlined"
                   fullWidth
                   onClick={() => props.setOpen(false)}
                 >
-                  Cancel
+                  {t("home.common.cancel")}
                 </Button>
               </Box>
             </Box>

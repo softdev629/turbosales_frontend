@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Box, Typography, Button, Stack } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { ReactComponent as NewClientIcon } from "../assets/images/ico_new_client.svg";
 // import { ReactComponent as PitchIcon } from "../assets/images/ico_pitch.svg";
@@ -20,6 +21,8 @@ import { useAppSelector } from "../redux/store";
 import { useLazyGetCenterSettingsQuery } from "../redux/api/centerApi";
 
 const HomePage = () => {
+  const { t } = useTranslation();
+
   const [openNewClient, setOpenNewClient] = useState(false);
   // const [openPitch, setOpenPitch] = useState(false);
   const [openTestDrive, setOpenTestDrive] = useState(false);
@@ -39,7 +42,7 @@ const HomePage = () => {
   const actions = [
     {
       icon: <NewClientIcon width={48} height={48} fill="#ea2049" />,
-      text: "New Client",
+      text: t("home.new_client") as string,
       click: () => {
         setOpenNewClient(true);
       },
@@ -53,14 +56,14 @@ const HomePage = () => {
     // },
     {
       icon: <TestDriveIcon width={48} height={48} fill="#ea2049" />,
-      text: "Test Drive",
+      text: t("home.testdrive"),
       click: () => {
         setOpenTestDrive(true);
       },
     },
     {
       icon: <SoldIcon width={48} height={48} fill="#ea2049" />,
-      text: "Sold!",
+      text: t("home.sold"),
       click: () => {
         setOpenSold(true);
       },
@@ -74,21 +77,21 @@ const HomePage = () => {
     // },
     {
       icon: <ScheduleIcon width={48} height={48} fill="#ea2049" />,
-      text: "Schedule",
+      text: t("header.schedule"),
       click: () => {
         navigate("/schedule");
       },
     },
     {
       icon: <CommissionIcon width={48} height={48} fill="#ea2049" />,
-      text: "Commission",
+      text: t("home.commission"),
       click: () => {
         navigate("/commissions");
       },
     },
     {
       icon: <ClientsIcon width={48} height={48} fill="#ea2049" />,
-      text: "Clients",
+      text: t("home.clients"),
       click: () => {
         navigate("/my_clients");
       },
@@ -109,7 +112,7 @@ const HomePage = () => {
           }}
         >
           <Typography color="white" variant="h5" textAlign="center">
-            Let's sale! Select an action.
+            {t("home.slogan")}
           </Typography>
         </Box>
 

@@ -25,6 +25,7 @@ import {
 import { object, string, boolean, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { useAddClientMutation } from "../../redux/api/clientApi";
 import { useAppSelector } from "../../redux/store";
@@ -72,6 +73,8 @@ const ClientModal = (props: {
   setOpen: (flag: boolean) => void;
   open: boolean;
 }) => {
+  const { t } = useTranslation();
+
   const [salesReferalLink, setSalesReferalLink] = useState("");
   const user = useAppSelector((state) => state.userState.user);
 
@@ -92,7 +95,7 @@ const ClientModal = (props: {
 
   useEffect(() => {
     if (addState.isSuccess) {
-      toast.success(addState.data.message);
+      toast.success(t("home.new_client_modal.success_msg"));
     }
     if (addState.isError) {
       console.log(addState.error);
@@ -102,6 +105,7 @@ const ClientModal = (props: {
         );
       else toast.error((addState.error as any).data.message);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addState]);
 
   const methods = useForm<NewClientSaveInput>({
@@ -148,9 +152,9 @@ const ClientModal = (props: {
             mt={2}
             mb={6}
           >
-            NEW CLIENT
+            {t("home.new_client")}
           </Typography>
-          <Typography mb={4}>All fields are required</Typography>
+          <Typography mb={4}>{t("home.common.required")}</Typography>
           <FormProvider {...methods}>
             <Box
               component="form"
@@ -165,7 +169,7 @@ const ClientModal = (props: {
                     defaultValue={user?.center_id}
                     render={({ field: { onChange, value } }) => (
                       <TextField
-                        label="Center ID"
+                        label={t("home.new_client_modal.center_id")}
                         size="small"
                         disabled
                         sx={{
@@ -176,7 +180,6 @@ const ClientModal = (props: {
                         value={value}
                         onChange={onChange}
                         error={!!errors["center_id"]}
-                        helperText={errors["center_id"]?.message}
                         fullWidth
                       />
                     )}
@@ -190,8 +193,9 @@ const ClientModal = (props: {
                     render={({ field: { onChange, value } }) => (
                       <TextField
                         required
-                        label="Sales Rep Referral Link"
-                        error={!!errors["sales_rep_referal_link"]}
+                        label={t(
+                          "home.new_client_modal.sales_rep_referal_link"
+                        )}
                         helperText={errors["sales_rep_referal_link"]?.message}
                         fullWidth
                         size="small"
@@ -213,14 +217,20 @@ const ClientModal = (props: {
               </Box>
 
               <Box mt={2}>
-                <Typography>Client Info</Typography>
+                <Typography>
+                  {t("home.new_client_modal.client_info")}
+                </Typography>
                 <Box display="flex" gap={2} flexWrap="wrap">
                   <Box width={288}>
                     <TextField
                       {...register("name")}
-                      label="Name"
+                      label={t("home.common.name")}
                       error={!!errors["name"]}
-                      helperText={errors["name"]?.message}
+                      helperText={
+                        errors["name"]?.message
+                          ? t("home.common.name_required")
+                          : null
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -228,15 +238,18 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter name here."
                     />
                   </Box>
                   <Box width={288}>
                     <TextField
                       {...register("title")}
-                      label="Title"
+                      label={t("home.common.title")}
                       error={!!errors["title"]}
-                      helperText={errors["title"]?.message}
+                      helperText={
+                        errors["title"]?.message
+                          ? t("home.common.title_required")
+                          : null
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -244,15 +257,20 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter title here."
                     />
                   </Box>
                   <Box width={288}>
                     <TextField
                       {...register("mobile")}
-                      label="Mobile"
+                      label={t("home.common.mobile")}
                       error={!!errors["mobile"]}
-                      helperText={errors["mobile"]?.message}
+                      helperText={
+                        !errors["mobile"]?.message
+                          ? null
+                          : errors["mobile"].message.includes("required")
+                          ? t("home.common.mobile_required")
+                          : t("home.common.mobile_invalid")
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -260,15 +278,20 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter mobile here."
                     />
                   </Box>
                   <Box width={288}>
                     <TextField
                       {...register("email")}
-                      label="Email"
+                      label={t("home.common.email")}
                       error={!!errors["email"]}
-                      helperText={errors["email"]?.message}
+                      helperText={
+                        !errors["email"]?.message
+                          ? null
+                          : errors["email"].message.includes("required")
+                          ? t("home.common.email_required")
+                          : t("home.common.email_invalid")
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -276,15 +299,13 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter email here."
                     />
                   </Box>
                   <Box width={288}>
                     <TextField
-                      label="Company"
+                      label={t("home.common.company")}
                       {...register("company")}
                       error={!!errors["company"]}
-                      helperText={errors["company"]?.message}
                       fullWidth
                       size="small"
                       sx={{
@@ -292,15 +313,18 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter company here."
                     />
                   </Box>
                   <Box width={288}>
                     <TextField
-                      label="Website"
+                      label={t("home.common.website")}
                       {...register("website")}
                       error={!!errors["website"]}
-                      helperText={errors["website"]?.message}
+                      helperText={
+                        errors["website"]?.message
+                          ? t("home.common.website_invalid")
+                          : null
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -314,14 +338,18 @@ const ClientModal = (props: {
                 </Box>
               </Box>
               <Box mt={2}>
-                <Typography>Address</Typography>
+                <Typography>{t("home.common.address")}</Typography>
                 <Box display="flex" gap={2} flexWrap="wrap">
                   <Box width={288}>
                     <TextField
-                      label="Street"
+                      label={t("home.common.street")}
                       {...register("street")}
                       error={!!errors["street"]}
-                      helperText={errors["street"]?.message}
+                      helperText={
+                        errors["street"]?.message
+                          ? t("home.common.street_required")
+                          : null
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -329,15 +357,18 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter street here."
                     />
                   </Box>
                   <Box width={288}>
                     <TextField
-                      label="City"
+                      label={t("home.common.city")}
                       {...register("city")}
                       error={!!errors["city"]}
-                      helperText={errors["city"]?.message}
+                      helperText={
+                        errors["city"]?.message
+                          ? t("home.common.city_required")
+                          : null
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -350,10 +381,14 @@ const ClientModal = (props: {
                   </Box>
                   <Box width={288}>
                     <TextField
-                      label="Zip Code"
+                      label={t("home.common.zip_code")}
                       {...register("zip_code")}
                       error={!!errors["zip_code"]}
-                      helperText={errors["zip_code"]?.message}
+                      helperText={
+                        errors["zip_code"]?.message
+                          ? t("home.common.zip_code_required")
+                          : null
+                      }
                       fullWidth
                       size="small"
                       sx={{
@@ -361,7 +396,6 @@ const ClientModal = (props: {
                           textAlign: "center",
                         },
                       }}
-                      placeholder="Enter zip code here."
                     />
                   </Box>
                   <Box width={288}>
@@ -391,11 +425,7 @@ const ClientModal = (props: {
                         <TextField
                           {...register("country")}
                           {...params}
-                          label="Choose a country"
-                          inputProps={{
-                            ...params.inputProps,
-                            autoComplete: "new-password", // disable autocomplete and autofill
-                          }}
+                          label={t("home.common.choose_country")}
                         />
                       )}
                     />
@@ -403,12 +433,18 @@ const ClientModal = (props: {
                 </Box>
               </Box>
               <Box mt={2}>
-                <Typography>Business Activity</Typography>
+                <Typography>
+                  {t("home.new_client_modal.business_activity")}
+                </Typography>
                 <Box width={288}>
                   <TextField
                     {...register("business_activity")}
                     error={!!errors["business_activity"]}
-                    helperText={errors["business_activity"]?.message}
+                    helperText={
+                      errors["business_activity"]?.message
+                        ? t("home.new_client_modal.business_activity_required")
+                        : null
+                    }
                     fullWidth
                     size="small"
                     sx={{
@@ -421,32 +457,36 @@ const ClientModal = (props: {
                 </Box>
               </Box>
               <FormControl sx={{ mt: 4 }}>
-                <FormLabel sx={{ color: "black" }}>Client Interest</FormLabel>
+                <FormLabel sx={{ color: "black" }}>
+                  {t("home.new_client_modal.client_interest")}
+                </FormLabel>
                 <FormGroup sx={{ flexDirection: "row" }}>
                   <FormControlLabel
                     control={<Checkbox {...register("check_annual")} />}
-                    label="Annual Membership"
+                    label={t("home.new_client_modal.annual_membership")}
                   />
                   <FormControlLabel
                     control={<Checkbox {...register("check_ai_center")} />}
-                    label="AI Center Franchise"
+                    label={t("home.new_client_modal.ai_center_franchise")}
                   />
                   <FormControlLabel
                     control={<Checkbox {...register("check_international")} />}
-                    label="International Sales Services"
+                    label={t(
+                      "home.new_client_modal.international_sales_services"
+                    )}
                   />
                 </FormGroup>
               </FormControl>
               <Stack flexDirection="row" justifyContent="center" gap={2} mt={4}>
                 <LoadingButton type="submit" variant="contained" fullWidth>
-                  Confirm
+                  {t("home.common.confirm")}
                 </LoadingButton>
                 <Button
                   variant="outlined"
                   fullWidth
                   onClick={() => props.setOpen(false)}
                 >
-                  Cancel
+                  {t("home.common.cancel")}
                 </Button>
               </Stack>
             </Box>

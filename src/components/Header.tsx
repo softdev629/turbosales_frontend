@@ -16,101 +16,16 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import LogoIcon from "../assets/images/logo_xavvi.svg";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { useLogoutUserMutation } from "../redux/api/authApi";
 import { logout } from "../redux/features/userSlice";
 
-const navLinks = [
-  {
-    text: "Home",
-    to: "/",
-    restrict: ["sales", "manager"],
-  },
-  {
-    text: "Commissions",
-    to: "/commissions",
-    restrict: ["instructor", "sales", "manager"],
-  },
-  {
-    text: "Schedule",
-    to: "/schedule",
-    restrict: ["instructor", "sales", "manager"],
-  },
-  {
-    text: "My Clients",
-    to: "/my_clients",
-    restrict: ["sales", "manager"],
-  },
-  {
-    text: "Dashboard",
-    to: "/dashboard",
-    restrict: ["manager"],
-  },
-];
-
-const moreLinks = [
-  {
-    text: "Center Clients",
-    to: "/center_clients",
-    restrict: ["sales", "manager"],
-  },
-  {
-    text: "Center Settings",
-    to: "/center_settings",
-    restrict: ["manager"],
-  },
-  {
-    text: "HQ Clients",
-    to: "/admin/hq_clients",
-    restrict: ["admin"],
-  },
-  {
-    text: "HQ Centers",
-    to: "/admin/hq_centers",
-    restrict: ["admin"],
-  },
-  {
-    text: "HQ Dashboard",
-    to: "/admin/hq_dashboard",
-    restrict: ["admin"],
-  },
-  {
-    text: "HQ Settings",
-    to: "/admin/hq_settings",
-    restrict: ["admin"],
-  },
-  {
-    text: "Account",
-    to: "/account",
-    restrict: ["instructor", "sales", "manager"],
-  },
-  {
-    text: "Contact",
-    to: "/contact",
-    restrict: ["instructor", "sales", "manager"],
-  },
-  {
-    text: "Terms",
-    to: "/terms",
-    restrict: ["instructor", "sales", "manager", "admin"],
-  },
-  {
-    text: "Log Out",
-    to: "/",
-    restrict: ["instructor", "sales", "manager", "admin"],
-  },
-];
-
-const langLinks = [
-  { text: "English" },
-  { text: "中文" },
-  { text: "Français" },
-  { text: "Español" },
-];
-
 const Header = () => {
+  const { t, i18n } = useTranslation();
+
   const [moreEl, setMoreEl] = useState<null | HTMLButtonElement>(null);
   const [langEl, setLangEl] = useState<null | HTMLButtonElement>(null);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -123,6 +38,94 @@ const Header = () => {
   const [logoutUser, logoutState] = useLogoutUserMutation();
 
   const navigate = useNavigate();
+
+  const navLinks = [
+    {
+      text: t("header.home"),
+      to: "/",
+      restrict: ["sales", "manager"],
+    },
+    {
+      text: t("header.commissions"),
+      to: "/commissions",
+      restrict: ["instructor", "sales", "manager"],
+    },
+    {
+      text: t("header.schedule"),
+      to: "/schedule",
+      restrict: ["instructor", "sales", "manager"],
+    },
+    {
+      text: t("header.my_clients"),
+      to: "/my_clients",
+      restrict: ["sales", "manager"],
+    },
+    {
+      text: t("header.dashboard"),
+      to: "/dashboard",
+      restrict: ["manager"],
+    },
+  ];
+
+  const moreLinks = [
+    {
+      text: t("header.more_menu.center_clients"),
+      to: "/center_clients",
+      restrict: ["sales", "manager"],
+    },
+    {
+      text: t("header.more_menu.center_settings"),
+      to: "/center_settings",
+      restrict: ["manager"],
+    },
+    {
+      text: "HQ Clients",
+      to: "/admin/hq_clients",
+      restrict: ["admin"],
+    },
+    {
+      text: "HQ Centers",
+      to: "/admin/hq_centers",
+      restrict: ["admin"],
+    },
+    {
+      text: "HQ Dashboard",
+      to: "/admin/hq_dashboard",
+      restrict: ["admin"],
+    },
+    {
+      text: "HQ Settings",
+      to: "/admin/hq_settings",
+      restrict: ["admin"],
+    },
+    {
+      text: t("header.more_menu.account"),
+      to: "/account",
+      restrict: ["instructor", "sales", "manager"],
+    },
+    {
+      text: t("header.more_menu.contact"),
+      to: "/contact",
+      restrict: ["instructor", "sales", "manager"],
+    },
+    {
+      text: t("header.more_menu.terms"),
+      to: "/terms",
+      restrict: ["instructor", "sales", "manager", "admin"],
+    },
+    {
+      text: t("header.more_menu.logout"),
+      to: "/",
+      restrict: ["instructor", "sales", "manager", "admin"],
+    },
+  ];
+
+  const langLinks = [
+    { text: "English", code: "en" },
+    { text: "中文", code: "ch" },
+    { text: "Français", code: "fr" },
+    { text: "Español", code: "es" },
+  ];
 
   useEffect(() => {
     if (logoutState.isSuccess) {
@@ -222,7 +225,7 @@ const Header = () => {
                       sx={{ color: "black", textTransform: "none" }}
                       endIcon={openMore ? <ArrowDropDown /> : <ArrowRight />}
                     >
-                      More
+                      {t("header.more")}
                     </Button>
                   </MenuItem>
                 )}
@@ -430,6 +433,9 @@ const Header = () => {
                       py: 1,
                       width: 120,
                       color: "#595959",
+                    }}
+                    onClick={() => {
+                      i18n.changeLanguage(moreLink.code);
                     }}
                   >
                     {moreLink.text}

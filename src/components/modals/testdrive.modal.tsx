@@ -23,6 +23,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Dayjs } from "dayjs";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { divideIntervals, fromDayjsToDate } from "../../util";
 import { useGetClientsQuery } from "../../redux/api/clientApi";
@@ -67,6 +68,8 @@ const TestDriveModal = (props: {
   setOpen: (flag: boolean) => void;
   open: boolean;
 }) => {
+  const { t } = useTranslation();
+
   const [booking, setBooking] = useState<
     { start: string; end: string; workstations: Array<number> }[]
   >([]);
@@ -93,7 +96,7 @@ const TestDriveModal = (props: {
 
   useEffect(() => {
     if (createState.isSuccess) {
-      toast.success(createState.data.message);
+      toast.success("home.test_drive_modal.success_msg");
       reset();
       props.setOpen(false);
     }
@@ -174,17 +177,21 @@ const TestDriveModal = (props: {
                   variant="h5"
                   textAlign="center"
                 >
-                  LAUNCH TEST DRIVE
+                  {t("home.testdrive_modal.launch_testdrive")}
                 </Typography>
                 <Typography textAlign="center">
-                  All fields are required
+                  {t("home.common.required")}
                 </Typography>
 
                 <Box textAlign="center">
-                  <Typography mb={1}>Referal Link</Typography>
+                  <Typography mb={1}>
+                    {t("home.testdrive_modal.referal_link")}
+                  </Typography>
                   <TextField
                     {...register("referal_link")}
-                    placeholder="Referal Link"
+                    placeholder={
+                      t("home.testdrive_modal.referal_link") as string
+                    }
                     size="small"
                     disabled
                     sx={{
@@ -199,13 +206,13 @@ const TestDriveModal = (props: {
                 <Box width={288}>
                   <FormControl fullWidth>
                     <InputLabel id="client-name-label" size="small">
-                      Select client
+                      {t("home.testdrive_modal.select_client")}
                     </InputLabel>
                     <Select
                       {...register("client")}
                       labelId="client-name-label"
                       id="client-name-select"
-                      label="Select client"
+                      label={t("home.testdrive_modal.select_client")}
                       size="small"
                       defaultValue=""
                       error={!!errors["client"]}
@@ -232,12 +239,11 @@ const TestDriveModal = (props: {
                 </Box>
                 <Box>
                   <Typography textAlign="center" mb={1}>
-                    Company
+                    {t("home.common.company")}
                   </Typography>
                   <TextField
                     {...register("company")}
                     fullWidth
-                    placeholder="Company"
                     size="small"
                     disabled
                     sx={{
@@ -256,11 +262,13 @@ const TestDriveModal = (props: {
                   gap={2}
                   alignItems="center"
                 >
-                  <Typography>Book the Test Drive</Typography>
+                  <Typography>
+                    {t("home.testdrive_modal.book_testdrive")}
+                  </Typography>
 
                   <TextField
                     {...register("date")}
-                    placeholder="Date"
+                    placeholder={t("home.testdrive_modal.date") as string}
                     sx={{ bgcolor: "white", width: "90%" }}
                     size="small"
                   />
@@ -311,12 +319,6 @@ const TestDriveModal = (props: {
                       </DemoItem>
                     </DemoContainer>
                   </LocalizationProvider>
-
-                  <TextField
-                    label="Time & Room"
-                    sx={{ bgcolor: "white", width: "90%" }}
-                    size="small"
-                  />
                   <Box width="100%">
                     {booking.map((item, item_index) => (
                       <Box
@@ -375,7 +377,9 @@ const TestDriveModal = (props: {
                                       setValue("time_room", booking);
                                     }}
                                   >
-                                    {value + 1}
+                                    {String.fromCharCode(
+                                      "A".charCodeAt(0) + value
+                                    )}
                                   </Box>
                                 ))}
                               </Stack>
@@ -395,7 +399,9 @@ const TestDriveModal = (props: {
                 width={288}
                 px={4}
               >
-                <Typography fontWeight={600}>Test Drive Meeting</Typography>
+                <Typography fontWeight={600}>
+                  {t("home.testdrive_modal.testdrive_meeting")}
+                </Typography>
                 <br />
                 {booking.map((item, index) =>
                   item.workstations.length !== 0 ? (
@@ -409,7 +415,9 @@ const TestDriveModal = (props: {
                         Room{" "}
                         {item.workstations
                           .sort((a, b) => a - b)
-                          .map((value) => value + 1)
+                          .map((value) =>
+                            String.fromCharCode("A".charCodeAt(0) + value)
+                          )
                           .join(",")}
                       </Typography>
                     </Box>
@@ -423,14 +431,14 @@ const TestDriveModal = (props: {
                   type="submit"
                   loading={createState.isLoading}
                 >
-                  Confirm
+                  {t("home.common.confirm")}
                 </LoadingButton>
                 <Button
                   variant="outlined"
                   fullWidth
                   onClick={() => props.setOpen(false)}
                 >
-                  Cancel
+                  {t("home.common.cancel")}
                 </Button>
               </Box>
             </Box>

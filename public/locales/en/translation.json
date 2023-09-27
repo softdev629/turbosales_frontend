@@ -1,0 +1,258 @@
+{
+  "header": {
+    "home": "Home",
+    "commissions": "Commissions",
+    "schedule": "Schedule",
+    "my_clients": "My Clients",
+    "dashboard": "Dashboard",
+    "more": "More",
+    "more_menu": {
+      "center_clients": "Center Clients",
+      "center_settings": "Center Settings",
+      "account": "Account",
+      "contact": "Contact",
+      "terms": "Terms",
+      "logout": "Log Out"
+    }
+  },
+  "home": {
+    "slogan": " Let's sale! Select an action.",
+    "new_client": "New Client",
+    "testdrive": "Test Drive",
+    "sold": "Sold!",
+    "clients": "Clients",
+    "commission": "Commission",
+    "new_client_modal": {
+      "center_id": "Center ID",
+      "sales_rep_referal_link": "Sales Rep Referal Link",
+      "client_info": "Client Info",
+      "business_activity": "Business Activity",
+      "business_activity_required": "Business Activity is required",
+      "client_interest": "Client Interest",
+      "annual_membership": "Annual Membership",
+      "ai_center_franchise": "AI Center Franchise",
+      "international_sales_services": "International Sales Services",
+      "success_msg": "Client created successfully"
+    },
+    "testdrive_modal": {
+      "launch_testdrive": "LAUNCH TEST DRIVE",
+      "referal_link": "Referal Link",
+      "referal_link_required": "Referal link is required",
+      "select_client": "Select client",
+      "company_required": "Company is required",
+      "book_testdrive": "Book the Test Drive",
+      "date": "Date",
+      "date_required": "Date is required",
+      "testdrive_meeting": "Test Drive Meeting",
+      "success_msg": "Test Drive launched successfuly"
+    },
+    "sold_modal": {
+      "sold_title": "SALE COMPLETED",
+      "sold_congrats": "Congratulations! You made a sale. Please input the info to process your commission.",
+      "purchase_date": "Purchase Date",
+      "product": "Select product",
+      "product_required": "Product is required",
+      "commission_rate": "Commission Rate",
+      "amount": "Amount",
+      "amount_required": "Amount is required",
+      "payment_type": "Payment Type",
+      "credit_card": "Credit Card",
+      "bank_transfer": "Bank Transfer",
+      "cash": "Cash",
+      "success_msg": "Sale completed successfully"
+    },
+    "common": {
+      "required": "All fields are required.",
+      "name": "Name",
+      "name_required": "Name is required",
+      "title": "Title",
+      "title_required": "Title is required",
+      "mobile": "Mobile",
+      "mobile_required": "Mobile is required",
+      "mobile_invalid": "Invalid mobile format",
+      "email": "Email",
+      "email_required": "Email is required",
+      "email_invalid": "Invalid email format",
+      "company": "Company",
+      "website": "Website",
+      "website_invalid": "Invalid url format",
+      "website_placeholder": "Please include https:// in your url.",
+      "address": "Address",
+      "street": "Street",
+      "street_required": "Street is required",
+      "city": "City",
+      "city_required": "City is required",
+      "zip_code": "Zip Code",
+      "zip_code_required": "Zip code is required",
+      "choose_country": "Choose a country",
+      "country_required": "Country is required",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "workstations": "Workstations",
+      "staff": "Staff",
+      "client": "Client",
+      "pitch": "Pitch",
+      "price": "Price",
+      "manager": "Manager",
+      "sales_rep": "Sales Rep",
+      "instructor": "Instructor"
+    }
+  },
+  "my_clients": {
+    "add_client": "Add Client",
+    "status": "Status",
+    "pitch": "Pitch",
+    "member": "Member",
+    "contact": "Contact",
+    "purchases": "Purchases",
+    "search": "Search"
+  },
+  "commissions": {
+    "manager": "Manager",
+    "referal_link": "Referal Link",
+    "upcoming_commissions": {
+      "0": "Upcoming",
+      "1": "Commissions"
+    },
+    "all_time_commissions": {
+      "0": "All-time",
+      "1": "Commissions"
+    },
+    "pitches_made": {
+      "0": "Pitches",
+      "1": "Made"
+    },
+    "members_paid": {
+      "0": "Members",
+      "1": "(Paid)"
+    },
+    "leads": "Leads",
+    "expiration": "Expiration"
+  },
+  "dashboard": {
+    "center_id": "Center ID",
+    "level": "Level",
+    "dashboard_tips": "Order more Membership packs to level up and enjoy surprise perks. Bronze: 1 pack, Silver: 3 packs, Gold: 10 packs and Platinum: 30 packs.",
+    "income": "Income",
+    "month": "Month",
+    "year": "Year",
+    "membership_sales": "Membership Sales",
+    "ai_center_referrals": "AI Center Referrals",
+    "marketing_services": "Marketing Services",
+    "total_income": "Total Income",
+    "membership_remaining": "Membership Remaining",
+    "recharge": "Recharge",
+    "sales_date": "Sales Date",
+    "paid": "Paid",
+    "memebers_in_tiktok": "Members participating in TikTok services",
+    "latest_tiktok_ad_spending_commissions": "Latest TikTok ad spending commissions",
+    "service": "Service",
+    "referer": "Referer"
+  },
+  "center_settings": {
+    "title": "AI Center Settings",
+    "workspaces": "Workspaces",
+    "duration": "Duration",
+    "operating_hours": "Operating Hours",
+    "mon": "MON",
+    "tue": "TUE",
+    "wed": "WED",
+    "thur": "THUR",
+    "fri": "FRI",
+    "sat": "SAT",
+    "manager_per_membership": {
+      "0": "Manager:",
+      "1": "Per Membership"
+    },
+    "manager_per_ai_center": {
+      "0": "Manager:",
+      "1": "Per AI Center"
+    },
+    "sales_rep_per_membership": {
+      "0": "Sales Rep:",
+      "1": "Per Membership"
+    },
+    "sales_rep_per_ai_center": {
+      "0": "Sales Rep:",
+      "1": "Per AI Center"
+    },
+    "type": "Type",
+    "job": "JOB",
+    "freeze": "FREEZE"
+  },
+  "hq_clients": {
+    "country": "Country",
+    "center": "Center"
+  },
+  "hq_centers": {
+    "new_center": "NEW CENTER",
+    "city": "City",
+    "center_id": "CENTER ID",
+    "referer_center_id": "REFERER CENTER ID",
+    "level": "LEVEL",
+    "purchaes": "PURCHASES"
+  },
+  "hq_dashboard": {
+    "year_stats": "YEAR STATS",
+    "ai_centers": {
+      "0": "AI",
+      "1": "Centers"
+    },
+    "total_income": {
+      "0": "Total",
+      "1": "Income"
+    },
+    "total_members": {
+      "0": "Total",
+      "1": "Members"
+    },
+    "gmv": "GMV",
+    "income": "Income",
+    "month": "Month",
+    "year": "Year",
+    "membership_packs": "Membership Packs",
+    "franchise_starter_kits": "Franchise Starter Kits",
+    "marketing _services": "Marketing Services",
+    "international_sales": "International Sales"
+  },
+  "hq_settinsg": {
+    "add_new_center": "ADD NEW CENTER",
+    "add_center": "ADD CENTER",
+    "ai_center_referral": "AI Center Referral",
+    "titok_ad_spending": "TikTok Ad Spending",
+    "set_terms": "SET TERMS",
+    "save": "Save"
+  },
+  "account": {
+    "referal_link": "Referal Link",
+    "mobile_tip": "Input your mobile number like this: +area code SPACE mobile number.   Example: '+33 555555555'",
+    "change": "Change",
+    "change_password": "CHANGE PASSWORD",
+    "password_tip": "Password must be minimum 8 characters, include upper-case, lower-case, a number and a special character",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Pasword"
+  },
+  "contact": {
+    "title": "Contact",
+    "tip": "Please tell us how we can help you",
+    "mendatory_msg": "All fields are mandatory.",
+    "type_of_user": "TYPE OF USER",
+    "send": "Send",
+    "close": "Close"
+  },
+  "footer": {
+    "xavvi": "Xavvi",
+    "str1": "Plug & Play AI for Brands",
+    "str2": "Tabivere alevik, Voldi tee 9",
+    "str3": "Tarfu maakond, Tartu vald",
+    "str4": "49127 Estonia",
+    "str5": "© 2023 Savvi, All Rights Reserved."
+  },
+  "login": {
+    "title": "Welcome back Xavvi team!",
+    "log_in": "LOG IN",
+    "password": "Password",
+    "confirm": "Confirm",
+    "forgot_password": "Forgot Password"
+  }
+}

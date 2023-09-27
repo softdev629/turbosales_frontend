@@ -1,0 +1,257 @@
+{
+  "header": {
+    "home": "主页",
+    "commissions": "佣金",
+    "schedule": "日程",
+    "my_clients": "我的客户",
+    "dashboard": "客户信息",
+    "more": "更多的",
+    "more_menu": {
+      "center_clients": "中心客户",
+      "center_settings": "中心设置",
+      "account": "账户",
+      "contact": "信息",
+      "terms": "条款",
+      "logout": "登记"
+    }
+  },
+  "home": {
+    "slogan": "卖家流程",
+    "new_client": "新客户",
+    "testdrive": "试驾",
+    "sold": "卖家",
+    "clients": "客户",
+    "new_client_modal": {
+      "center_id": "中心编号",
+      "sales_rep_referal_link": "销售代表推荐链接",
+      "client_info": "客户信息",
+      "business_activity": "商业活动",
+      "business_activity_required": "需要进行商业活动",
+      "client_interest": "客户兴趣",
+      "annual_membership": "年度会员资格",
+      "ai_center_franchise": "人工智能中心特许经营",
+      "international_sales_services": "国际销售服务",
+      "success_msg": "客户端创建号"
+    },
+    "testdrive_modal": {
+      "launch_testdrive": "启动试驾",
+      "referal_link": "推荐链接",
+      "referal_link_required": "需要推荐链接",
+      "select_client": "选择客户",
+      "company_required": "公司必填项",
+      "book_testdrive": "预约试驾",
+      "date": "日期",
+      "date_required": "日期为必填项",
+      "testdrive_meeting": "试驾会议",
+      "success_msg": "试驾成功"
+    },
+    "sold_modal": {
+      "sold_tile": "销售完成",
+      "sold_congrats": "恭喜 你成交了 请输入信息以处理您的佣金",
+      "purchase_date": "购买日期",
+      "product": "选择产品",
+      "product_required": "产品为必填项",
+      "commission_rate": "佣金率",
+      "amount": "数量",
+      "amount_required": "金额为必填项",
+      "payment_type": "付款方式",
+      "credit_card": "信用卡",
+      "bank_transfer": "银行转帐",
+      "cash": "现金",
+      "success_msg": "销售成功完成"
+    },
+    "common": {
+      "required": "销售领域",
+      "name": "名",
+      "name_required": "姓",
+      "title": "标题",
+      "title_required": "标题为必填项",
+      "mobile": "电话",
+      "mobile_required": "手机",
+      "mobile_invalid": "手机格式无效",
+      "email": "电子邮件",
+      "email_required": "电子邮件为必填项",
+      "email_invalid": "电子邮件",
+      "company": "公司",
+      "website": "网站",
+      "website_invalid": "网址地址",
+      "website_placeholder": "请在您的网址中包含 https://",
+      "address": "地址",
+      "street": "街道",
+      "street_required": "街道为必填项",
+      "city": "城市",
+      "city_required": "城市为必填项",
+      "zip_code": "邮政编码",
+      "zip_code_required": "邮政编码为必填项",
+      "choose_country": "国家",
+      "country_required": "国家/地区为必填项",
+      "confirm": "确认",
+      "cancel": "取消",
+      "workstations": "工作站",
+      "staff": "职员",
+      "client": "客户",
+      "pitch": "资料",
+      "price": "价格",
+      "manager": "经理",
+      "sales_rep": "销售代表",
+      "instructor": "讲师"
+    }
+  },
+  "my_clients": {
+    "add_client": "添加客户端",
+    "status": "信息",
+    "pitch": "信息",
+    "member": "成员",
+    "contact": "接触",
+    "purchases": "购买",
+    "search": "搜索"
+  },
+  "commissions": {
+    "manager": "经理",
+    "referal_link": "推荐链接",
+    "upcoming_commissions": {
+      "0": "即将推出",
+      "1": "佣金"
+    },
+    "all_time_commissions": {
+      "0": "固定佣金",
+      "1": "佣金"
+    },
+    "pitches_made": {
+      "0": "进展",
+      "1": "进展"
+    },
+    "members_paid": {
+      "0": "会员",
+      "1": "薪酬"
+    },
+    "leads": "潜在客户",
+    "expiration": "到期日"
+  },
+  "dashboard": {
+    "center_id": "中心编号",
+    "level": "等级",
+    "dashboard_tips": "订购更多会员包以升级并享受惊喜福利 铜牌1 包 银牌3 包 金牌 10 包        \n铂金 30 包",
+    "income": "收入",
+    "month": "月",
+    "year": "年",
+    "membership_sales": "会员销售",
+    "ai_center_referrals": "人工智能中心推荐",
+    "marketing_services": "营销服务",
+    "total_income": "总收入",
+    "membership_remaining": "剩余会员资格",
+    "recharge": "充值",
+    "sales_date": "销售日期",
+    "paid": "有薪酬的",
+    "memebers_in_tiktok": "参与 TikTok 服务的会员",
+    "latest_tiktok_ad_spending_commissions": "最新 TikTok 广告支出佣金\n\n",
+    "service": "服务",
+    "referer": "推荐人"
+  },
+  "center_settings": {
+    "title": "人工智能中心设置",
+    "workspaces": "工作空间",
+    "duration": "期间",
+    "operating_hours": "营业时间",
+    "mon": "星期一",
+    "tue": "星期二",
+    "wed": "星期三",
+    "thur": "星期四",
+    "fri": "星期五",
+    "sat": "星期六",
+    "manager_per_membership": {
+      "0": "经理",
+      "1": "每个会员资格"
+    },
+    "manager_per_ai_center": {
+      "0": "经理",
+      "1": "每个人工智能中心"
+    },
+    "sales_rep_per_membership": {
+      "0": "销售代表",
+      "1": "每个会员资格"
+    },
+    "sales_rep_per_ai_center": {
+      "0": "销售代表",
+      "1": "每个人工智能中心"
+    },
+    "type": "类型",
+    "job": "工作",
+    "freeze": "公司"
+  },
+  "hq_clients": {
+    "country": "国家",
+    "center": "中心"
+  },
+  "hq_centers": {
+    "new_center": "新中心",
+    "city": "城市",
+    "center_id": "中心编号",
+    "referer_center_id": "推荐人中心 ID",
+    "level": "等级",
+    "purchaes": "购买"
+  },
+  "hq_dashboard": {
+    "year_stats": "年度统计数据",
+    "ai_centers": {
+      "0": "人工智能",
+      "1": "中心"
+    },
+    "total_income": {
+      "0": "全部的",
+      "1": "收入"
+    },
+    "total_members": {
+      "0": "全部的",
+      "1": "会员"
+    },
+    "gmv": "商品交易总额",
+    "income": "收入",
+    "month": "月",
+    "year": "年",
+    "membership_packs": "会员礼包",
+    "franchise_starter_kits": "特许经营入门套件",
+    "marketing _services": "营销服务",
+    "international_sales": "国际销售"
+  },
+  "hq_settinsg": {
+    "add_new_center": "添加新中心",
+    "add_center": "添加中心",
+    "ai_center_referral": "人工智能中心推荐",
+    "titok_ad_spending": "TikTok 广告支出",
+    "set_terms": "设定条款",
+    "save": "链接"
+  },
+  "account": {
+    "referal_link": "推荐链接",
+    "mobile_tip": "输入您的手机号码，如下所示：区号  国家 手机号码 示例： +33 555555555",
+    "change": "账户",
+    "change_password": "更改密码",
+    "password_tip": "密码必须至少8个字符 包含大写字母 小写字母 数字和特殊字符",
+    "new_password": "新密码",
+    "confirm_password": "确认密码"
+  },
+  "contact": {
+    "title": "标题",
+    "tip": "请告诉我们如何帮助您",
+    "mendatory_msg": "所有字段均为必填字段",
+    "type_of_user": "用户类型",
+    "send": "发送",
+    "close": "关闭"
+  },
+  "footer": {
+    "xavvi": "萨维",
+    "str1": "品牌即用人工智能",
+    "str2'": "塔比韦雷镇区",
+    "str3": "塔尔图瓦尔德",
+    "str4": "爱沙尼亚",
+    "str5": "© 2023 Xavvi，保留所有权利。"
+  },
+  "login": {
+    "title": "欢迎回到 Xavvi 团队！",
+    "log_in": "登录",
+    "password": "密码",
+    "confirm": "确认",
+    "forgot_password": "忘记密码"
+  }
+}

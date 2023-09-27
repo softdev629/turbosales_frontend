@@ -6,10 +6,13 @@ import {
   Divider,
   Container,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import LogoIcon from "../assets/images/logo_xavvi.svg";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Box p={4} bgcolor="#ededed" mt={10}>
@@ -23,7 +26,7 @@ const Footer = () => {
             >
               <Box>
                 <img src={LogoIcon} alt="Logo" width={144} />
-                <Typography pt={2}>Plug & Play AI for Brands</Typography>
+                <Typography pt={2}>{t("footer.str1")}</Typography>
               </Box>
               <Box display="flex" flexDirection="column">
                 <Link
@@ -34,7 +37,7 @@ const Footer = () => {
                   }}
                   mb={3}
                 >
-                  Contact
+                  {t("header.more_menu.contact")}
                 </Link>
                 <Link
                   sx={{
@@ -44,7 +47,7 @@ const Footer = () => {
                   }}
                   mb={3}
                 >
-                  Terms & Privacy
+                  {t("header.more_menu.terms")} & Privacy
                 </Link>
               </Box>
               <Box>
@@ -52,21 +55,19 @@ const Footer = () => {
                   Xavvi
                 </Typography>
                 <Typography fontWeight={400} mb={1}>
-                  Tabivere alevik, Voldi tee 9,
+                  {t("footer.str2")},
                 </Typography>
                 <Typography fontWeight={400} mb={1}>
-                  Tarfu maakond, Tartu vald
+                  {t("footer.str3")}
                 </Typography>
                 <Typography fontWeight={400} mb={1}>
-                  49127 Estonia
+                  {t("footer.str4")}
                 </Typography>
               </Box>
             </Stack>
           </Box>
           <Divider sx={{ my: 4, borderColor: "#ea2049" }} />
-          <Typography textAlign="center">
-            © 2023 Xavvi, All Rights Reserved.
-          </Typography>
+          <Typography textAlign="center">{t("footer.str5")}</Typography>
         </Container>
       </Box>
     </>
