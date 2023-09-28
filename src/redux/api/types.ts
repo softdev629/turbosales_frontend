@@ -76,7 +76,7 @@ export interface ITestdrive {
   _id: string;
   client: IClient;
   date: Date;
-  time_rooms: { start: string; end: string; workstations: number[] }[];
+  time_rooms: { start: string; end: string; workstation: number }[];
   staff: IUser;
   createdAt: Date;
   updatedAt: Date;
