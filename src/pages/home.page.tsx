@@ -102,7 +102,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ p: { xs: 0 } }}>
+      <Container maxWidth="xl" sx={{ p: { xs: 0 }, mt: 15 }}>
         <Box
           sx={{
             borderBottomLeftRadius: { md: 40, xs: 0 },

@@ -47,7 +47,7 @@ const Footer = () => {
                   }}
                   mb={3}
                 >
-                  {t("header.more_menu.terms")} & Privacy
+                  {t("footer.terms_privacy")}
                 </Link>
               </Box>
               <Box>

@@ -83,7 +83,7 @@ const SigninPage = () => {
               <TextField
                 {...register("email")}
                 label={t("home.common.email")}
-                placeholder="Enter your email here."
+                placeholder={t("login.email_placeholder") as string}
                 size="small"
                 error={!!errors["email"]}
                 helperText={
@@ -96,10 +96,16 @@ const SigninPage = () => {
                 {...register("password")}
                 label={t("login.password")}
                 type="password"
-                placeholder="Enter your email here."
+                placeholder={t("login.password_placeholder") as string}
                 size="small"
                 error={!!errors["password"]}
-                helperText={errors["password"]?.message}
+                helperText={
+                  !errors["password"]?.message
+                    ? null
+                    : errors["password"].message.includes("required")
+                    ? t("login.password_required")
+                    : t("login.password_longer")
+                }
               />
               <LoadingButton variant="contained" type="submit">
                 {t("login.confirm")}

@@ -242,6 +242,7 @@
   },
   "footer": {
     "xavvi": "Xavvi",
+    "terms_privacy": "Terms & Privacy",
     "str1": "Plug & Play AI for Brands",
     "str2": "Tabivere alevik, Voldi tee 9",
     "str3": "Tarfu maakond, Tartu vald",
@@ -251,8 +252,16 @@
   "login": {
     "title": "Welcome back Xavvi team!",
     "log_in": "LOG IN",
+    "email_placeholder": "Enter your email here.",
     "password": "Password",
+    "password_placeholder": "Enter your password here.",
+    "password_required": "Password is required.",
+    "password_longer": "Password must be longer than 8 characters.",
     "confirm": "Confirm",
     "forgot_password": "Forgot Password"
+  },
+  "schedule": {
+    "workstation": "Workstation",
+    "book_date_picker": "Book date picker"
   }
 }

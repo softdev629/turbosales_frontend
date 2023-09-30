@@ -144,9 +144,8 @@ const Header = () => {
 
   return (
     <>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ zIndex: 2, position: "fixed" }}>
         <AppBar
-          position="static"
           sx={{ bgcolor: "white", color: "black", p: 4, boxShadow: "none" }}
         >
           <Toolbar disableGutters>
@@ -349,7 +348,7 @@ const Header = () => {
                   sx={{ color: "black", textTransform: "none" }}
                   endIcon={openMore ? <ArrowDropDown /> : <ArrowRight />}
                 >
-                  More
+                  {t("header.more")}
                 </Button>
               )}
               {user && (
@@ -381,7 +380,7 @@ const Header = () => {
                           }}
                           onClick={() => {
                             setMoreEl(null);
-                            if (moreLink.text !== "Log Out")
+                            if (moreLink.text !== t("header.more_menu.logout"))
                               navigate(moreLink.to);
                             else logoutUser();
                           }}
