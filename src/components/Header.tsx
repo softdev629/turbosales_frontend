@@ -144,7 +144,7 @@ const Header = () => {
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ zIndex: 2, position: "fixed" }}>
+      <Container maxWidth="lg" sx={{ zIndex: 2, position: "fixed" }}>
         <AppBar
           sx={{ bgcolor: "white", color: "black", p: 4, boxShadow: "none" }}
         >

@@ -53,7 +53,7 @@ const ContactPage = () => {
 
   return (
     <>
-      <Container>
+      <Container sx={{ mt: 20 }}>
         <Typography variant="h4" textAlign="center" color="primary.main">
           Contact
         </Typography>

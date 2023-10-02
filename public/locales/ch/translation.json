@@ -154,15 +154,16 @@
   },
   "center_settings": {
     "title": "人工智能中心设置",
-    "workspaces": "工作空间",
+    "workstations": "工作站",
     "duration": "期间",
     "operating_hours": "营业时间",
     "mon": "星期一",
     "tue": "星期二",
     "wed": "星期三",
-    "thur": "星期四",
+    "thurs": "星期四",
     "fri": "星期五",
     "sat": "星期六",
+    "sun": "星期日",
     "manager_per_membership": {
       "0": "经理",
       "1": "每个会员资格"

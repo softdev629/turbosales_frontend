@@ -19,6 +19,7 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import {
   TablePaginationActions,
@@ -38,6 +39,8 @@ import { ICenterSettings } from "../redux/api/types";
 import FullScreenLoader from "../components/FullscreenLoader";
 
 const CenterSettingsPage = () => {
+  const { t } = useTranslation();
+
   const [openStaff, setOpenStaff] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -87,9 +90,9 @@ const CenterSettingsPage = () => {
 
   return (
     <>
-      <Container>
+      <Container sx={{ mt: 20 }}>
         <Typography color="primary.main" variant="h4" textAlign="center">
-          AI Center Settings
+          {t("center_settings.title")}
         </Typography>
         <Box display="flex" flexDirection="column" alignItems="center">
           <Box
@@ -101,7 +104,7 @@ const CenterSettingsPage = () => {
             width="100%"
           >
             <Typography color="primary.main" variant="h5" textAlign="center">
-              WORKSTATIONS
+              {t("center_settings.workstations")}
             </Typography>
             <Box display="flex" justifyContent="center" mt={4}>
               <Box
@@ -111,9 +114,13 @@ const CenterSettingsPage = () => {
                 width="40%"
                 borderRadius={4}
               >
-                <Typography textAlign="center">Workstations</Typography>
+                <Typography textAlign="center">
+                  {t("home.common.workstations")}
+                </Typography>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Workstations</Typography>
+                  <Typography flexGrow={1}>
+                    {t("home.common.workstations")}
+                  </Typography>
                   <Box
                     display="flex"
                     flexGrow={1}
@@ -153,7 +160,9 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Duration</Typography>
+                  <Typography flexGrow={1}>
+                    {t("center_settings.duration")}
+                  </Typography>
                   <Box flexGrow={1}>
                     <FormControl fullWidth>
                       <Select
@@ -170,9 +179,9 @@ const CenterSettingsPage = () => {
                           });
                         }}
                       >
-                        <MenuItem value={2}>2 hour</MenuItem>
-                        <MenuItem value={2.5}>2.5 hours</MenuItem>
-                        <MenuItem value={3}>3 hours</MenuItem>
+                        <MenuItem value={1}>1 hours</MenuItem>
+                        <MenuItem value={1.5}>1.5 hours</MenuItem>
+                        <MenuItem value={2}>2 hours</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
@@ -190,7 +199,7 @@ const CenterSettingsPage = () => {
             width="100%"
           >
             <Typography color="primary.main" variant="h5" textAlign="center">
-              OPERATING HOURS
+              {t("center_settings.operating_hours")}
             </Typography>
             <Box display="flex" justifyContent="center" mt={4}>
               <Box
@@ -210,7 +219,9 @@ const CenterSettingsPage = () => {
                     alignItems="center"
                     key={`operating_hour_${index}`}
                   >
-                    <Typography width="20%">{row.day}</Typography>
+                    <Typography width="20%">
+                      {t(`center_settings.${row.day.toLowerCase()}`)}
+                    </Typography>
                     <Box width="20%">
                       <FormControl fullWidth>
                         <Select
@@ -298,7 +309,7 @@ const CenterSettingsPage = () => {
             width="100%"
           >
             <Typography color="primary.main" variant="h5" textAlign="center">
-              COMMISSIONS
+              {t("dashboard.commissions")}
             </Typography>
             <Box
               display="flex"
@@ -316,12 +327,14 @@ const CenterSettingsPage = () => {
                 textAlign="center"
               >
                 <Typography>
-                  Manager:
+                  {t("center_settings.manager_per_membership.0")}:
                   <br />
-                  per Membership
+                  {t("center_settings.manager_per_membership.1")}
                 </Typography>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Amount</Typography>
+                  <Typography flexGrow={1}>
+                    {t("home.sold_modal.amount")}
+                  </Typography>
                   <Box
                     display="flex"
                     flexGrow={1}
@@ -347,7 +360,9 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Type</Typography>
+                  <Typography flexGrow={1}>
+                    {t("center_settings.type")}
+                  </Typography>
                   <Box flexGrow={1}>
                     <FormControl fullWidth>
                       <Select
@@ -379,12 +394,14 @@ const CenterSettingsPage = () => {
                 textAlign="center"
               >
                 <Typography>
-                  Manager:
+                  {t("center_settings.manager_per_ai_center.0")}
                   <br />
-                  per AI Center
+                  {t("center_settings.manager_per_ai_center.1")}
                 </Typography>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Amount</Typography>
+                  <Typography flexGrow={1}>
+                    {t("home.sold_modal.amount")}
+                  </Typography>
                   <Box
                     display="flex"
                     flexGrow={1}
@@ -410,7 +427,9 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Type</Typography>
+                  <Typography flexGrow={1}>
+                    {t("center_settings.type")}
+                  </Typography>
                   <Box flexGrow={1}>
                     <FormControl fullWidth>
                       <Select
@@ -441,12 +460,14 @@ const CenterSettingsPage = () => {
                 textAlign="center"
               >
                 <Typography>
-                  Sales Rep:
+                  {t("center_settings.sales_rep_per_membership.0")}
                   <br />
-                  per Membership
+                  {t("center_settings.sales_rep_per_membership.1")}
                 </Typography>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Amount</Typography>
+                  <Typography flexGrow={1}>
+                    {t("home.sold_modal.amount")}
+                  </Typography>
                   <Box
                     display="flex"
                     flexGrow={1}
@@ -470,7 +491,9 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Type</Typography>
+                  <Typography flexGrow={1}>
+                    {t("center_settings.type")}
+                  </Typography>
                   <Box flexGrow={1}>
                     <FormControl fullWidth>
                       <Select
@@ -502,12 +525,14 @@ const CenterSettingsPage = () => {
                 textAlign="center"
               >
                 <Typography>
-                  Sales Rep:
+                  {t("center_settings.sales_rep_per_ai_center.0")}
                   <br />
-                  per AI Center
+                  {t("center_settings.sales_rep_per_ai_center.1")}
                 </Typography>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Amount</Typography>
+                  <Typography flexGrow={1}>
+                    {t("home.sold_modal.amount")}
+                  </Typography>
                   <Box
                     display="flex"
                     flexGrow={1}
@@ -533,7 +558,9 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
                 <Box display="flex" alignItems="center" mt={2}>
-                  <Typography flexGrow={1}>Type</Typography>
+                  <Typography flexGrow={1}>
+                    {t("center_settings.type")}
+                  </Typography>
                   <Box flexGrow={1}>
                     <FormControl fullWidth>
                       <Select
@@ -562,23 +589,30 @@ const CenterSettingsPage = () => {
 
         <Box display="flex" justifyContent="space-between" mt={10}>
           <Typography variant="h4" color="primary.main">
-            STAFF
+            {t("center_settings.staff")}
           </Typography>
           <Button variant="contained" onClick={() => setOpenStaff(true)}>
-            ADD STAFF
+            {t("center_settings.add_staff")}
           </Button>
         </Box>
         <Typography textAlign="right" mt={3}>
-          JOB: S = Sales Rep, I = Instructor, M = Manager{" "}
+          {t("center_settings.job")}: S = {t("home.common.sales_rep")}, I ={" "}
+          {t("home.common.instructor")}, M = {t("home.common.manager")}
         </Typography>
         <TableContainer sx={{ px: 4, mt: 3 }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>NAME</StyledTableCell>
-                <StyledTableCell align="center">JOB</StyledTableCell>
-                <StyledTableCell align="center">START DATE</StyledTableCell>
-                <StyledTableCell align="center">FREEZE</StyledTableCell>
+                <StyledTableCell>{t("center_settings.name")}</StyledTableCell>
+                <StyledTableCell align="center">
+                  {t("center_settings.job")}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {t("center_settings.start_date")}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {t("center_settings.freeze")}
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

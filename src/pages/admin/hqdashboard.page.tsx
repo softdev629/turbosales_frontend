@@ -29,6 +29,7 @@ const HQDashboardPage = () => {
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
+          mt: 20,
         }}
       >
         <Box bgcolor="primary.main" width="100%">

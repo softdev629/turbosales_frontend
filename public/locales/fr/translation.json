@@ -1,0 +1,259 @@
+{
+  "header": {
+    "home": "Accueil",
+    "commissions": "Commissions",
+    "schedule": "Disponibilité",
+    "my_clients": "Mes Clients",
+    "dashboard": "Tableau de bord",
+    "more": "Plus",
+    "more_menu": {
+      "center_clients": "Centre Clients",
+      "center_settings": "Paramètres",
+      "account": "Compte",
+      "contact": "Contact",
+      "terms": "Conditions",
+      "logout": "Déconnexion"
+    }
+  },
+  "home": {
+    "slogan": "Faisons des ventes ! Sélectionnez une action.\n\n",
+    "new_client": "Nouveau Client",
+    "testdrive": "Essai Routier",
+    "sold": "Vendu!",
+    "clients": "Clients",
+    "new_client_modal": {
+      "center_id": "ID Centre",
+      "sales_rep_referal_link": "Lien de parrainage",
+      "client_info": "Info Client",
+      "business_activity": "Activité Commerciale",
+      "business_activity_required": "L'Activité d'Entreprise est obligatoire.",
+      "client_interest": "Intérêt du Client",
+      "annual_membership": "Abonnement annuel",
+      "ai_center_franchise": "Franchise Centre AI",
+      "international_sales_services": "Service de vente International",
+      "success_msg": "Client créé avec succès"
+    },
+    "testdrive_modal": {
+      "launch_testdrive": "LANCEMENT DE L'ESSAI ROUTIER",
+      "referal_link": "Lien de Parrainage",
+      "referal_link_required": "Le lien de parrainage est requis.",
+      "select_client": "Sélectionnez le client",
+      "company_required": "La société est requise.",
+      "book_testdrive": "Réservez l'Essai Routier",
+      "date": "Date",
+      "date_required": "La date est obligatoire.",
+      "testdrive_meeting": "Rdv pour un Essai Routier\n\n",
+      "success_msg": "L'Essai Routier a été lancé avec succès"
+    },
+    "sold_modal": {
+      "sold_tile": "VENTE TERMINÉE",
+      "sold_congrats": "Félicitations ! Vous avez réalisé une vente. Veuillez entrer les informations pour traiter votre commission.",
+      "purchase_date": "Date d'achat",
+      "product": "Sélectionnez un produit",
+      "product_required": "Le champ \"Produit\" est obligatoire.",
+      "commission_rate": "Taux de Commission",
+      "amount": "Montant",
+      "amount_required": "Le champ \"Montant\" est obligatoire.",
+      "payment_type": "Moyen de Paiement",
+      "credit_card": "Carte de Crédit",
+      "bank_transfer": "Virement Bancaire",
+      "cash": "Espèces",
+      "success_msg": "Vente réussie avec succès"
+    },
+    "common": {
+      "required": "Tous les champs sont obligatoires.",
+      "name": "Nom",
+      "name_required": "Le champ \"Nom\" est obligatoire.",
+      "title": "Titre",
+      "title_required": "Le champ \"Titre\" est obligatoire.",
+      "mobile": "Mobile",
+      "mobile_required": "Le champ \"Mobile\" est obligatoire.",
+      "mobile_invalid": "Format de mobile invalide.",
+      "email": "Email",
+      "email_required": "Le champ \"E-mail\" est obligatoire.",
+      "email_invalid": "Format d'email invalide",
+      "company": "Entreprise",
+      "website": "Site web",
+      "website_invalid": "Format d'URL invalide",
+      "website_placeholder": "Veuillez inclure https:// dans votre URL.",
+      "address": "Adresse",
+      "street": "Rue",
+      "street_required": "L'adresse de la rue est obligatoire.",
+      "city": "Ville",
+      "city_required": "La ville est obligatoire.",
+      "zip_code": "Code Postal",
+      "zip_code_required": "Le code postal est obligatoire.",
+      "choose_country": "Choisissez un pays",
+      "country_required": "Le pays est obligatoire.",
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "workstations": "Postes de travail",
+      "staff": "Personnel",
+      "client": "Client",
+      "pitch": "Présentation",
+      "price": "Prix",
+      "manager": "Manager",
+      "sales_rep": "Commercial",
+      "instructor": "Formateur"
+    }
+  },
+  "my_clients": {
+    "add_client": "Ajouter un Client",
+    "status": "Statut",
+    "pitch": "Proposition",
+    "member": "Membre",
+    "contact": "Contact",
+    "purchases": "Achats",
+    "search": "Recherche"
+  },
+  "commissions": {
+    "manager": "Manager",
+    "referal_link": "Lien de Parrainage",
+    "upcoming_commissions": {
+      "0": "À venir",
+      "1": "Commissions"
+    },
+    "all_time_commissions": {
+      "0": "Totales",
+      "1": "Commissions"
+    },
+    "pitches_made": {
+      "0": "Propositions",
+      "1": "Fait"
+    },
+    "members_paid": {
+      "0": "Membres",
+      "1": "Payé"
+    },
+    "leads": "Leads",
+    "expiration": "Expiration"
+  },
+  "dashboard": {
+    "center_id": "ID Centre",
+    "level": "Niveau",
+    "dashboard_tips": "Commandez davantage de packs d'adhésion pour monter de niveau et profitez de bonus surprises. Bronze : 1 pack, Argent : 3 packs, Or : 10 packs et Platine : 30 packs.",
+    "income": "Revenu",
+    "month": "Mois",
+    "year": "Année",
+    "membership_sales": "Ventes d'Abonnement",
+    "ai_center_referrals": "Références Centre IA",
+    "marketing_services": "Services Marketing",
+    "total_income": "Revenu Total",
+    "membership_remaining": "Abonnement Restante",
+    "recharge": "Recharge",
+    "sales_date": "Date de Vente",
+    "paid": "Payé",
+    "memebers_in_tiktok": "Membres participant aux services TikTok",
+    "latest_tiktok_ad_spending_commissions": "Dernières commissions de dépenses publicitaires TikTok",
+    "service": "Service",
+    "referrer": "Référent"
+  },
+  "center_settings": {
+    "title": "Paramètres Centre IA",
+    "workstations": "Postes de travail",
+    "duration": "Durée",
+    "operating_hours": "Horaires d'ouverture",
+    "mon": "Lundi",
+    "tue": "Mardi",
+    "wed": "Mercredi",
+    "thur": "Jeudi",
+    "fri": "Vendredi",
+    "sat": "Samedi",
+    "sun": "Dimanche",
+    "manager_per_membership": {
+      "0": "Manager",
+      "1": "Par Abonnement"
+    },
+    "manager_per_ai_center": {
+      "0": "Manager",
+      "1": "Par Centre IA"
+    },
+    "sales_rep_per_membership": {
+      "0": "Commercial",
+      "1": "Par Abonnement"
+    },
+    "sales_rep_per_ai_center": {
+      "0": "Commercial",
+      "1": "Par Centre IA"
+    },
+    "type": "Taper",
+    "job": "EMPLOI",
+    "freeze": "GELER",
+    "staff": "PERSONNEL"
+  },
+  "hq_clients": {
+    "country": "Pays",
+    "center": "Centre"
+  },
+  "hq_centers": {
+    "new_center": "Nouveau Centre",
+    "city": "Ville",
+    "center_id": "ID Centre",
+    "referer_center_id": "ID du Centre de Référence",
+    "level": "Niveau",
+    "purchaes": "Achats"
+  },
+  "hq_dashboard": {
+    "year_stats": "STATISTIQUES ANNUELLES",
+    "ai_centers": {
+      "0": "IA",
+      "1": "Centres"
+    },
+    "total_income": {
+      "0": "Total",
+      "1": "Revenu"
+    },
+    "total_members": {
+      "0": "Total des",
+      "1": "Membres"
+    },
+    "gmv": "GMV (Volume Brut de Marchandises)",
+    "income": "Revenu",
+    "month": "Mois",
+    "year": "Année",
+    "membership_packs": "Forfaits d'Abonnement",
+    "franchise_starter_kits": "Kits de Démarrage pour Franchise",
+    "marketing _services": "Services Marketing",
+    "international_sales": "Ventes Internationales"
+  },
+  "hq_settings": {
+    "add_new_center": "Ajouter un Nouveau Centre",
+    "add_center": "Ajouter un Centre",
+    "ai_center_referral": "Parrainage Centre IA",
+    "titok_ad_spending": "Dépenses publicitaires TikTok",
+    "set_terms": "Définir les Conditions",
+    "save": "Sauvegarder"
+  },
+  "account": {
+    "referal_link": "Lien de Parrainage",
+    "mobile_tip": "Saisissez votre numéro de mobile comme ceci : indicatif régional ESPACE numéro de mobile. Exemple : '+33 555555555'",
+    "change": "Changer",
+    "change_password": "CHANGER LE MOT DE PASSE",
+    "password_tip": "Le mot de passe doit comporter au minimum 8 caractères, inclure une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
+    "new_password": "Nouveau Mot de Passe",
+    "confirm_password": "confirmer mot de passe"
+  },
+  "contact": {
+    "title": "Contact",
+    "tip": "Veuillez nous dire comment nous pouvons vous aider.",
+    "mendatory_msg": "Tous les champs sont obligatoires.",
+    "type_of_user": "Type d'Utilisateur",
+    "send": "Envoyer",
+    "close": "Fermer"
+  },
+  "footer": {
+    "savvi": "Savvi",
+    "str1": "IA Plug & Play pour les Marques",
+    "str2": "Village de Tabivere, Rue Voldi 9",
+    "str3": "Comté de Tarfu",
+    "str4": "49127 Estonie",
+    "str5": "© 2023 Savvi, Tous droits réservés."
+  },
+  "login": {
+    "title": "Bienvenue de retour, équipe Xavvi !",
+    "log_in": "CONNEXION",
+    "password": "Mot de passe",
+    "confirm": "Confirmer",
+    "forgot_password": "Mot de passe oublié"
+  }
+}

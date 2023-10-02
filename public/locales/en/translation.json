@@ -160,34 +160,39 @@
   },
   "center_settings": {
     "title": "AI Center Settings",
-    "workspaces": "Workspaces",
+    "workstations": "WORKSTATIONS",
     "duration": "Duration",
-    "operating_hours": "Operating Hours",
+    "operating_hours": "OPERATING HOURS",
     "mon": "MON",
     "tue": "TUE",
     "wed": "WED",
-    "thur": "THUR",
+    "thurs": "THURS",
     "fri": "FRI",
     "sat": "SAT",
+    "sun": "SUN",
     "manager_per_membership": {
-      "0": "Manager:",
+      "0": "Manager",
       "1": "Per Membership"
     },
     "manager_per_ai_center": {
-      "0": "Manager:",
+      "0": "Manager",
       "1": "Per AI Center"
     },
     "sales_rep_per_membership": {
-      "0": "Sales Rep:",
+      "0": "Sales Rep",
       "1": "Per Membership"
     },
     "sales_rep_per_ai_center": {
-      "0": "Sales Rep:",
+      "0": "Sales Rep",
       "1": "Per AI Center"
     },
     "type": "Type",
     "job": "JOB",
-    "freeze": "FREEZE"
+    "freeze": "FREEZE",
+    "staff": "STAFF",
+    "add_staff": "ADD STAFF",
+    "start_date": "START DATE",
+    "name": "NAME"
   },
   "hq_clients": {
     "country": "Country",
