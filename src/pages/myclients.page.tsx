@@ -95,7 +95,9 @@ const MyClientsPage = () => {
                       // sx={{ bgcolor: "white" }}
                     >
                       <StyledTableCell component="th" scope="row">
-                        {row.company}
+                        <Typography color="primary.main">
+                          {row.company}
+                        </Typography>
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         {row.name}
