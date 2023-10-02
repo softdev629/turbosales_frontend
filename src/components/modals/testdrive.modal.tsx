@@ -125,6 +125,7 @@ const TestDriveModal = (props: {
           }
         }
         const now = new Date();
+        const selDay = new Date(date.year(), date.month(), date.date());
         const currentHour = now.getHours();
         const intervals = divideIntervals(
           settings.operating_hours[(date.day() + 6) % 7].start,
@@ -135,8 +136,10 @@ const TestDriveModal = (props: {
         for (let i in intervals) {
           if (
             ((now.getDate() === date.date() &&
+              now.getMonth() === date.month() &&
+              now.getFullYear() === date.year() &&
               parseInt(intervals[i].start) >= currentHour) ||
-              now.getDate() < date.date()) &&
+              now < selDay) &&
             (!Object.keys(booked_workstations).includes(intervals[i].start) ||
               booked_workstations[intervals[i].start].length)
           ) {
@@ -245,7 +248,11 @@ const TestDriveModal = (props: {
                         </MenuItem>
                       ))}
                     </Select>
-                    <FormHelperText>{errors["client"]?.message}</FormHelperText>
+                    <FormHelperText>
+                      {errors["client"]?.message
+                        ? t("home.testdrive_modal.client_required")
+                        : ""}
+                    </FormHelperText>
                   </FormControl>
                 </Box>
                 <Box>
@@ -297,6 +304,7 @@ const TestDriveModal = (props: {
                                 value.month(),
                                 value.date() + 1
                               );
+                              console.log(currentDate, selectedDate);
                               if (selectedDate < currentDate) {
                                 setBooking([]);
                                 setValue("time_room", []);

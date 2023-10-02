@@ -15,12 +15,14 @@ import {
   TableRow,
   TableBody,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useGetClientsQuery } from "../redux/api/clientApi";
 import { StyledTableCell, StyledTableRow } from "./admin/hqcenters.page";
 import ClientModal from "../components/modals/client.modal";
 
 const MyClientsPage = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [openClient, setOpenClient] = useState(false);
 
@@ -28,28 +30,28 @@ const MyClientsPage = () => {
 
   return (
     <>
-      <Container>
+      <Container sx={{ mt: 20 }}>
         <Box display="flex" justifyContent="space-between" mt={6}>
           <Button variant="contained" onClick={() => setOpenClient(true)}>
-            Add Client
+            {t("my_clients.add_client")}
           </Button>
 
           <Box width="25%">
             <FormControl fullWidth>
               <InputLabel id="status-label" size="small">
-                Status
+                {t("my_clients.status")}
               </InputLabel>
               <Select
                 labelId="status-label"
                 id="status-select"
-                label="Status"
+                label={t("my_clients.status")}
                 size="small"
                 defaultValue=""
                 onChange={(event) => {}}
               >
-                <MenuItem value="P">Pitch</MenuItem>
-                <MenuItem value="T">Test Drive</MenuItem>
-                <MenuItem value="M">Member</MenuItem>
+                <MenuItem value="P">{t("my_clients.pitch")}</MenuItem>
+                <MenuItem value="T">{t("home.testdrive")}</MenuItem>
+                <MenuItem value="M">{t("my_clients.member")}</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -57,23 +59,31 @@ const MyClientsPage = () => {
           <TextField
             sx={{ width: "25%" }}
             size="small"
-            label="Search"
+            label={t("my_clients.search")}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
         </Box>
         <Typography textAlign="center" color="#999999" mt={5}>
-          STATUS: P = Pitch, T = Test Drive, M = Member (paid)
+          {t("my_clients.status")}: P = {t("my_clients.pitch")}, T ={" "}
+          {t("home.testdrive")}, M = {t("my_clients.member")} (
+          {t("commissions.members_paid.1")})
         </Typography>
 
         <TableContainer sx={{ px: 4, mt: 3 }}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>COMPANY</StyledTableCell>
-                <StyledTableCell align="center">CONTACT</StyledTableCell>
-                <StyledTableCell align="center">STATUS</StyledTableCell>
-                <StyledTableCell align="center">PURCHASES</StyledTableCell>
+                <StyledTableCell>{t("home.common.company")}</StyledTableCell>
+                <StyledTableCell align="center">
+                  {t("contact.title")}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {t("my_clients.status")}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {t("my_clients.purchases")}
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

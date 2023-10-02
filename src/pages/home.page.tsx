@@ -84,7 +84,7 @@ const HomePage = () => {
     },
     {
       icon: <CommissionIcon width={48} height={48} fill="#ea2049" />,
-      text: t("home.commission"),
+      text: t("header.commissions"),
       click: () => {
         navigate("/commissions");
       },

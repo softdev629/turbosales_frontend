@@ -9,6 +9,10 @@
     "more_menu": {
       "center_clients": "Center Clients",
       "center_settings": "Center Settings",
+      "hq_clients": "HQ Clients",
+      "hq_centers": "HQ Centers",
+      "hq_dashboard": "HQ Dashboard",
+      "hq_settings": "HQ Settings",
       "account": "Account",
       "contact": "Contact",
       "terms": "Terms",
@@ -39,6 +43,7 @@
       "referal_link": "Referal Link",
       "referal_link_required": "Referal link is required",
       "select_client": "Select client",
+      "client_required": "Client field is required",
       "company_required": "Company is required",
       "book_testdrive": "Book the Test Drive",
       "date": "Date",
@@ -124,7 +129,7 @@
     },
     "members_paid": {
       "0": "Members",
-      "1": "(Paid)"
+      "1": "Paid"
     },
     "leads": "Leads",
     "expiration": "Expiration"
@@ -133,21 +138,25 @@
     "center_id": "Center ID",
     "level": "Level",
     "dashboard_tips": "Order more Membership packs to level up and enjoy surprise perks. Bronze: 1 pack, Silver: 3 packs, Gold: 10 packs and Platinum: 30 packs.",
-    "income": "Income",
-    "month": "Month",
-    "year": "Year",
+    "income": "INCOME",
+    "month": "MONTH",
+    "year": "YEAR",
     "membership_sales": "Membership Sales",
     "ai_center_referrals": "AI Center Referrals",
     "marketing_services": "Marketing Services",
     "total_income": "Total Income",
-    "membership_remaining": "Membership Remaining",
+    "membership_remaining": "Memberships Remaining",
     "recharge": "Recharge",
     "sales_date": "Sales Date",
     "paid": "Paid",
     "memebers_in_tiktok": "Members participating in TikTok services",
     "latest_tiktok_ad_spending_commissions": "Latest TikTok ad spending commissions",
     "service": "Service",
-    "referer": "Referer"
+    "referrer": "Referrer",
+    "commissions": "COMMISSIONS",
+    "members": "MEMBERS",
+    "leads": "LEADS",
+    "marketing_services_big": "MARKETING SERVICES"
   },
   "center_settings": {
     "title": "AI Center Settings",
@@ -215,7 +224,7 @@
     "marketing _services": "Marketing Services",
     "international_sales": "International Sales"
   },
-  "hq_settinsg": {
+  "hq_settings": {
     "add_new_center": "ADD NEW CENTER",
     "add_center": "ADD CENTER",
     "ai_center_referral": "AI Center Referral",
@@ -262,6 +271,9 @@
   },
   "schedule": {
     "workstation": "Workstation",
-    "book_date_picker": "Book date picker"
+    "book_date_picker": "Book date picker",
+    "legend": "LEGEND",
+    "free": "FREE",
+    "booked": "Booked"
   }
 }

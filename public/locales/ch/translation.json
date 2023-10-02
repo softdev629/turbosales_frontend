@@ -146,7 +146,11 @@
     "memebers_in_tiktok": "参与 TikTok 服务的会员",
     "latest_tiktok_ad_spending_commissions": "最新 TikTok 广告支出佣金\n\n",
     "service": "服务",
-    "referer": "推荐人"
+    "referrer": "推荐人",
+    "commissions": "佣金",
+    "members": "成员",
+    "leads": "潜在客户",
+    "marketing_services_big": "营销服务"
   },
   "center_settings": {
     "title": "人工智能中心设置",

@@ -227,7 +227,7 @@ const SchedulePage = () => {
           alignItems="center"
           gap={2}
         >
-          <Typography>LEGEND</Typography>
+          <Typography>{t("schedule.legend")}</Typography>
           <Box
             width="10%"
             height={35}
@@ -237,7 +237,7 @@ const SchedulePage = () => {
             bgcolor="rgba(76, 195, 102, 0.4)"
             borderRadius={2}
           >
-            FREE
+            {t("schedule.free")}
           </Box>
           <Box
             width="10%"
@@ -248,7 +248,7 @@ const SchedulePage = () => {
             bgcolor="rgba(225, 71, 71, 0.4)"
             borderRadius={2}
           >
-            Booked
+            {t("schedule.booked")}
           </Box>
         </Box>
         <Box mt={5}>

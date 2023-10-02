@@ -1,5 +1,5 @@
 import { Container, Box, Typography, SvgIcon, Stack } from "@mui/material";
-import { useAppSelector } from "../redux/store";
+import { useTranslation } from "react-i18next";
 
 import { ReactComponent as PitchesModeIcon } from "../assets/images/ico_pitchesmode.svg";
 import { ReactComponent as MoneyUnitIcon } from "../assets/images/ico_moneyunit.svg";
@@ -7,12 +7,15 @@ import MoneyBagIcon from "../assets/images/ico_moneybag.svg";
 import { ReactComponent as MembersPaidIcon } from "../assets/images/ico_memeberspaid.svg";
 import { ReactComponent as ContactIcon } from "../assets/images/ico_contact.svg";
 
+import { useAppSelector } from "../redux/store";
+
 const CommissionsPage = () => {
   const user = useAppSelector((state) => state.userState.user);
+  const { t } = useTranslation();
 
   return (
     <>
-      <Container>
+      <Container sx={{ mt: 20 }}>
         <Box display="flex" justifyContent="center">
           <Box
             display="flex"
@@ -35,10 +38,10 @@ const CommissionsPage = () => {
             >
               <Typography color="white">
                 {user?.role === "manager"
-                  ? "Manager"
+                  ? t("home.common.manager")
                   : user?.role === "sales_rep"
-                  ? "Sales Rep"
-                  : "Instructor"}
+                  ? t("home.common.sales_rep")
+                  : t("home.common.instructor")}
               </Typography>
               <Typography variant="h5" color="white">
                 {user?.name}
@@ -50,9 +53,11 @@ const CommissionsPage = () => {
               gap={5}
               width="100%"
               alignItems="center"
-              mt={3}
+              mt={1}
             >
-              <Typography color="white">Referal link</Typography>
+              <Typography color="white">
+                {t("commissions.referal_link")}
+              </Typography>
               <Typography variant="h5" color="white">
                 {user?.center_id}
               </Typography>
@@ -68,9 +73,9 @@ const CommissionsPage = () => {
               €1,000
             </Typography>
             <Typography>
-              Upcoming
+              {t("commissions.upcoming_commissions.0")}
               <br />
-              Commissions
+              {t("commissions.upcoming_commissions.1")}
             </Typography>
           </Box>
           <Box textAlign="center">
@@ -85,9 +90,9 @@ const CommissionsPage = () => {
               €10,000
             </Typography>
             <Typography>
-              All-time
+              {t("commissions.all_time_commissions.0")}
               <br />
-              Commissions
+              {t("commissions.all_time_commissions.1")}
             </Typography>
           </Box>
           <Box textAlign="center">
@@ -98,9 +103,9 @@ const CommissionsPage = () => {
               500
             </Typography>
             <Typography>
-              Pitches
+              {t("commissions.pitches_made.0")}
               <br />
-              Made
+              {t("commissions.pitches_made.1")}
             </Typography>
           </Box>
           <Box textAlign="center">
@@ -111,9 +116,8 @@ const CommissionsPage = () => {
               50
             </Typography>
             <Typography>
-              Members
-              <br />
-              (Paid)
+              {t("commissions.members_paid.0")}
+              <br />({t("commissions.members_paid.1")})
             </Typography>
           </Box>
         </Box>
@@ -127,7 +131,7 @@ const CommissionsPage = () => {
           >
             <Box display="flex" justifyContent="space-between">
               <Typography color="primary.main" variant="h5">
-                LEADS
+                {t("dashboard.leads")}
               </Typography>
               <SvgIcon sx={{ fill: "#ea2049", width: 30, height: 35 }}>
                 <ContactIcon />
@@ -140,16 +144,16 @@ const CommissionsPage = () => {
               py={1}
             >
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Company
+                {t("home.common.company")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Contact
+                {t("contact.title")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Pitch
+                {t("home.common.pitch")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Test Drive
+                {t("home.testdrive")}
               </Typography>
             </Box>
             <Box display="flex">
@@ -206,7 +210,7 @@ const CommissionsPage = () => {
           >
             <Box display="flex" justifyContent="space-between">
               <Typography color="primary.main" variant="h5">
-                MEMBERS
+                {t("dashboard.members")}
               </Typography>
               <SvgIcon sx={{ fill: "#ea2049", width: 30, height: 35 }}>
                 <ContactIcon />
@@ -219,16 +223,16 @@ const CommissionsPage = () => {
               py={1}
             >
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Company
+                {t("home.common.company")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Expiration
+                {t("commissions.expiration")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Price
+                {t("home.common.price")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                Commissions
+                {t("header.commissions")}
               </Typography>
             </Box>
             <Box display="flex">

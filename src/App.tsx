@@ -22,6 +22,7 @@ import SchedulePage from "./pages/schedule.page";
 import CenterClientsPage from "./pages/centerclient.page";
 import TermsPage from "./pages/terms.page";
 import HQClientsPage from "./pages/admin/hqclients.page";
+import DashboardPage from "./pages/dashboard.page";
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,7 @@ function App() {
             </Route>
             <Route element={<RequireUser allowedRoles={["manager"]} />}>
               <Route path="center_settings" element={<CenterSettingsPage />} />
+              <Route path="dashboard" element={<DashboardPage />} />
             </Route>
             <Route
               element={
