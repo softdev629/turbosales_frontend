@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -8,15 +9,33 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useTranslation } from "react-i18next";
+import { string } from "zod";
+import { toast } from "react-toastify";
 
 import { ReactComponent as ReferLinkIcon } from "../assets/images/ico_refer_link.svg";
 import { ReactComponent as RoleIcon } from "../assets/images/ico_role.svg";
 import { useAppSelector } from "../redux/store";
+import { useUpdateMeMutation } from "../redux/api/userApi";
 
 const AccountPage = () => {
   const { t } = useTranslation();
+  const [isChangeMobile, setIsChangeMobile] = useState(false);
+  const [isChangeEmail, setIsChangeEmail] = useState(false);
 
   const user = useAppSelector((state) => state.userState.user);
+  const [mobile, setMobile] = useState(user?.mobile);
+  const [email, setEmail] = useState(user?.email);
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+  const [updateMe, updateState] = useUpdateMeMutation();
+
+  useEffect(() => {
+    if (updateState.isSuccess) {
+      toast.success("Profile updated successfully.");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateState]);
 
   return (
     <>
@@ -71,22 +90,73 @@ const AccountPage = () => {
         <Box mt={3} border="1px solid #D9D9D9" p={2} borderRadius={4}>
           <Box display="flex">
             <Typography width={192}>{t("home.common.mobile")}</Typography>
-            <Typography color="primary.main">{user?.mobile}</Typography>
+            {isChangeMobile ? (
+              <TextField
+                size="small"
+                value={mobile as string}
+                onChange={(event) => setMobile(event.target.value)}
+              />
+            ) : (
+              <Typography color="primary.main">{user?.mobile}</Typography>
+            )}
           </Box>
           <Typography fontSize={12} mt={1}>
             {t("account.mobile_tip")}
           </Typography>
-          <LoadingButton variant="outlined" sx={{ mt: 3 }}>
-            {t("account.change")}
+          <LoadingButton
+            variant="outlined"
+            sx={{ mt: 3 }}
+            onClick={() => {
+              const valid = string()
+                .min(1, "Mobile field can't be empty.")
+                .regex(/^\+\d{1,3} \d+$/, "Invalid mobile format.")
+                .safeParse(mobile);
+
+              if (isChangeMobile) {
+                if (!valid.success) {
+                  toast.error(valid.error.errors[0].message);
+                  return;
+                }
+                updateMe({ mobile });
+              }
+              setIsChangeMobile(!isChangeMobile);
+            }}
+          >
+            {!isChangeMobile ? t("account.change") : t("hq_settings.save")}
           </LoadingButton>
         </Box>
         <Box mt={3} border="1px solid #D9D9D9" p={2} borderRadius={4}>
           <Box display="flex">
             <Typography width={192}>{t("home.common.email")}</Typography>
-            <Typography color="primary.main">{user?.email}</Typography>
+            {isChangeEmail ? (
+              <TextField
+                size="small"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            ) : (
+              <Typography color="primary.main">{user?.email}</Typography>
+            )}
           </Box>
-          <LoadingButton variant="outlined" sx={{ mt: 3 }}>
-            {t("account.change")}
+          <LoadingButton
+            variant="outlined"
+            sx={{ mt: 3 }}
+            onClick={() => {
+              const valid = string()
+                .min(1, "Email is required")
+                .email("Invalid email format")
+                .safeParse(email);
+              if (isChangeMobile) {
+                if (!valid.success) {
+                  toast.error(valid.error.errors[0].message);
+                  return;
+                }
+                updateMe({ email });
+              }
+              setIsChangeEmail(!isChangeEmail);
+            }}
+          >
+            {!isChangeEmail ? t("account.change") : t("hq_settings.save")}
           </LoadingButton>
         </Box>
         <Box mt={3} border="1px solid #D9D9D9" p={2} borderRadius={4}>
@@ -102,15 +172,37 @@ const AccountPage = () => {
               sx={{ width: 220, mt: 2 }}
               size="small"
               type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <TextField
               label={t("account.confirm_password")}
               sx={{ width: 220, mt: 2 }}
               size="small"
               type="password"
+              value={confirm}
+              onChange={(event) => setConfirm(event.target.value)}
             />
           </Stack>
-          <LoadingButton variant="outlined" sx={{ mt: 3 }}>
+          <LoadingButton
+            variant="outlined"
+            sx={{ mt: 3 }}
+            onClick={() => {
+              const passwordValid = string()
+                .min(1, "Password can't be empty!")
+                .min(8, "Password must be longer than 8 characters.")
+                .safeParse(password);
+              const confirmValid = string()
+                .min(1, "Confirm password can't be empty!")
+                .safeParse(confirm);
+              if (passwordValid.success) {
+                if (confirmValid.success) {
+                  if (password === confirm) updateMe({ password });
+                  else toast.error("Password do not match!");
+                } else toast.error(confirmValid.error.errors[0].message);
+              } else toast.error(passwordValid.error.errors[0].message);
+            }}
+          >
             {t("account.change")}
           </LoadingButton>
         </Box>

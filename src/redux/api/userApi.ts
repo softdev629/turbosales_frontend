@@ -50,7 +50,24 @@ export const userApi = createApi({
       },
       providesTags: [{ type: "User", id: "LIST" }],
     }),
+    updateMe: builder.mutation<
+      IGenericResponse,
+      { email?: string; mobile?: string; password?: string }
+    >({
+      query(data) {
+        return {
+          method: "PATCH",
+          url: "/users",
+          body: data,
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddStaffMutation, useLazyGetStaffQuery } = userApi;
+export const {
+  useAddStaffMutation,
+  useLazyGetStaffQuery,
+  useUpdateMeMutation,
+} = userApi;

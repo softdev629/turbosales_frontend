@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
-import { Box, Typography, Container, Button, SvgIcon } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Container,
+  Button,
+  SvgIcon,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -16,6 +25,7 @@ import { useLazyGetCenterSettingsQuery } from "../redux/api/centerApi";
 import { useAppSelector } from "../redux/store";
 import { divideIntervals, fromDayjsToDate } from "../util";
 import TestDriveModal from "../components/modals/testdrive.modal";
+import { LoadingButton } from "@mui/lab";
 
 const SchedulePage = () => {
   const { t } = useTranslation();
@@ -37,6 +47,7 @@ const SchedulePage = () => {
   const [getTestdriveByDate, getTestdriveState] =
     useLazyGetTestdriveByDateQuery();
   const settings = useAppSelector((state) => state.centerState.settings);
+  const user = useAppSelector((state) => state.userState.user);
 
   useEffect(() => {
     getCenterSettings();
@@ -104,42 +115,105 @@ const SchedulePage = () => {
         top={96}
       >
         <Container
-          sx={{ display: "flex", justifyContent: "space-between", py: 4 }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            py: 4,
+            alignItems: "center",
+          }}
         >
-          <Box
-            width="60%"
-            display="flex"
-            justifyContent="space-evenly"
-            alignItems="center"
+          <Button
+            sx={{ width: 96, height: 96, borderRadius: 6 }}
+            variant="outlined"
+            onClick={() => setOpenTestdrive(true)}
           >
-            <Button
-              sx={{ width: 96, height: 96, borderRadius: 6 }}
-              variant="outlined"
-              onClick={() => setOpenTestdrive(true)}
+            <SvgIcon sx={{ width: 48, height: 48 }}>
+              <TestdriveIcon />
+            </SvgIcon>
+          </Button>
+          {user?.role === "manager" ? (
+            <Box
+              width="100%"
+              maxWidth={350}
+              borderRadius={6}
+              bgcolor="rgba(217, 217, 217, 0.15)"
+              border="1px solid #D9D9D9"
+              p={2}
             >
-              <SvgIcon sx={{ width: 48, height: 48 }}>
-                <TestdriveIcon />
-              </SvgIcon>
-            </Button>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DatePicker"]}>
-                <DatePicker
-                  label={t("schedule.book_date_picker")}
-                  value={date}
-                  onChange={(value) => {
-                    setDate(value);
-                    if (value) {
-                      getTestdriveByDate({
-                        date: fromDayjsToDate(value),
-                      });
-                    }
-                  }}
-                />
-              </DemoContainer>
-            </LocalizationProvider>
-          </Box>
+              <Box display="flex" mb={3} justifyContent="space-between">
+                <Typography
+                  color="primary.main"
+                  variant="h5"
+                  sx={{ display: "flex", alignItems: "center" }}
+                  width="30%"
+                >
+                  <SvgIcon sx={{ fill: "#ea2049", mr: 1 }}>
+                    <ClockIcon />
+                  </SvgIcon>
+                  {roomInfo?.time}
+                </Typography>
+                <Typography
+                  color="primary.main"
+                  variant="h5"
+                  sx={{ display: "flex", alignItems: "center" }}
+                  width="60%"
+                >
+                  <SvgIcon sx={{ fill: "#ea2049", mr: 1 }}>
+                    <PCIcon />
+                  </SvgIcon>
+                  {t("schedule.workstation")}{" "}
+                  {String.fromCharCode(
+                    "A".charCodeAt(0) + (roomInfo?.workstation as number)
+                  )}
+                </Typography>
+              </Box>
+              <Box display="flex" mb={3} justifyContent="space-between">
+                <Typography
+                  color="#595959"
+                  sx={{ display: "flex", alignItems: "center" }}
+                  width="30%"
+                >
+                  {t("home.common.staff")}
+                </Typography>
+                <Box width={180}>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="staff-name-label"
+                      id="staff-name-select"
+                      size="small"
+                      defaultValue={user.name}
+                    >
+                      <MenuItem value={user.name}>{user.name}</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Box>
+              <Box display="flex" justifyContent="flex-end">
+                <LoadingButton variant="contained">Confirm</LoadingButton>
+              </Box>
+            </Box>
+          ) : null}
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={["DatePicker"]}>
+              <DatePicker
+                label={t("schedule.book_date_picker")}
+                value={date}
+                onChange={(value) => {
+                  setDate(value);
+                  if (value) {
+                    getTestdriveByDate({
+                      date: fromDayjsToDate(value),
+                    });
+                  }
+                }}
+              />
+            </DemoContainer>
+          </LocalizationProvider>
+
           <Box
-            width="35%"
+            width="100%"
+            maxWidth={350}
             borderRadius={6}
             bgcolor="rgba(217, 217, 217, 0.15)"
             border="1px solid #D9D9D9"

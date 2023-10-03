@@ -251,8 +251,8 @@ const CenterSettingsPage = () => {
                             });
                           }}
                         >
-                          <MenuItem value={"9:00"}>9:00</MenuItem>
-                          <MenuItem value={"9:30"}>9:30</MenuItem>
+                          <MenuItem value={"09:00"}>9:00</MenuItem>
+                          <MenuItem value={"09:30"}>9:30</MenuItem>
                           <MenuItem value={"10:00"}>10:00</MenuItem>
                           <MenuItem value={"10:30"}>10:30</MenuItem>
                         </Select>
