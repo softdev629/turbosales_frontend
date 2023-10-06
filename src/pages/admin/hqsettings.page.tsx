@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Container,
   Typography,
@@ -9,17 +10,19 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import CenterModal from "../../components/modals/center.modal";
 import { ReactComponent as PlusIcon } from "../../assets/images/ico_plus.svg";
 import { ReactComponent as MinusIcon } from "../../assets/images/ico_minus.svg";
 
 const HQSettingsPage = () => {
+  const { t } = useTranslation();
   const [openCenter, setOpenSenter] = useState(false);
+
   return (
     <>
-      <Container>
+      <Container sx={{ mt: 20 }}>
         <Typography color="primary.main" textAlign="center" variant="h4" mt={4}>
           HQ Settings
         </Typography>
@@ -33,7 +36,7 @@ const HQSettingsPage = () => {
         </Box>
         <Box borderRadius={4} mt={6} bgcolor="rgba(217, 217, 217, 0.2)" p={4}>
           <Typography variant="h5" textAlign="center" color="primary.main">
-            Commisions
+            {t("header.commissions")}
           </Typography>
           <Box display="flex" justifyContent="center" gap={4}>
             <Box
@@ -46,7 +49,7 @@ const HQSettingsPage = () => {
               flexDirection="column"
             >
               <Typography textAlign="center" variant="h5">
-                AI Centers Referal
+                {t("hq_settings.ai_center_referral")}
               </Typography>
               <Box
                 display="flex"
@@ -55,7 +58,9 @@ const HQSettingsPage = () => {
                 alignItems="center"
                 mt={3}
               >
-                <Typography flexGrow={1}>Amount</Typography>
+                <Typography flexGrow={1}>
+                  {t("home.sold_modal.amount")}
+                </Typography>
                 <Box display="flex" flexGrow={1} justifyContent="space-between">
                   <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
                     <PlusIcon />
@@ -73,14 +78,19 @@ const HQSettingsPage = () => {
                 alignItems="center"
                 mt={3}
               >
-                <Typography flexGrow={3}>Type</Typography>
+                <Typography flexGrow={3}>
+                  {t("center_settings.type")}
+                </Typography>
                 <Box display="flex" flexGrow={7}>
                   <FormControl fullWidth>
-                    <InputLabel id="money-unit-select-label">Age</InputLabel>
+                    <InputLabel id="money-unit-select-label">
+                      {t("center_settings.type")}
+                    </InputLabel>
                     <Select
                       labelId="money-unit-select-label"
                       id="money-unit-select"
-                      label="Age"
+                      label={t("center_settings.type")}
+                      defaultValue={""}
                     >
                       <MenuItem value={"€"}>€</MenuItem>
                       <MenuItem value={"%"}>%</MenuItem>
@@ -90,21 +100,62 @@ const HQSettingsPage = () => {
               </Box>
             </Box>
             <Box
-              bgcolor="rgba(234, 32, 73, 0.1)"
+              bgcolor="rgba(133, 220, 255, 0.2)"
               border="1px solid #D9D9D9"
               width="30%"
+              p={2}
+              display="flex"
+              alignItems="center"
+              flexDirection="column"
             >
-              <Typography>AI Centers Referal</Typography>
-              <Box display="flex" justifyContent="space-between">
-                <Typography flexGrow={1}>Amount</Typography>
-                <Box display="flex" flexGrow={1}>
-                  <SvgIcon sx={{ fill: "#999999" }}>
+              <Typography textAlign="center" variant="h5">
+                {t("hq_settings.titok_ad_spending")}
+              </Typography>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                width="100%"
+                alignItems="center"
+                mt={3}
+              >
+                <Typography flexGrow={1}>
+                  {t("home.sold_modal.amount")}
+                </Typography>
+                <Box display="flex" flexGrow={1} justifyContent="space-between">
+                  <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
                     <PlusIcon />
                   </SvgIcon>
-                  {10}
-                  <SvgIcon sx={{ fill: "#999999" }}>
+                  <Typography variant="h5">{10}</Typography>
+                  <SvgIcon sx={{ fill: "#999999", width: 32, height: 32 }}>
                     <MinusIcon />
                   </SvgIcon>
+                </Box>
+              </Box>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                width="100%"
+                alignItems="center"
+                mt={3}
+              >
+                <Typography flexGrow={3}>
+                  {t("center_settings.type")}
+                </Typography>
+                <Box display="flex" flexGrow={7}>
+                  <FormControl fullWidth>
+                    <InputLabel id="money-unit-select-label">
+                      {t("center_settings.type")}
+                    </InputLabel>
+                    <Select
+                      labelId="money-unit-select-label"
+                      id="money-unit-select"
+                      label={t("center_settings.type")}
+                      defaultValue=""
+                    >
+                      <MenuItem value={"€"}>€</MenuItem>
+                      <MenuItem value={"%"}>%</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Box>
               </Box>
             </Box>
