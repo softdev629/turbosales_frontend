@@ -20,6 +20,7 @@ import {
 } from "react-hook-form";
 import { object, string, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 
 const newContactSchema = object({
   name: string().min(1, "Name is required"),
@@ -34,6 +35,8 @@ const newContactSchema = object({
 export type NewContactSchema = TypeOf<typeof newContactSchema>;
 
 const ContactPage = () => {
+  const { t } = useTranslation();
+
   const methods = useForm<NewContactSchema>({
     resolver: zodResolver(newContactSchema),
   });
@@ -55,10 +58,10 @@ const ContactPage = () => {
     <>
       <Container sx={{ mt: 20 }}>
         <Typography variant="h4" textAlign="center" color="primary.main">
-          Contact
+          {t("contact.title")}
         </Typography>
         <Typography textAlign="center" mt={3}>
-          Please tell us how we can help you
+          {t("contact.tip")}
         </Typography>
         <Paper
           component="form"
@@ -69,37 +72,47 @@ const ContactPage = () => {
         >
           <FormProvider {...methods}>
             <Typography color="primary.main">
-              All fields are mandatory.
+              {t("contact.mendatory_msg")}
             </Typography>
             <TextField
               {...register("name")}
-              label="Name"
+              label={t("home.common.name")}
               sx={{ mt: 4 }}
               fullWidth
               error={!!errors["name"]}
-              helperText={errors["name"]?.message}
+              helperText={
+                errors["name"]?.message ? t("home.common.name_required") : ""
+              }
             />
             <TextField
               {...register("email")}
-              label="Email"
+              label={t("home.common.email")}
               sx={{ mt: 4 }}
               fullWidth
               error={!!errors["email"]}
-              helperText={errors["email"]?.message}
+              helperText={
+                !errors["email"]?.message
+                  ? ""
+                  : errors["email"].message.includes("required")
+                  ? t("home.common.email_required")
+                  : t("home.common.email_invalid")
+              }
             />
             <TextField
               {...register("message")}
-              label="Message"
+              label={t("contact.message")}
               sx={{ mt: 4 }}
               fullWidth
               multiline
               rows={7}
               error={!!errors["message"]}
-              helperText={errors["message"]?.message}
+              helperText={
+                errors["message"]?.message ? t("contact.message_required") : ""
+              }
             />
             <FormControl sx={{ mt: 4 }} fullWidth>
               <FormLabel id="role-radio-buttons-group-label">
-                TYPE OF USER
+                {t("contact.type_of_user")}
               </FormLabel>
               <Controller
                 control={control}
@@ -110,22 +123,22 @@ const ContactPage = () => {
                     aria-labelledby="role-radio-buttons-group-label"
                     value={value}
                     onChange={onChange}
-                    sx={{ display: "flex", flexDirection: "row", gap: 4 }}
+                    sx={{ display: "flex", flexDirection: "row" }}
                   >
                     <FormControlLabel
                       value="manager"
                       control={<Radio />}
-                      label="Manager"
+                      label={t("home.common.manager")}
                     />
                     <FormControlLabel
                       value="instructor"
                       control={<Radio />}
-                      label="Instructor"
+                      label={t("home.common.instructor")}
                     />
                     <FormControlLabel
                       value="sales"
                       control={<Radio />}
-                      label="Sales Rep"
+                      label={t("home.common.sales_rep")}
                     />
                   </RadioGroup>
                 )}
@@ -133,10 +146,10 @@ const ContactPage = () => {
             </FormControl>
             <Box display="flex" justifyContent="center" gap={4} mt={4}>
               <LoadingButton variant="contained" fullWidth type="submit">
-                SEND
+                {t("contact.send")}
               </LoadingButton>
               <Button variant="outlined" fullWidth>
-                CLOSE
+                {t("contact.close")}
               </Button>
             </Box>
           </FormProvider>

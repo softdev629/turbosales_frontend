@@ -56,7 +56,6 @@ function App() {
                 />
               }
             >
-              <Route path="contact" element={<ContactPage />} />
               <Route path="account" element={<AccountPage />} />
               <Route path="commissions" element={<CommissionsPage />} />
               <Route path="schedule" element={<SchedulePage />} />
@@ -78,6 +77,7 @@ function App() {
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="unauthorized" element={<UnauthorizedPage />} />
+            <Route path="contact" element={<ContactPage />} />
             <Route path="terms" element={<TermsPage />} />
           </Route>
         </Routes>

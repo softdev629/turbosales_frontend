@@ -252,7 +252,9 @@
     "mendatory_msg": "All fields are mandatory.",
     "type_of_user": "TYPE OF USER",
     "send": "Send",
-    "close": "Close"
+    "close": "Close",
+    "message": "Message",
+    "message_required": "Message is required"
   },
   "footer": {
     "xavvi": "Xavvi",

@@ -7,11 +7,13 @@ import {
   Container,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import LogoIcon from "../assets/images/logo_xavvi.svg";
 
 const Footer = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -36,6 +38,9 @@ const Footer = () => {
                     fontWeight: 700,
                   }}
                   mb={3}
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
                 >
                   {t("header.more_menu.contact")}
                 </Link>
@@ -46,6 +51,9 @@ const Footer = () => {
                     fontWeight: 700,
                   }}
                   mb={3}
+                  onClick={() => {
+                    navigate("/terms");
+                  }}
                 >
                   {t("footer.terms_privacy")}
                 </Link>
