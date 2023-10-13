@@ -20,29 +20,46 @@ const HQSettingsPage = () => {
   const { t } = useTranslation();
   const [openCenter, setOpenSenter] = useState(false);
 
+  const [hqSettings, setHQSettings] = useState<{
+    center_referal_amount: number;
+    center_referal_type: string;
+    tiktok_spending_amount: number;
+    tiktok_spending_type: string;
+  }>();
+
   return (
     <>
       <Container sx={{ mt: 20 }}>
         <Typography color="primary.main" textAlign="center" variant="h4" mt={4}>
-          HQ Settings
+          {t("header.more_menu.hq_settings")}
         </Typography>
         <Box display="flex" justifyContent="space-between" mt={4}>
-          <Typography color="primary.main" variant="h5">
-            ADD NEW CENTER
+          <Typography color="primary.main" variant="h4">
+            {t("hq_settings.add_new_center")}
           </Typography>
-          <Button variant="contained" onClick={() => setOpenSenter(true)}>
-            ADD CENTER
+          <Button
+            variant="contained"
+            sx={{ height: "fit-content" }}
+            onClick={() => setOpenSenter(true)}
+          >
+            {t("hq_settings.add_center")}
           </Button>
         </Box>
         <Box borderRadius={4} mt={6} bgcolor="rgba(217, 217, 217, 0.2)" p={4}>
           <Typography variant="h5" textAlign="center" color="primary.main">
             {t("header.commissions")}
           </Typography>
-          <Box display="flex" justifyContent="center" gap={4}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            gap={4}
+            mt={4}
+            sx={{ flexDirection: { xs: "column", sm: "column", md: "row" } }}
+          >
             <Box
               bgcolor="rgba(234, 32, 73, 0.1)"
               border="1px solid #D9D9D9"
-              width="30%"
+              width={{ xs: "100%", sm: "70%", md: "30%" }}
               p={2}
               display="flex"
               alignItems="center"
@@ -102,7 +119,7 @@ const HQSettingsPage = () => {
             <Box
               bgcolor="rgba(133, 220, 255, 0.2)"
               border="1px solid #D9D9D9"
-              width="30%"
+              width={{ xs: "100%", sm: "70%", md: "30%" }}
               p={2}
               display="flex"
               alignItems="center"

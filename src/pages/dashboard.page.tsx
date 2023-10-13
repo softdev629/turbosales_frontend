@@ -85,7 +85,11 @@ const DashboardPage = () => {
           </Typography>
         </Box>
 
-        <Box border="1px solid #D9D9D9" mt={4} width="80%">
+        <Box
+          border="1px solid #D9D9D9"
+          mt={4}
+          width={{ md: "80%", xs: "100%" }}
+        >
           <Box
             display="flex"
             justifyContent="space-between"
@@ -105,18 +109,28 @@ const DashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 36 },
+                  height: { md: 48, xs: 36 },
+                }}
+              >
                 <MembershipIcon />
               </SvgIcon>
             </Box>
             <Box width="25%">
-              <Typography width={150} variant="h5">
+              <Typography
+                width={{ md: 150, xs: 120 }}
+                variant="h5"
+                fontSize={{ md: 24, xs: 18 }}
+              >
                 {t("dashboard.membership_sales")}
               </Typography>
             </Box>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -124,7 +138,7 @@ const DashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -133,20 +147,29 @@ const DashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 36 },
+                  height: { md: 48, xs: 36 },
+                }}
+              >
                 <FrenchiseIcon />
               </SvgIcon>
             </Box>
 
             <Box width="25%">
-              <Typography width={150} variant="h5">
+              <Typography
+                width={{ md: 150, xs: 120 }}
+                fontSize={{ md: 24, xs: 18 }}
+              >
                 {t("dashboard.ai_center_referrals")}
               </Typography>
             </Box>
 
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -154,7 +177,7 @@ const DashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -163,18 +186,27 @@ const DashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 36 },
+                  height: { md: 48, xs: 36 },
+                }}
+              >
                 <MarketingIcon />
               </SvgIcon>
             </Box>
             <Box width="25%">
-              <Typography width={150} variant="h5">
+              <Typography
+                width={{ md: 150, xs: 120 }}
+                fontSize={{ md: 24, xs: 18 }}
+              >
                 {t("dashboard.marketing_services")}
               </Typography>
             </Box>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -182,7 +214,7 @@ const DashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -191,16 +223,24 @@ const DashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <Box component="img" src={MoneyBagIcon} width={40} height={40} />
+              <Box
+                component="img"
+                src={MoneyBagIcon}
+                width={{ md: 40, xs: 30 }}
+                height={{ md: 40, xs: 30 }}
+              />
             </Box>
             <Box width="25%">
-              <Typography width={150} variant="h5">
+              <Typography
+                width={{ md: 150, xs: 100 }}
+                fontSize={{ md: 24, xs: 18 }}
+              >
                 {t("dashboard.total_income")}
               </Typography>
             </Box>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -208,7 +248,7 @@ const DashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 36, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -218,7 +258,7 @@ const DashboardPage = () => {
         </Box>
 
         <Box
-          width="90%"
+          width={{ md: "90%", xs: "100%" }}
           maxWidth={800}
           border="1px solid #D9D9D9"
           borderRadius={4}
@@ -239,12 +279,15 @@ const DashboardPage = () => {
               >
                 {t("dashboard.membership_remaining")}:
               </Typography>
-              <Typography color="primary.main" variant="h3">
+              <Typography color="primary.main" fontSize={{ md: 44, xs: 24 }}>
                 80
               </Typography>
             </Box>
-            <Button variant="contained" sx={{ height: 48 }}>
-              RECHARGE
+            <Button
+              variant="contained"
+              sx={{ height: { md: 48, xs: 36 }, fontSize: { md: 18, xs: 12 } }}
+            >
+              {t("dashboard.recharge")}
             </Button>
           </Box>
           <Box
@@ -321,13 +364,18 @@ const DashboardPage = () => {
 
         <Box display="flex" justifyContent="center" mt={4} width="100%">
           <Stack
-            width="70%"
+            width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
             p={4}
             gap={2}
           >
-            <Box display="flex" justifyContent="space-between">
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              flexWrap="wrap"
+              gap={1}
+            >
               <Typography color="primary.main" variant="h5">
                 {t("dashboard.commissions")}
               </Typography>
@@ -437,13 +485,18 @@ const DashboardPage = () => {
 
         <Box display="flex" justifyContent="center" width="100%" mt={4}>
           <Stack
-            width="70%"
+            width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
             p={4}
             gap={2}
           >
-            <Box display="flex" justifyContent="space-between">
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              flexWrap="wrap"
+              gap={1}
+            >
               <Typography color="primary.main" variant="h5">
                 {t("dashboard.marketing_services_big")}
               </Typography>
@@ -554,13 +607,18 @@ const DashboardPage = () => {
 
         <Box display="flex" justifyContent="center" width="100%" mt={4}>
           <Stack
-            width="70%"
+            width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
             p={4}
             gap={2}
           >
-            <Box display="flex" justifyContent="space-between">
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              flexWrap="wrap"
+              gap={1}
+            >
               <Typography color="primary.main" variant="h5">
                 {t("dashboard.leads")}
               </Typography>
@@ -654,13 +712,18 @@ const DashboardPage = () => {
 
         <Box display="flex" justifyContent="center" mt={4} width="100%">
           <Stack
-            width="70%"
+            width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
             p={4}
             gap={2}
           >
-            <Box display="flex" justifyContent="space-between">
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              flexWrap="wrap"
+              gap={1}
+            >
               <Typography color="primary.main" variant="h5">
                 {t("dashboard.members")}
               </Typography>
@@ -703,7 +766,10 @@ const DashboardPage = () => {
               <Typography width="25%" sx={{ color: "#595959" }}>
                 {t("home.common.price")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959", overflowWrap: "break-word" }}
+              >
                 {t("header.commissions")}
               </Typography>
             </Box>
@@ -714,10 +780,18 @@ const DashboardPage = () => {
               <Typography width="25%" textAlign="center">
                 2023-02-13
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+              >
                 €2,000.00
               </Typography>
-              <Typography width="25%" textAlign="right">
+              <Typography
+                width="25%"
+                textAlign="right"
+                sx={{ overflowWrap: "break-word" }}
+              >
                 €300.00
               </Typography>
             </Box>
@@ -728,10 +802,18 @@ const DashboardPage = () => {
               <Typography width="25%" textAlign="center">
                 2023-02-14
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+              >
                 Not yet
               </Typography>
-              <Typography width="25%" textAlign="right">
+              <Typography
+                width="25%"
+                textAlign="right"
+                sx={{ overflowWrap: "break-word" }}
+              >
                 NA
               </Typography>
             </Box>
@@ -742,10 +824,18 @@ const DashboardPage = () => {
               <Typography width="25%" textAlign="center">
                 2023-03-15
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+              >
                 €60,000.00
               </Typography>
-              <Typography width="25%" textAlign="right">
+              <Typography
+                width="25%"
+                textAlign="right"
+                sx={{ overflowWrap: "break-word" }}
+              >
                 €3,000.00
               </Typography>
             </Box>

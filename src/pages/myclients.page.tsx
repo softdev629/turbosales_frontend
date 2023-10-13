@@ -31,7 +31,13 @@ const MyClientsPage = () => {
   return (
     <>
       <Container sx={{ mt: 20 }}>
-        <Box display="flex" justifyContent="space-between" mt={6}>
+        <Box
+          display="flex"
+          justifyContent="space-around"
+          mt={6}
+          flexWrap="wrap"
+          gap={2}
+        >
           <Button variant="contained" onClick={() => setOpenClient(true)}>
             {t("my_clients.add_client")}
           </Button>

@@ -31,7 +31,13 @@ const CenterClientPage = () => {
   return (
     <>
       <Container sx={{ mt: 20 }}>
-        <Box display="flex" justifyContent="space-between" mt={6}>
+        <Box
+          display="flex"
+          justifyContent="space-around"
+          mt={6}
+          flexWrap="wrap"
+          gap={2}
+        >
           <Button variant="contained" onClick={() => setOpenClient(true)}>
             {t("my_clients.add_client")}
           </Button>
@@ -54,7 +60,7 @@ const CenterClientPage = () => {
             </FormControl>
           </Box>
 
-          <Box width="25%">
+          <Box width={{ md: "25%", xs: "30%" }}>
             <FormControl fullWidth>
               <InputLabel id="status-label" size="small">
                 {t("my_clients.status")}
@@ -74,7 +80,7 @@ const CenterClientPage = () => {
           </Box>
 
           <TextField
-            sx={{ width: "25%" }}
+            sx={{ width: { md: "25%", xs: 192 } }}
             size="small"
             label={t("my_clients.search")}
             value={search}
