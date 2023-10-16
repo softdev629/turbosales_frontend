@@ -53,7 +53,7 @@ const newClientInfoSchema = object({
   title: string().min(1, "Title is required"),
   mobile: string()
     .min(1, "Mobile is required")
-    .regex(/^\+\d{1,3} \d+$/, "Invalid mobile format."),
+    .regex(/^\+(?:[0-9] ?){6,14}[0-9]$/, "Invalid mobile format."),
   email: string().min(1, "Email is required").email("Invalid email format"),
   company: string().optional(),
   website: string().url("Invalid url format").optional(),

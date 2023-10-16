@@ -109,7 +109,7 @@ const AccountPage = () => {
             onClick={() => {
               const valid = string()
                 .min(1, "Mobile field can't be empty.")
-                .regex(/^\+\d{1,3} \d+$/, "Invalid mobile format.")
+                .regex(/^\+(?:[0-9] ?){6,14}[0-9]$/, "Invalid mobile format.")
                 .safeParse(mobile);
 
               if (isChangeMobile) {

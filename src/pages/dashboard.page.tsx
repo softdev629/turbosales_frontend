@@ -309,19 +309,6 @@ const DashboardPage = () => {
           <Stack direction="row" justifyContent="space-evenly" py={4}>
             <Box display="flex" flexDirection="column" alignItems="center">
               <SvgIcon sx={{ fill: "white", width: 40, height: 40 }}>
-                <PitchesIcon />
-              </SvgIcon>
-              <Typography variant="h4" color="white" mt={2}>
-                500
-              </Typography>
-              <Typography color="#D9D9D9" textAlign="center" mt={1}>
-                {t("hq_dashboard.month")}
-                <br />
-                {t("commissions.pitches_made.0")}
-              </Typography>
-            </Box>
-            <Box display="flex" flexDirection="column" alignItems="center">
-              <SvgIcon sx={{ fill: "white", width: 40, height: 40 }}>
                 <TestdriveIcon />
               </SvgIcon>
               <Typography variant="h4" color="white" mt={2}>

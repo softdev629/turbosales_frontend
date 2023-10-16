@@ -79,26 +79,6 @@ const Header = () => {
       restrict: ["manager"],
     },
     {
-      text: "HQ Clients",
-      to: "/admin/hq_clients",
-      restrict: ["admin"],
-    },
-    {
-      text: "HQ Centers",
-      to: "/admin/hq_centers",
-      restrict: ["admin"],
-    },
-    {
-      text: "HQ Dashboard",
-      to: "/admin/hq_dashboard",
-      restrict: ["admin"],
-    },
-    {
-      text: "HQ Settings",
-      to: "/admin/hq_settings",
-      restrict: ["admin"],
-    },
-    {
       text: t("header.more_menu.account"),
       to: "/account",
       restrict: ["instructor", "sales", "manager"],
@@ -111,12 +91,35 @@ const Header = () => {
     {
       text: t("header.more_menu.terms"),
       to: "/terms",
-      restrict: ["instructor", "sales", "manager", "admin"],
+      restrict: ["instructor", "sales", "manager"],
     },
     {
       text: t("header.more_menu.logout"),
       to: "/",
-      restrict: ["instructor", "sales", "manager", "admin"],
+      restrict: ["instructor", "sales", "manager"],
+    },
+  ];
+
+  const adminLinks = [
+    {
+      text: "HQ Clients",
+      to: "/admin/hq_clients",
+    },
+    {
+      text: "HQ Centers",
+      to: "/admin/hq_centers",
+    },
+    {
+      text: "HQ Dashboard",
+      to: "/admin/hq_dashboard",
+    },
+    {
+      text: "HQ Settings",
+      to: "/admin/hq_settings",
+    },
+    {
+      text: "Log out",
+      to: "",
     },
   ];
 
@@ -193,6 +196,7 @@ const Header = () => {
                 }}
               >
                 {user &&
+                  user.role !== "admin" &&
                   navLinks.map(
                     (navLink, index) =>
                       navLink.restrict.includes(user?.role as string) && (
@@ -211,7 +215,21 @@ const Header = () => {
                         </MenuItem>
                       )
                   )}
-                {user && (
+                {user &&
+                  user.role === "admin" &&
+                  adminLinks.map((adminLink, index) => (
+                    <MenuItem
+                      sx={{ color: "black", textTransform: "none" }}
+                      key={`admin_link_${index}`}
+                      onClick={() => {
+                        if (adminLink.text === "Log out") logoutUser();
+                        else navigate(adminLink.to);
+                      }}
+                    >
+                      {adminLink.text}
+                    </MenuItem>
+                  ))}
+                {user && user.role !== "admin" && (
                   <MenuItem>
                     <Button
                       id="more-button"
@@ -242,6 +260,7 @@ const Header = () => {
                   }}
                 >
                   {user &&
+                    user.role !== "admin" &&
                     moreLinks.map(
                       (moreLink, index) =>
                         moreLink.restrict.includes(user?.role as string) && (
@@ -279,7 +298,7 @@ const Header = () => {
                     sx={{ color: "black" }}
                     endIcon={openLang ? <ArrowDropDown /> : <ArrowRight />}
                   >
-                    ENG / 中文
+                    A / 文
                   </Button>
                 </MenuItem>
                 <Menu
@@ -321,6 +340,7 @@ const Header = () => {
             <Box sx={{ display: { xs: "none", md: "flex" } }} flexGrow={1} />
             <Box sx={{ display: { xs: "none", md: "flex" } }} gap={3}>
               {user &&
+                user.role !== "admin" &&
                 navLinks.map(
                   (navLink, index) =>
                     navLink.restrict.includes(user?.role as string) && (
@@ -336,7 +356,7 @@ const Header = () => {
                       </Button>
                     )
                 )}
-              {user && (
+              {user && user.role !== "admin" && (
                 <Button
                   id="more-button"
                   aria-controls={openMore ? "more-menu" : undefined}
@@ -351,7 +371,7 @@ const Header = () => {
                   {t("header.more")}
                 </Button>
               )}
-              {user && (
+              {user && user.role !== "admin" && (
                 <Menu
                   id="more-menu"
                   anchorEl={moreEl}
@@ -391,6 +411,20 @@ const Header = () => {
                   )}
                 </Menu>
               )}
+              {user &&
+                user.role === "admin" &&
+                adminLinks.map((adminLink, index) => (
+                  <Button
+                    sx={{ color: "black", textTransform: "none" }}
+                    key={`admin_link_${index}`}
+                    onClick={() => {
+                      if (adminLink.text === "Log out") logoutUser();
+                      else navigate(adminLink.to);
+                    }}
+                  >
+                    {adminLink.text}
+                  </Button>
+                ))}
 
               <Button
                 id="lang-button"
@@ -403,7 +437,7 @@ const Header = () => {
                 sx={{ color: "black" }}
                 endIcon={openLang ? <ArrowDropDown /> : <ArrowRight />}
               >
-                ENG / 中文
+                A / 文
               </Button>
               <Menu
                 id="lang-menu"
