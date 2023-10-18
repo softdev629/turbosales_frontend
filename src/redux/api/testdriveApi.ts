@@ -30,8 +30,20 @@ export const testdriveApi = createApi({
       },
       transformResponse: (result: { data: ITestdrive[] }) => result.data,
     }),
+    getPendding: builder.query<ITestdrive | null, void>({
+      query() {
+        return {
+          url: "testdrives/pending",
+          credentials: "include",
+        };
+      },
+      transformResponse: (results: { data: ITestdrive | null }) => results.data,
+    }),
   }),
 });
 
-export const { useCreateTestdriveMutation, useLazyGetTestdriveByDateQuery } =
-  testdriveApi;
+export const {
+  useCreateTestdriveMutation,
+  useLazyGetTestdriveByDateQuery,
+  useLazyGetPenddingQuery,
+} = testdriveApi;

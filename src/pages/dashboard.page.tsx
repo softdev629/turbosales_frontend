@@ -18,7 +18,6 @@ import { ReactComponent as FrenchiseIcon } from "../assets/images/ico_franchise.
 import { ReactComponent as MarketingIcon } from "../assets/images/ico_marketing.svg";
 import MoneyBagIcon from "../assets/images/ico_moneybag.svg";
 import { ReactComponent as MembersIcon } from "../assets/images/ico_members.svg";
-import { ReactComponent as PitchesIcon } from "../assets/images/ico_pitchesmode.svg";
 import { ReactComponent as TestdriveIcon } from "../assets/images/ico_testdrive.svg";
 import { ReactComponent as QuestionIcon } from "../assets/images/ico_question.svg";
 import { ReactComponent as ContactIcon } from "../assets/images/ico_contact.svg";

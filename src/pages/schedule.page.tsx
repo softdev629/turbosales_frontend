@@ -20,7 +20,10 @@ import { ReactComponent as TestdriveIcon } from "../assets/images/ico_test_drive
 import { ReactComponent as ClockIcon } from "../assets/images/ico_clock.svg";
 import { ReactComponent as PCIcon } from "../assets/images/ico_pc.svg";
 
-import { useLazyGetTestdriveByDateQuery } from "../redux/api/testdriveApi";
+import {
+  useLazyGetTestdriveByDateQuery,
+  useLazyGetPenddingQuery,
+} from "../redux/api/testdriveApi";
 import { useLazyGetCenterSettingsQuery } from "../redux/api/centerApi";
 import { useAppSelector } from "../redux/store";
 import { divideIntervals, fromDayjsToDate } from "../util";
@@ -42,15 +45,24 @@ const SchedulePage = () => {
     client: string;
     company: string;
   }>();
+  const [bookInfo, setBookInfo] = useState<{
+    testdrive_id: string;
+    date: string;
+    staff: string;
+    client: string;
+  }>({ testdrive_id: "", date: "", staff: "", client: "" });
 
   const [getCenterSettings] = useLazyGetCenterSettingsQuery();
   const [getTestdriveByDate, getTestdriveState] =
     useLazyGetTestdriveByDateQuery();
+  const [getPending, pendingState] = useLazyGetPenddingQuery();
+
   const settings = useAppSelector((state) => state.centerState.settings);
   const user = useAppSelector((state) => state.userState.user);
 
   useEffect(() => {
     getCenterSettings();
+    getPending();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -104,6 +116,24 @@ const SchedulePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getTestdriveState]);
 
+  useEffect(() => {
+    if (pendingState.isSuccess) {
+      setBookInfo({
+        testdrive_id: pendingState.data?._id as string,
+        date: `${
+          pendingState.data?.date && new Date(pendingState.data.date).getMonth()
+        }/${
+          pendingState.data?.date && new Date(pendingState.data.date).getDate()
+        }/${
+          pendingState.data?.date &&
+          new Date(pendingState.data.date).getFullYear()
+        }`,
+        staff: "",
+        client: pendingState.data?.client.name as string,
+      });
+    }
+  }, [pendingState]);
+
   return (
     <>
       <Box
@@ -117,9 +147,11 @@ const SchedulePage = () => {
         <Container
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             py: 4,
             alignItems: "center",
+            flexWrap: "wrap",
+            gap: 1,
           }}
         >
           <Button
@@ -140,34 +172,21 @@ const SchedulePage = () => {
               border="1px solid #D9D9D9"
               p={2}
             >
-              <Box display="flex" mb={3} justifyContent="space-between">
+              <Box display="flex" mb={1}>
                 <Typography
                   color="primary.main"
-                  variant="h5"
-                  sx={{ display: "flex", alignItems: "center" }}
-                  width="30%"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
                   <SvgIcon sx={{ fill: "#ea2049", mr: 1 }}>
                     <ClockIcon />
                   </SvgIcon>
-                  {roomInfo?.time}
-                </Typography>
-                <Typography
-                  color="primary.main"
-                  variant="h5"
-                  sx={{ display: "flex", alignItems: "center" }}
-                  width="60%"
-                >
-                  <SvgIcon sx={{ fill: "#ea2049", mr: 1 }}>
-                    <PCIcon />
-                  </SvgIcon>
-                  {t("schedule.workstation")}{" "}
-                  {String.fromCharCode(
-                    "A".charCodeAt(0) + (roomInfo?.workstation as number)
-                  )}
+                  {bookInfo?.date}
                 </Typography>
               </Box>
-              <Box display="flex" mb={3} justifyContent="space-between">
+              <Box display="flex" mb={1} justifyContent="space-between">
                 <Typography
                   color="#595959"
                   sx={{ display: "flex", alignItems: "center" }}
@@ -181,12 +200,33 @@ const SchedulePage = () => {
                       labelId="staff-name-label"
                       id="staff-name-select"
                       size="small"
-                      defaultValue={user.name}
+                      value={bookInfo?.staff}
+                      onChange={(event) => {
+                        setBookInfo({
+                          ...bookInfo,
+                          staff: event.target.value,
+                        });
+                      }}
                     >
                       <MenuItem value={user.name}>{user.name}</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
+              </Box>
+              <Box display="flex" mb={1} justifyContent="space-between">
+                <Typography
+                  color="#595959"
+                  sx={{ display: "flex", alignItems: "center" }}
+                  width="30%"
+                >
+                  {t("home.common.client")}
+                </Typography>
+                <Typography
+                  sx={{ display: "flex", alignItems: "center" }}
+                  width="60%"
+                >
+                  {bookInfo?.client}
+                </Typography>
               </Box>
               <Box display="flex" justifyContent="flex-end">
                 <LoadingButton variant="contained">Confirm</LoadingButton>
@@ -195,7 +235,10 @@ const SchedulePage = () => {
           ) : null}
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
+            <DemoContainer
+              components={["DatePicker"]}
+              sx={{ width: { md: "fit-content", xs: "100%" } }}
+            >
               <DatePicker
                 label={t("schedule.book_date_picker")}
                 value={date}
@@ -294,7 +337,7 @@ const SchedulePage = () => {
           </Box>
         </Container>
       </Box>
-      <Container sx={{ mt: 45, minHeight: 400 }}>
+      <Container sx={{ mt: { md: 45, xs: 90 }, minHeight: 400 }}>
         <Box
           display="flex"
           justifyContent="flex-end"
@@ -303,7 +346,7 @@ const SchedulePage = () => {
         >
           <Typography>{t("schedule.legend")}</Typography>
           <Box
-            width="10%"
+            width={{ md: "10%", xs: "30%" }}
             height={35}
             display="flex"
             justifyContent="center"
@@ -314,7 +357,7 @@ const SchedulePage = () => {
             {t("schedule.free")}
           </Box>
           <Box
-            width="10%"
+            width={{ md: "10%", xs: "30%" }}
             height={35}
             display="flex"
             justifyContent="center"
