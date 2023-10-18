@@ -49,8 +49,9 @@ const SchedulePage = () => {
     testdrive_id: string;
     date: string;
     staff: string;
+    staff_id: string;
     client: string;
-  }>({ testdrive_id: "", date: "", staff: "", client: "" });
+  }>({ testdrive_id: "", date: "", staff: "", staff_id: "", client: "" });
 
   const [getCenterSettings] = useLazyGetCenterSettingsQuery();
   const [getTestdriveByDate, getTestdriveState] =
@@ -129,6 +130,7 @@ const SchedulePage = () => {
           new Date(pendingState.data.date).getFullYear()
         }`,
         staff: "",
+        staff_id: pendingState.data?.staff._id as string,
         client: pendingState.data?.client.name as string,
       });
     }

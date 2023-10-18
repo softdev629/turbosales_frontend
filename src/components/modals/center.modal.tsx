@@ -40,6 +40,7 @@ const style = {
 };
 
 const newCenterSchema = object({
+  name: string().min(1, "Center name is required"),
   referer_center_id: string().optional(),
   owner_name: string().min(1, "Owner Name is required."),
   owner_mobile: string()
@@ -136,6 +137,7 @@ const CenterModal = (props: {
               <Typography textAlign="center">
                 All fields are required
               </Typography>
+              <TextField {...register("name")} label="Name" size="small" />
               <Box
                 sx={{ border: "2px solid #ea2049" }}
                 borderRadius={5}
