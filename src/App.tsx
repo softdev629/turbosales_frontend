@@ -49,10 +49,18 @@ function App() {
                 <RequireUser allowedRoles={["manager", "sales", "reseller"]} />
               }
             >
-              <Route path="/" element={<HomePage />} />
               <Route path="account" element={<AccountPage />} />
               <Route path="commissions" element={<CommissionsPage />} />
               <Route path="schedule" element={<SchedulePage />} />
+            </Route>
+            <Route
+              element={
+                <RequireUser
+                  allowedRoles={["manager", "sales", "reseller", "admin"]}
+                />
+              }
+            >
+              <Route path="/" element={<HomePage />} />
             </Route>
             <Route
               element={<RequireUser allowedRoles={["sales", "manager"]} />}
@@ -69,6 +77,7 @@ function App() {
               <Route path="hq_settings" element={<HQSettingsPage />} />
               <Route path="hq_clients" element={<HQClientsPage />} />
             </Route>
+
             <Route path="login" element={<LoginPage />} />
             <Route path="unauthorized" element={<UnauthorizedPage />} />
             <Route path="contact" element={<ContactPage />} />
