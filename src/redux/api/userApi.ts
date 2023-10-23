@@ -63,6 +63,15 @@ export const userApi = createApi({
         };
       },
     }),
+    getSales: builder.query<IUser[], void>({
+      query() {
+        return {
+          url: "/users/sales",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: IUser[] }) => result.data,
+    }),
   }),
 });
 
@@ -70,4 +79,5 @@ export const {
   useAddStaffMutation,
   useLazyGetStaffQuery,
   useUpdateMeMutation,
+  useLazyGetSalesQuery,
 } = userApi;

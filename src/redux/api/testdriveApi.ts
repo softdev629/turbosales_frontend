@@ -39,6 +39,41 @@ export const testdriveApi = createApi({
       },
       transformResponse: (results: { data: ITestdrive | null }) => results.data,
     }),
+    assignTestdrive: builder.mutation<
+      IGenericResponse,
+      { testdrive_id: string; staff_id: string }
+    >({
+      query(data) {
+        return {
+          method: "PATCH",
+          url: "/testdrives/assign",
+          credentials: "include",
+          body: data,
+        };
+      },
+    }),
+    getConfirm: builder.query<ITestdrive | null, void>({
+      query() {
+        return {
+          url: "/testdrives/confirm",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: ITestdrive | null }) => result.data,
+    }),
+    confirmTestdrive: builder.mutation<
+      IGenericResponse,
+      { testdrive_id: string }
+    >({
+      query(data) {
+        return {
+          method: "PATCH",
+          url: "/testdrives/confirm",
+          credentials: "include",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -46,4 +81,7 @@ export const {
   useCreateTestdriveMutation,
   useLazyGetTestdriveByDateQuery,
   useLazyGetPenddingQuery,
+  useAssignTestdriveMutation,
+  useLazyGetConfirmQuery,
+  useConfirmTestdriveMutation,
 } = testdriveApi;

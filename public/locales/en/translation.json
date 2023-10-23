@@ -281,6 +281,8 @@
     "book_date_picker": "Book date picker",
     "legend": "LEGEND",
     "free": "FREE",
-    "booked": "Booked"
+    "booked": "BOOKED",
+    "pending": "PENDING",
+    "confirming": "CONFIRMING"
   }
 }

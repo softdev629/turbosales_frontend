@@ -40,11 +40,6 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route element={<Layout />}>
-            <Route
-              element={<RequireUser allowedRoles={["admin", "manager"]} />}
-            >
-              <Route path="/" element={<HomePage />} />
-            </Route>
             <Route element={<RequireUser allowedRoles={["manager"]} />}>
               <Route path="center_settings" element={<CenterSettingsPage />} />
               <Route path="dashboard" element={<DashboardPage />} />
@@ -65,6 +60,7 @@ function App() {
             >
               <Route path="my_clients" element={<MyClientsPage />} />
               <Route path="center_clients" element={<CenterClientsPage />} />
+              <Route path="/" element={<HomePage />} />
             </Route>
             <Route
               path="admin"

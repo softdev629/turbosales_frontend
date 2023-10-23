@@ -201,11 +201,6 @@ const StaffModal = (props: {
                         label="Manager"
                       />
                       <FormControlLabel
-                        value="instructor"
-                        control={<Radio />}
-                        label="Instructor"
-                      />
-                      <FormControlLabel
                         value="sales"
                         control={<Radio />}
                         label="Sales Rep"

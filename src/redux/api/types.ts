@@ -51,6 +51,8 @@ export interface IAddress {
   city: string;
   zip_code: string;
   country: string;
+  latitude: number;
+  langtitude: number;
 }
 
 export interface IClient {
@@ -72,12 +74,35 @@ export interface IClient {
   updatedAt: Date;
 }
 
+export interface ICenter {
+  _id: string;
+  name: string;
+  referer_center_id: string;
+  owner: string;
+  manager: string;
+  address: IAddress;
+  center_id: string;
+  settings: ICenterSettings;
+  subdomain: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+
 export interface ITestdrive {
   _id: string;
-  client: IClient;
+  client?: IClient;
+  client_name?: string;
+  client_email?: string;
+  company?: string;
+  website?: string;
+  center?: ICenter;
   date: Date;
   time_rooms: { start: string; end: string; workstation: number }[];
   staff: IUser;
+  status: string;
+  type: string;
   createdAt: Date;
   updatedAt: Date;
+  __v: number;
 }
