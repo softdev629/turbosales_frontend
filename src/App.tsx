@@ -46,11 +46,10 @@ function App() {
             </Route>
             <Route
               element={
-                <RequireUser
-                  allowedRoles={["manager", "sales", "instructor"]}
-                />
+                <RequireUser allowedRoles={["manager", "sales", "reseller"]} />
               }
             >
+              <Route path="/" element={<HomePage />} />
               <Route path="account" element={<AccountPage />} />
               <Route path="commissions" element={<CommissionsPage />} />
               <Route path="schedule" element={<SchedulePage />} />
@@ -60,7 +59,6 @@ function App() {
             >
               <Route path="my_clients" element={<MyClientsPage />} />
               <Route path="center_clients" element={<CenterClientsPage />} />
-              <Route path="/" element={<HomePage />} />
             </Route>
             <Route
               path="admin"

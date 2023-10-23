@@ -43,7 +43,7 @@ const Header = () => {
     {
       text: t("header.home"),
       to: "/",
-      restrict: ["sales", "manager"],
+      restrict: ["sales", "manager", "reseller"],
     },
     {
       text: t("header.commissions"),
@@ -81,22 +81,22 @@ const Header = () => {
     {
       text: t("header.more_menu.account"),
       to: "/account",
-      restrict: ["instructor", "sales", "manager"],
+      restrict: ["reseller", "sales", "manager"],
     },
     {
       text: t("header.more_menu.contact"),
       to: "/contact",
-      restrict: ["instructor", "sales", "manager"],
+      restrict: ["reseller", "sales", "manager"],
     },
     {
       text: t("header.more_menu.terms"),
       to: "/terms",
-      restrict: ["instructor", "sales", "manager"],
+      restrict: ["reseller", "sales", "manager"],
     },
     {
       text: t("header.more_menu.logout"),
       to: "/",
-      restrict: ["instructor", "sales", "manager"],
+      restrict: ["reseller", "sales", "manager"],
     },
   ];
 

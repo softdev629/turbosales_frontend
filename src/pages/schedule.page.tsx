@@ -192,13 +192,14 @@ const SchedulePage = () => {
         company: pendingState.data?.company as string,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingState]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (salesState.isSuccess && salesState.data) {
       setSales(salesState.data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [salesState]);
 
   useEffect(() => {
@@ -206,6 +207,7 @@ const SchedulePage = () => {
       toast.success("Assigned Successfully.");
       getPending();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assignState]);
 
   useEffect(() => {
@@ -245,6 +247,7 @@ const SchedulePage = () => {
       toast.success("Book confirmed Successfully.");
       getConfirm();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmState]);
 
   return (

@@ -46,6 +46,7 @@ const HomePage = () => {
       click: () => {
         setOpenNewClient(true);
       },
+      restrict: ["manager", "sales"],
     },
     // {
     //   icon: <PitchIcon width={48} height={48} fill="#ea2049" />,
@@ -60,6 +61,7 @@ const HomePage = () => {
       click: () => {
         setOpenTestDrive(true);
       },
+      restrict: ["manager", "sales", "reseller"],
     },
     {
       icon: <SoldIcon width={48} height={48} fill="#ea2049" />,
@@ -67,6 +69,7 @@ const HomePage = () => {
       click: () => {
         setOpenSold(true);
       },
+      restrict: ["manager", "sales"],
     },
     // {
     //   icon: <TrainingIcon width={48} height={48} fill="#ea2049" />,
@@ -81,6 +84,7 @@ const HomePage = () => {
       click: () => {
         navigate("/schedule");
       },
+      restrict: ["manager", "sales"],
     },
     {
       icon: <CommissionIcon width={48} height={48} fill="#ea2049" />,
@@ -88,6 +92,7 @@ const HomePage = () => {
       click: () => {
         navigate("/commissions");
       },
+      restrict: ["manager", "sales"],
     },
     {
       icon: <ClientsIcon width={48} height={48} fill="#ea2049" />,
@@ -95,6 +100,7 @@ const HomePage = () => {
       click: () => {
         navigate("/my_clients");
       },
+      restrict: ["manager", "sales"],
     },
   ];
 
@@ -127,25 +133,28 @@ const HomePage = () => {
             justifyContent="center"
             flexWrap="wrap"
           >
-            {actions.map((action, index) => (
-              <Button
-                sx={{
-                  color: "black",
-                  textTransform: "none",
-                  border: "1px solid #999",
-                  borderRadius: "20px",
-                  p: 2,
-                  width: { md: 192, xs: "40%" },
-                }}
-                key={`action_item_${index}`}
-                onClick={action.click}
-              >
-                <Stack alignItems="center">
-                  <Box my={2}>{action.icon}</Box>
-                  {action.text}
-                </Stack>
-              </Button>
-            ))}
+            {actions.map(
+              (action, index) =>
+                action.restrict.includes(user?.role as string) && (
+                  <Button
+                    sx={{
+                      color: "black",
+                      textTransform: "none",
+                      border: "1px solid #999",
+                      borderRadius: "20px",
+                      p: 2,
+                      width: { md: 192, xs: "40%" },
+                    }}
+                    key={`action_item_${index}`}
+                    onClick={action.click}
+                  >
+                    <Stack alignItems="center">
+                      <Box my={2}>{action.icon}</Box>
+                      {action.text}
+                    </Stack>
+                  </Button>
+                )
+            )}
           </Stack>
         </Box>
       </Container>
