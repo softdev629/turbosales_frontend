@@ -41,7 +41,7 @@ const HQDashboardPage = () => {
               <SvgIcon sx={{ fill: "white", width: 40, height: 40 }}>
                 <BoxIcon />
               </SvgIcon>
-              <Typography variant="h4" color="white" mt={2}>
+              <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
                 500
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
@@ -57,7 +57,7 @@ const HQDashboardPage = () => {
                 width={40}
                 height={40}
               />
-              <Typography variant="h4" color="white" mt={2}>
+              <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
                 €100.6M
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
@@ -70,7 +70,7 @@ const HQDashboardPage = () => {
               <SvgIcon sx={{ fill: "white", width: 40, height: 40 }}>
                 <MembersIcon />
               </SvgIcon>
-              <Typography variant="h4" color="white" mt={2}>
+              <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
                 50.2K
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
@@ -83,7 +83,7 @@ const HQDashboardPage = () => {
               <SvgIcon sx={{ fill: "white", width: 40, height: 40 }}>
                 <MoneyIcon />
               </SvgIcon>
-              <Typography variant="h4" color="white" mt={2}>
+              <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
                 €500.9M
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
@@ -92,7 +92,11 @@ const HQDashboardPage = () => {
             </Box>
           </Stack>
         </Box>
-        <Box border="1px solid #D9D9D9" mt={4} width="80%">
+        <Box
+          border="1px solid #D9D9D9"
+          mt={4}
+          width={{ md: "80%", xs: "100%" }}
+        >
           <Box
             display="flex"
             justifyContent="space-between"
@@ -112,18 +116,24 @@ const HQDashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 32 },
+                  height: { md: 48, xs: 32 },
+                }}
+              >
                 <MembershipIcon />
               </SvgIcon>
             </Box>
-            <Typography width="25%" variant="h5">
+            <Typography width="25%" fontSize={{ md: 24, xs: 18 }}>
               Membership
               <br />
               Packs
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -131,7 +141,7 @@ const HQDashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -140,18 +150,24 @@ const HQDashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 32 },
+                  height: { md: 48, xs: 32 },
+                }}
+              >
                 <FrenchiseIcon />
               </SvgIcon>
             </Box>
-            <Typography width="25%" variant="h5">
+            <Typography width="25%" fontSize={{ md: 24, xs: 18 }}>
               Franchise
               <br />
               Starter Kits
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -159,7 +175,7 @@ const HQDashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -168,18 +184,24 @@ const HQDashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 32 },
+                  height: { md: 48, xs: 32 },
+                }}
+              >
                 <MarketingIcon />
               </SvgIcon>
             </Box>
-            <Typography width="25%" variant="h5">
+            <Typography width="25%" fontSize={{ md: 24, xs: 18 }}>
               Marketing
               <br />
               Services
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -187,7 +209,7 @@ const HQDashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -196,18 +218,24 @@ const HQDashboardPage = () => {
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
             <Box width="10%" display="flex" justifyContent="center">
-              <SvgIcon sx={{ fill: "#ea2049", width: 48, height: 48 }}>
+              <SvgIcon
+                sx={{
+                  fill: "#ea2049",
+                  width: { md: 48, xs: 32 },
+                  height: { md: 48, xs: 32 },
+                }}
+              >
                 <GiftIcon />
               </SvgIcon>
             </Box>
-            <Typography width="25%" variant="h5">
+            <Typography width="25%" fontSize={{ md: 24, xs: 18 }}>
               International
               <br />
               Sales
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -215,7 +243,7 @@ const HQDashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -226,14 +254,14 @@ const HQDashboardPage = () => {
             <Box width="10%" display="flex" justifyContent="center">
               <Box component="img" src={MoneyBagIcon} width={40} height={40} />
             </Box>
-            <Typography width="25%" variant="h5">
+            <Typography width="25%" fontSize={{ md: 24, xs: 18 }}>
               Membership
               <br />
               Packs
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -241,7 +269,7 @@ const HQDashboardPage = () => {
             </Typography>
             <Typography
               width="25%"
-              variant="h4"
+              fontSize={{ md: 32, xs: 24 }}
               color="primary.main"
               textAlign="center"
             >
@@ -250,7 +278,12 @@ const HQDashboardPage = () => {
           </Box>
         </Box>
 
-        <Box width="70%" border="1px solid #D9D9D9" mt={6} p={3}>
+        <Box
+          width={{ md: "70%", xs: "100%" }}
+          border="1px solid #D9D9D9"
+          mt={6}
+          p={3}
+        >
           <Box display="flex">
             <Typography variant="h5" color="primary.main" flexGrow={1}>
               Commissions

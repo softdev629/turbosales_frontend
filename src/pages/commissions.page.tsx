@@ -69,7 +69,11 @@ const CommissionsPage = () => {
             <SvgIcon sx={{ fill: "#ea2049", height: 48, width: 48 }}>
               <MoneyUnitIcon />
             </SvgIcon>
-            <Typography color="primary.main" variant="h4" fontWeight={700}>
+            <Typography
+              color="primary.main"
+              fontWeight={700}
+              fontSize={{ md: 32, xs: 18 }}
+            >
               €1,000
             </Typography>
             <Typography>
@@ -86,7 +90,11 @@ const CommissionsPage = () => {
               width={48}
               height={48}
             />
-            <Typography color="primary.main" variant="h4" fontWeight={700}>
+            <Typography
+              color="primary.main"
+              fontSize={{ md: 32, xs: 18 }}
+              fontWeight={700}
+            >
               €10,000
             </Typography>
             <Typography>
@@ -99,7 +107,11 @@ const CommissionsPage = () => {
             <SvgIcon sx={{ fill: "#ea2049", height: 48, width: 48 }}>
               <PitchesModeIcon />
             </SvgIcon>
-            <Typography color="primary.main" variant="h4" fontWeight={700}>
+            <Typography
+              color="primary.main"
+              fontSize={{ md: 32, xs: 18 }}
+              fontWeight={700}
+            >
               500
             </Typography>
             <Typography>
@@ -112,7 +124,11 @@ const CommissionsPage = () => {
             <SvgIcon sx={{ fill: "#ea2049", height: 48, width: 48 }}>
               <MembersPaidIcon />
             </SvgIcon>
-            <Typography color="primary.main" variant="h4" fontWeight={700}>
+            <Typography
+              color="primary.main"
+              fontSize={{ md: 32, xs: 18 }}
+              fontWeight={700}
+            >
               50
             </Typography>
             <Typography>
@@ -123,7 +139,7 @@ const CommissionsPage = () => {
         </Box>
         <Box display="flex" justifyContent="center">
           <Stack
-            width="70%"
+            width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
             p={4}
@@ -143,58 +159,122 @@ const CommissionsPage = () => {
               textAlign="center"
               py={1}
             >
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("home.common.company")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("contact.title")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("home.common.pitch")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("home.testdrive")}
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 ABC
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 Amy Adams
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-02-13
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-02-21
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 DEF
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 Barry. Brad
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-02-14
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 Not yet
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 GHI
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 Cindy Craw
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-03-15
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-03-18
               </Typography>
             </Box>
@@ -202,13 +282,13 @@ const CommissionsPage = () => {
         </Box>
         <Box display="flex" justifyContent="center" mt={4}>
           <Stack
-            width="70%"
+            width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
             p={4}
             gap={2}
           >
-            <Box display="flex" justifyContent="space-between">
+            <Box display="flex" justifyContent="space-between" flexWrap="wrap">
               <Typography color="primary.main" variant="h5">
                 {t("dashboard.members")}
               </Typography>
@@ -222,58 +302,128 @@ const CommissionsPage = () => {
               textAlign="center"
               py={1}
             >
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("home.common.company")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("commissions.expiration")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="20%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 {t("home.common.price")}
               </Typography>
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="30%"
+                fontSize={{ md: 18, xs: 12 }}
+                sx={{ color: "#595959", overflowWrap: "break-word" }}
+              >
                 {t("header.commissions")}
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 ABC
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-02-13
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 €2,000.00
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 €300.00
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 DEF
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-02-14
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 Not yet
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 NA
               </Typography>
             </Box>
             <Box display="flex">
-              <Typography width="25%" sx={{ color: "#595959" }}>
+              <Typography
+                width="25%"
+                sx={{ color: "#595959" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 GHI
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 2023-03-15
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 €60,000.00
               </Typography>
-              <Typography width="25%" textAlign="center">
+              <Typography
+                width="25%"
+                textAlign="center"
+                sx={{ overflowWrap: "break-word" }}
+                fontSize={{ md: 18, xs: 12 }}
+              >
                 €3,000.00
               </Typography>
             </Box>

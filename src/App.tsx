@@ -37,7 +37,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ToastContainer />
+        <ToastContainer draggable={false} />
         <Routes>
           <Route element={<Layout />}>
             <Route element={<RequireUser allowedRoles={["manager"]} />}>
