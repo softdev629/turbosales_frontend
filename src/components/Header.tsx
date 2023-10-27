@@ -80,7 +80,7 @@ const Header = () => {
     },
     {
       text: t("header.more_menu.account"),
-      to: "/account",
+      to: "/profile/me",
       restrict: ["reseller", "sales", "manager"],
     },
     {

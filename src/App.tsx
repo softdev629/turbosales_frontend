@@ -13,7 +13,7 @@ import LoginPage from "./pages/login.page";
 import RequireUser from "./components/RequireUser";
 import UnauthorizedPage from "./pages/unauthorized.page";
 import ContactPage from "./pages/contact.page";
-import AccountPage from "./pages/account.page";
+import AccountPage from "./pages/profile/account.page";
 import HQSettingsPage from "./pages/admin/hqsettings.page";
 import HQDashboardPage from "./pages/admin/hqdashboard.page";
 import CommissionsPage from "./pages/commissions.page";
@@ -23,6 +23,7 @@ import CenterClientsPage from "./pages/centerclient.page";
 import TermsPage from "./pages/terms.page";
 import HQClientsPage from "./pages/admin/hqclients.page";
 import DashboardPage from "./pages/dashboard.page";
+import ClientProfilePage from "./pages/profile/client.page";
 
 const theme = createTheme({
   palette: {
@@ -49,7 +50,7 @@ function App() {
                 <RequireUser allowedRoles={["manager", "sales", "reseller"]} />
               }
             >
-              <Route path="account" element={<AccountPage />} />
+              <Route path="profile/me" element={<AccountPage />} />
               <Route path="commissions" element={<CommissionsPage />} />
               <Route path="schedule" element={<SchedulePage />} />
             </Route>
@@ -78,6 +79,9 @@ function App() {
               <Route path="hq_clients" element={<HQClientsPage />} />
             </Route>
 
+            <Route path="profile">
+              <Route path="clients" element={<ClientProfilePage />} />
+            </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="unauthorized" element={<UnauthorizedPage />} />
             <Route path="contact" element={<ContactPage />} />

@@ -20,12 +20,12 @@ const HQSettingsPage = () => {
   const { t } = useTranslation();
   const [openCenter, setOpenSenter] = useState(false);
 
-  const [hqSettings, setHQSettings] = useState<{
-    center_referal_amount: number;
-    center_referal_type: string;
-    tiktok_spending_amount: number;
-    tiktok_spending_type: string;
-  }>();
+  // const [hqSettings, setHQSettings] = useState<{
+  //   center_referal_amount: number;
+  //   center_referal_type: string;
+  //   tiktok_spending_amount: number;
+  //   tiktok_spending_type: string;
+  // }>();
 
   return (
     <>

@@ -284,5 +284,28 @@
     "booked": "BOOKED",
     "pending": "PENDING",
     "confirming": "CONFIRMING"
+  },
+  "profile_client": {
+    "back": "BACK",
+    "brand_or_buyer": "BRAND(OR BUYER)",
+    "status": "STATUS",
+    "company_or_name": "Company (Or Name)",
+    "area_code_state": "Area Code & State",
+    "membership": "MEMBERSHIP",
+    "membership_expiration": "Membership Expiration",
+    "activation_code": "Activation Code",
+    "purchases": "PURCHASES",
+    "total_purchases": "TOTAL PURCHASES",
+    "sales_funnel": "SALES FUNNEL",
+    "deal_signed": "Deal signed",
+    "training": "Training",
+    "contact_person": "CONTACT PERSON",
+    "contact_name": "Contact Name",
+    "title": "Title",
+    "referral": "REFERRAL",
+    "ai_center_id": "AI Center ID",
+    "ai_center_city": "AI Center City",
+    "sales_rep_referral_link": "Sales Rep Referral Link",
+    "name_of_referrer": "Name Of Referrer"
   }
 }

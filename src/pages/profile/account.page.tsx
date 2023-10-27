@@ -12,10 +12,10 @@ import { useTranslation } from "react-i18next";
 import { string } from "zod";
 import { toast } from "react-toastify";
 
-import { ReactComponent as ReferLinkIcon } from "../assets/images/ico_refer_link.svg";
-import { ReactComponent as RoleIcon } from "../assets/images/ico_role.svg";
-import { useAppSelector } from "../redux/store";
-import { useUpdateMeMutation } from "../redux/api/userApi";
+import { ReactComponent as ReferLinkIcon } from "../../assets/images/ico_refer_link.svg";
+import { ReactComponent as RoleIcon } from "../../assets/images/ico_role.svg";
+import { useAppSelector } from "../../redux/store";
+import { useUpdateMeMutation } from "../../redux/api/userApi";
 
 const AccountPage = () => {
   const { t } = useTranslation();
