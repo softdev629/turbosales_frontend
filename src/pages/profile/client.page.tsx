@@ -1,9 +1,9 @@
 import { Box, Container, Link, SvgIcon, Typography } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as EditIcon } from "../../assets/images/ico_edit.svg";
-import { useNavigate } from "react-router-dom";
 
 const ClientProfilePage = () => {
   const { t } = useTranslation();

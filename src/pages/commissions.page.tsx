@@ -142,7 +142,7 @@ const CommissionsPage = () => {
             width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
-            p={4}
+            p={{ md: 4, xs: 2 }}
             gap={2}
           >
             <Box display="flex" justifyContent="space-between">
@@ -285,7 +285,7 @@ const CommissionsPage = () => {
             width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
             borderRadius={5}
-            p={4}
+            p={{ md: 4, xs: 2 }}
             gap={2}
           >
             <Box display="flex" justifyContent="space-between" flexWrap="wrap">

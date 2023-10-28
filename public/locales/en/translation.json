@@ -307,5 +307,32 @@
     "ai_center_city": "AI Center City",
     "sales_rep_referral_link": "Sales Rep Referral Link",
     "name_of_referrer": "Name Of Referrer"
+  },
+  "profile_center": {
+    "ai_center": "AI CENTER",
+    "level": "LEVEL",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
+    "platinum": "Platinum",
+    "subdomain": "Subdomain",
+    "city_country": "City & Country",
+    "franchise_license_expiration": "Franchise License Expiration",
+    "membership_packs_purchased": "Membership Packs Purchased",
+    "managers": "MANAGERS",
+    "sales_reps": "Sales Reps",
+    "resellers": "Resellers",
+    "owner_name": "Owner Name",
+    "manager": "Manager",
+    "address": "ADDRESS",
+    "referred_to_by": "Referred to by",
+    "referral_sentence_1": "COMMISSIONS BY ROLE AND PRODUCT",
+    "role": "ROLE",
+    "quantity": "Quantiy",
+    "membership": "Membership",
+    "centers": "Centers",
+    "equipment": "EQUIPMENT",
+    "total_workstations": "TOTAL WORKSTATIONS",
+    "activation_codes": "Activation Codes"
   }
 }

@@ -24,6 +24,7 @@ import TermsPage from "./pages/terms.page";
 import HQClientsPage from "./pages/admin/hqclients.page";
 import DashboardPage from "./pages/dashboard.page";
 import ClientProfilePage from "./pages/profile/client.page";
+import CenterProfilePage from "./pages/profile/center.page";
 
 const theme = createTheme({
   palette: {
@@ -81,6 +82,7 @@ function App() {
 
             <Route path="profile">
               <Route path="clients" element={<ClientProfilePage />} />
+              <Route path="centers" element={<CenterProfilePage />} />
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="unauthorized" element={<UnauthorizedPage />} />
