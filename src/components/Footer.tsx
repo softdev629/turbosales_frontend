@@ -60,7 +60,7 @@ const Footer = () => {
               </Box>
               <Box>
                 <Typography mb={3} fontWeight={700}>
-                  Xavvi
+                  {t("footer.xavvi_holdings")}
                 </Typography>
                 <Typography fontWeight={400} mb={1}>
                   {t("footer.str2")},
