@@ -504,10 +504,10 @@ const HQCentersPage = () => {
                     setLevel(event.target.value);
                   }}
                 >
-                  <MenuItem value="bronze">Bronze</MenuItem>
-                  <MenuItem value="silver">Silver</MenuItem>
-                  <MenuItem value="gold">Gold</MenuItem>
-                  <MenuItem value="platinum">Platinum</MenuItem>
+                  <MenuItem value="Bronze">Bronze</MenuItem>
+                  <MenuItem value="Silver">Silver</MenuItem>
+                  <MenuItem value="Gold">Gold</MenuItem>
+                  <MenuItem value="Platinum">Platinum</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -561,7 +561,9 @@ const HQCentersPage = () => {
                     <StyledTableCell align="center">
                       {row.referer_center_id}
                     </StyledTableCell>
-                    <StyledTableCell align="center"></StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.level}
+                    </StyledTableCell>
                     <StyledTableCell align="center"></StyledTableCell>
                   </StyledTableRow>
                 ))}
