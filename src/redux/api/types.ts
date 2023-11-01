@@ -106,3 +106,9 @@ export interface ITestdrive {
   updatedAt: Date;
   __v: number;
 }
+
+export interface IClientTableItem {
+  _id: string;
+  company: string;
+  center_id: string;
+}

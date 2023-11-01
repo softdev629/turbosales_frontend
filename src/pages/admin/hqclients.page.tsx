@@ -28,10 +28,8 @@ import {
   TablePaginationActions,
 } from "./hqcenters.page";
 
-import {
-  useGetAllCentersQuery,
-  useLazyGetCentersQuery,
-} from "../../redux/api/centerApi";
+import { useGetAllCentersQuery } from "../../redux/api/centerApi";
+import { useLazyFilterClientsQuery } from "../../redux/api/clientApi";
 
 import ClientModal from "../../components/modals/client.modal";
 
@@ -44,20 +42,19 @@ const HQClientsPage = () => {
   const [center, setCenter] = useState("");
 
   const centersData = useGetAllCentersQuery();
-
-  // const [getClients, getState] = useLazyGetCentersQuery();
+  const [filterClients, filterData] = useLazyFilterClientsQuery();
 
   useEffect(() => {
-    // getClients({ page, rowsPerPage, country, level, search });
+    filterClients({ page, rowsPerPage, country, center, search });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, country, center, search, rowsPerPage]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  // const emptyRows = !getState.data
-  //   ? rowsPerPage
-  //   : page > 0
-  //   ? Math.max(0, (1 + page) * rowsPerPage - getState.data.filtered_counts)
-  //   : 0;
+  const emptyRows = !filterData.data
+    ? rowsPerPage
+    : page > 0
+    ? Math.max(0, (1 + page) * rowsPerPage - filterData.data.filtered_counts)
+    : 0;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -175,29 +172,23 @@ const HQClientsPage = () => {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>CENTER ID</StyledTableCell>
-                <StyledTableCell align="center">CITY, COUNTRY</StyledTableCell>
-                <StyledTableCell align="center">
-                  REFERER CENTER ID
-                </StyledTableCell>
-                <StyledTableCell align="center">LEVEL</StyledTableCell>
+                <StyledTableCell>COMPANY</StyledTableCell>
+                <StyledTableCell align="center">Center</StyledTableCell>
                 <StyledTableCell align="center">PURCHASES</StyledTableCell>
               </TableRow>
             </TableHead>
-            {/* <TableBody>
-              {getState.data?.centers &&
-                getState.data.centers.map((row, index) => (
+            <TableBody>
+              {filterData.data?.clients &&
+                filterData.data.clients.map((row, index) => (
                   <StyledTableRow key={`table_row_${index}`}>
                     <StyledTableCell component="th" scope="row">
+                      <Typography color="primary.main">
+                        {row.company}
+                      </Typography>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
                       {row.center_id}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {`${row.address.city} ${row.address.country}`}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.referer_center_id}
-                    </StyledTableCell>
-                    <StyledTableCell align="center"></StyledTableCell>
                     <StyledTableCell align="center"></StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -206,13 +197,13 @@ const HQClientsPage = () => {
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
-            </TableBody> */}
+            </TableBody>
             <TableFooter>
-              {/* <TableRow>
+              <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={5}
-                  // count={!getState.data ? 0 : getState.data.filtered_counts}
+                  count={!filterData.data ? 0 : filterData.data.filtered_counts}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
@@ -225,7 +216,7 @@ const HQClientsPage = () => {
                   onRowsPerPageChange={handleChangeRowsPerPage}
                   ActionsComponent={TablePaginationActions}
                 />
-              </TableRow> */}
+              </TableRow>
             </TableFooter>
           </Table>
         </TableContainer>
