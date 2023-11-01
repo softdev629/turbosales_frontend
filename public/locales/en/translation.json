@@ -224,10 +224,23 @@
     "income": "Income",
     "month": "Month",
     "year": "Year",
-    "membership_packs": "Membership Packs",
-    "franchise_starter_kits": "Franchise Starter Kits",
-    "marketing _services": "Marketing Services",
-    "international_sales": "International Sales"
+    "membership_packs": {
+      "0": "Membership",
+      "1": "Packs"
+    },
+    "franchise_starter_kits": {
+      "0": "Franchise",
+      "1": "Starter Kits"
+    },
+    "tiktok_services": {
+      "0": "TikTok",
+      "1": "Services"
+    },
+    "international_sales": "INTERNATIONAL SALES",
+    "ai_center": "AI Center",
+    "ai_centers_big": "AI CENTERS",
+    "members": "Members",
+    "sales": "Sales"
   },
   "hq_settings": {
     "add_new_center": "ADD NEW CENTER",

@@ -214,10 +214,18 @@
     "income": "收入",
     "month": "月",
     "year": "年",
-    "membership_packs": "会员礼包",
-    "franchise_starter_kits": "特许经营入门套件",
-    "marketing _services": "营销服务",
-    "international_sales": "国际销售"
+    "membership_packs": {
+      "0": "会员",
+      "1": "礼包"
+    },
+    "franchise_starter_kits": {
+      "0": "特许经营",
+      "1": "入门套件"
+    },
+    "tiktok_services": {
+      "0": "TikTok",
+      "1": "服务"
+    }
   },
   "hq_settings": {
     "add_new_center": "添加新中心",
