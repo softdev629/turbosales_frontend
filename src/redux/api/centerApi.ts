@@ -65,6 +65,16 @@ export const centerApi = createApi({
         },
       }
     ),
+    getAllCenters: builder.query<string[], void>({
+      query() {
+        return {
+          url: "/centers/all",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: { center_id: string }[] }) =>
+        result.data.map((item) => item.center_id),
+    }),
   }),
 });
 
@@ -74,4 +84,5 @@ export const {
   useGetCenterSettingsQuery,
   useLazyGetCenterSettingsQuery,
   useUpdateCenterSettingsMutation,
+  useGetAllCentersQuery,
 } = centerApi;

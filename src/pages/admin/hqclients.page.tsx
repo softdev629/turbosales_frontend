@@ -28,31 +28,36 @@ import {
   TablePaginationActions,
 } from "./hqcenters.page";
 
-import { useLazyGetCentersQuery } from "../../redux/api/centerApi";
+import {
+  useGetAllCentersQuery,
+  useLazyGetCentersQuery,
+} from "../../redux/api/centerApi";
 
-import CenterModal from "../../components/modals/center.modal";
+import ClientModal from "../../components/modals/client.modal";
 
 const HQClientsPage = () => {
-  const [openCenter, setOpenCenter] = useState(false);
+  const [openClient, setOpenClient] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [country, setCountry] = useState("");
   const [search, setSearch] = useState("");
-  const [level, setLevel] = useState("");
+  const [center, setCenter] = useState("");
 
-  const [getClients, getState] = useLazyGetCentersQuery();
+  const centersData = useGetAllCentersQuery();
+
+  // const [getClients, getState] = useLazyGetCentersQuery();
 
   useEffect(() => {
-    getClients({ page, rowsPerPage, country, level, search });
+    // getClients({ page, rowsPerPage, country, level, search });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, country, level, search, rowsPerPage]);
+  }, [page, country, center, search, rowsPerPage]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = !getState.data
-    ? rowsPerPage
-    : page > 0
-    ? Math.max(0, (1 + page) * rowsPerPage - getState.data.filtered_counts)
-    : 0;
+  // const emptyRows = !getState.data
+  //   ? rowsPerPage
+  //   : page > 0
+  //   ? Math.max(0, (1 + page) * rowsPerPage - getState.data.filtered_counts)
+  //   : 0;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -124,20 +129,21 @@ const HQClientsPage = () => {
           <Box display="flex" gap={3} flexWrap="wrap">
             <Box width={288}>
               <FormControl fullWidth>
-                <InputLabel id="level-name-label">Level</InputLabel>
+                <InputLabel id="level-name-label">AI Center</InputLabel>
                 <Select
                   labelId="level-name-label"
                   id="level-name-select"
-                  label="Level"
+                  label="AI Center"
                   defaultValue=""
                   onChange={(event) => {
-                    setLevel(event.target.value);
+                    setCenter(event.target.value);
                   }}
                 >
-                  <MenuItem value="bronze">Bronze</MenuItem>
-                  <MenuItem value="silver">Silver</MenuItem>
-                  <MenuItem value="gold">Gold</MenuItem>
-                  <MenuItem value="platinum">Platinum</MenuItem>
+                  {centersData.data?.map((item, index) => (
+                    <MenuItem key={`center_item_${index}`} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>
@@ -156,13 +162,13 @@ const HQClientsPage = () => {
           px={{ md: 4 }}
         >
           <Typography>
-            CENTERS{" "}
+            CLIENTS{" "}
             <Box component="span" color="primary.main" fontSize={25} ml={3}>
-              {getState.data?.total_counts.toLocaleString()}
+              {/* {getState.data?.total_counts.toLocaleString()} */}
             </Box>
           </Typography>
-          <Button variant="contained" onClick={() => setOpenCenter(true)}>
-            NEW CENTER
+          <Button variant="contained" onClick={() => setOpenClient(true)}>
+            ADD CLIENT
           </Button>
         </Box>
         <TableContainer sx={{ px: 4, mt: 3 }}>
@@ -178,7 +184,7 @@ const HQClientsPage = () => {
                 <StyledTableCell align="center">PURCHASES</StyledTableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            {/* <TableBody>
               {getState.data?.centers &&
                 getState.data.centers.map((row, index) => (
                   <StyledTableRow key={`table_row_${index}`}>
@@ -200,13 +206,13 @@ const HQClientsPage = () => {
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
-            </TableBody>
+            </TableBody> */}
             <TableFooter>
-              <TableRow>
+              {/* <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   colSpan={5}
-                  count={!getState.data ? 0 : getState.data.filtered_counts}
+                  // count={!getState.data ? 0 : getState.data.filtered_counts}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
@@ -219,12 +225,12 @@ const HQClientsPage = () => {
                   onRowsPerPageChange={handleChangeRowsPerPage}
                   ActionsComponent={TablePaginationActions}
                 />
-              </TableRow>
+              </TableRow> */}
             </TableFooter>
           </Table>
         </TableContainer>
       </Container>
-      <CenterModal open={openCenter} setOpen={setOpenCenter} />
+      <ClientModal open={openClient} setOpen={setOpenClient} />
     </>
   );
 };
