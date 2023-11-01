@@ -160,28 +160,21 @@ const CommissionsPage = () => {
               py={1}
             >
               <Typography
-                width="25%"
+                width="33%"
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
                 {t("home.common.company")}
               </Typography>
               <Typography
-                width="25%"
+                width="33%"
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
                 {t("contact.title")}
               </Typography>
               <Typography
-                width="25%"
-                sx={{ color: "#595959" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                {t("home.common.pitch")}
-              </Typography>
-              <Typography
-                width="25%"
+                width="33%"
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
@@ -190,28 +183,21 @@ const CommissionsPage = () => {
             </Box>
             <Box display="flex">
               <Typography
-                width="25%"
+                width="33%"
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
                 ABC
               </Typography>
               <Typography
-                width="25%"
+                width="33%"
                 textAlign="center"
                 fontSize={{ md: 18, xs: 12 }}
               >
                 Amy Adams
               </Typography>
               <Typography
-                width="25%"
-                textAlign="center"
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                2023-02-13
-              </Typography>
-              <Typography
-                width="25%"
+                width="33%"
                 textAlign="center"
                 fontSize={{ md: 18, xs: 12 }}
               >
@@ -220,58 +206,42 @@ const CommissionsPage = () => {
             </Box>
             <Box display="flex">
               <Typography
-                width="25%"
+                width="33%"
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
                 DEF
               </Typography>
               <Typography
-                width="25%"
+                width="33%"
                 textAlign="center"
                 fontSize={{ md: 18, xs: 12 }}
               >
                 Barry. Brad
               </Typography>
               <Typography
-                width="25%"
+                width="33%"
                 textAlign="center"
                 fontSize={{ md: 18, xs: 12 }}
-              >
-                2023-02-14
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                Not yet
-              </Typography>
+              ></Typography>
             </Box>
             <Box display="flex">
               <Typography
-                width="25%"
+                width="33%"
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
                 GHI
               </Typography>
               <Typography
-                width="25%"
+                width="33%"
                 textAlign="center"
                 fontSize={{ md: 18, xs: 12 }}
               >
                 Cindy Craw
               </Typography>
               <Typography
-                width="25%"
-                textAlign="center"
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                2023-03-15
-              </Typography>
-              <Typography
-                width="25%"
+                width="33%"
                 textAlign="center"
                 fontSize={{ md: 18, xs: 12 }}
               >
@@ -321,7 +291,7 @@ const CommissionsPage = () => {
                 sx={{ color: "#595959" }}
                 fontSize={{ md: 18, xs: 12 }}
               >
-                {t("home.common.price")}
+                {t("my_clients.purchases")}
               </Typography>
               <Typography
                 width="30%"
