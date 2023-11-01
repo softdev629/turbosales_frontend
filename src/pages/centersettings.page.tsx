@@ -385,7 +385,7 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
               </Box>
-              <Box
+              {/* <Box
                 width="30%"
                 border="1px solid #D9D9D9"
                 bgcolor="rgba(234, 32, 73, 0.1)"
@@ -450,7 +450,7 @@ const CenterSettingsPage = () => {
                     </FormControl>
                   </Box>
                 </Box>
-              </Box>
+              </Box> */}
               <Box
                 width="30%"
                 border="1px solid #D9D9D9"
@@ -516,7 +516,7 @@ const CenterSettingsPage = () => {
                   </Box>
                 </Box>
               </Box>
-              <Box
+              {/* <Box
                 width="30%"
                 border="1px solid #D9D9D9"
                 bgcolor="rgba(133, 220, 255, 0.2)"
@@ -582,7 +582,7 @@ const CenterSettingsPage = () => {
                     </FormControl>
                   </Box>
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
         </Box>
