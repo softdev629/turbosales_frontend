@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
 import { ICenterSettings, ICenters, IGenericResponse } from "./types";
 import { NewCenterSaveSchema } from "../../components/modals/center.modal";
-import { setSettings } from "../features/centerSlice";
+import { setSettings, setCenters } from "../features/centerSlice";
 
 export const centerApi = createApi({
   reducerPath: "centerApi",
@@ -74,6 +74,12 @@ export const centerApi = createApi({
       },
       transformResponse: (result: { data: { center_id: string }[] }) =>
         result.data.map((item) => item.center_id),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setCenters(data));
+        } catch (error) {}
+      },
     }),
   }),
 });

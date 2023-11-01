@@ -104,7 +104,7 @@
     }
   },
   "my_clients": {
-    "add_client": "Add Client",
+    "add_client": "ADD CLIENT",
     "status": "Status",
     "pitch": "Pitch",
     "member": "Member",
@@ -196,7 +196,8 @@
   },
   "hq_clients": {
     "country": "Country",
-    "center": "Center"
+    "center": "Center",
+    "clients": "CLIENTS"
   },
   "hq_centers": {
     "new_center": "NEW CENTER",
@@ -204,7 +205,7 @@
     "center_id": "CENTER ID",
     "referer_center_id": "REFERER CENTER ID",
     "level": "LEVEL",
-    "purchaes": "PURCHASES"
+    "purchases": "PURCHASES"
   },
   "hq_dashboard": {
     "year_stats": "YEAR STATS",

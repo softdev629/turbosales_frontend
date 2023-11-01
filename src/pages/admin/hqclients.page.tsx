@@ -32,8 +32,11 @@ import { useGetAllCentersQuery } from "../../redux/api/centerApi";
 import { useLazyFilterClientsQuery } from "../../redux/api/clientApi";
 
 import ClientModal from "../../components/modals/client.modal";
+import { useTranslation } from "react-i18next";
 
 const HQClientsPage = () => {
+  const { t } = useTranslation();
+
   const [openClient, setOpenClient] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -111,7 +114,7 @@ const HQClientsPage = () => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Choose a country"
+                label={t("home.common.choose_country")}
                 inputProps={{
                   ...params.inputProps,
                   autoComplete: "new-password", // disable autocomplete and autofill
@@ -126,11 +129,13 @@ const HQClientsPage = () => {
           <Box display="flex" gap={3} flexWrap="wrap">
             <Box width={288}>
               <FormControl fullWidth>
-                <InputLabel id="level-name-label">AI Center</InputLabel>
+                <InputLabel id="center-label">
+                  {t("hq_dashboard.ai_center")}
+                </InputLabel>
                 <Select
-                  labelId="level-name-label"
-                  id="level-name-select"
-                  label="AI Center"
+                  labelId="center-label"
+                  id="center-select"
+                  label={t("hq_dashboard.ai_center")}
                   defaultValue=""
                   onChange={(event) => {
                     setCenter(event.target.value);
@@ -145,7 +150,7 @@ const HQClientsPage = () => {
               </FormControl>
             </Box>
             <TextField
-              label="Search"
+              label={t("my_clients.search")}
               onChange={(event) => {
                 setSearch(event.target.value);
               }}
@@ -159,13 +164,13 @@ const HQClientsPage = () => {
           px={{ md: 4 }}
         >
           <Typography>
-            CLIENTS{" "}
+            {t("hq_clients.clients")}
             <Box component="span" color="primary.main" fontSize={25} ml={3}>
-              {/* {getState.data?.total_counts.toLocaleString()} */}
+              {filterData.data?.total_counts.toLocaleString()}
             </Box>
           </Typography>
           <Button variant="contained" onClick={() => setOpenClient(true)}>
-            ADD CLIENT
+            {t("my_clients.add_client")}
           </Button>
         </Box>
         <TableContainer sx={{ px: 4, mt: 3 }}>

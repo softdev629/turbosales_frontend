@@ -645,7 +645,7 @@ const DashboardPage = () => {
                 {t("contact.title")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
-                {t("home.common.pitch")}
+                {t("dashboard.referrer")}
               </Typography>
               <Typography width="25%" sx={{ color: "#595959" }}>
                 {t("home.testdrive")}
@@ -658,9 +658,7 @@ const DashboardPage = () => {
               <Typography width="25%" textAlign="center">
                 Amy Adams
               </Typography>
-              <Typography width="25%" textAlign="center">
-                2023-02-13
-              </Typography>
+              <Typography width="25%" textAlign="center"></Typography>
               <Typography width="25%" textAlign="right">
                 2023-02-21
               </Typography>
@@ -673,7 +671,7 @@ const DashboardPage = () => {
                 Barry. Brad
               </Typography>
               <Typography width="25%" textAlign="center">
-                2023-02-14
+                ABC
               </Typography>
               <Typography width="25%" textAlign="right">
                 Not yet
@@ -687,7 +685,7 @@ const DashboardPage = () => {
                 Cindy Craw
               </Typography>
               <Typography width="25%" textAlign="center">
-                2023-03-15
+                DEF
               </Typography>
               <Typography width="25%" textAlign="right">
                 2023-03-18
