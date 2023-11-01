@@ -115,9 +115,9 @@ const CommissionsPage = () => {
               500
             </Typography>
             <Typography>
-              {t("commissions.pitches_made.0")}
+              {t("commissions.testdrives_made.0")}
               <br />
-              {t("commissions.pitches_made.1")}
+              {t("commissions.testdrives_made.1")}
             </Typography>
           </Box>
           <Box textAlign="center">

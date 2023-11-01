@@ -123,8 +123,8 @@
       "0": "All-time",
       "1": "Commissions"
     },
-    "pitches_made": {
-      "0": "Pitches",
+    "testdrives_made": {
+      "0": "Test Drives",
       "1": "Made"
     },
     "members_paid": {
