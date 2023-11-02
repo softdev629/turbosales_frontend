@@ -8,10 +8,19 @@ import { ReactComponent as MembersPaidIcon } from "../assets/images/ico_memebers
 import { ReactComponent as ContactIcon } from "../assets/images/ico_contact.svg";
 
 import { useAppSelector } from "../redux/store";
+import { useGetCommissionsQuery } from "../redux/api/transactionApi";
+import FullScreenLoader from "../components/FullscreenLoader";
 
 const CommissionsPage = () => {
   const user = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
+
+  const commissionData = useGetCommissionsQuery();
+
+  if (!commissionData.data || commissionData.isLoading)
+    return <FullScreenLoader />;
+
+  console.log(commissionData);
 
   return (
     <>
@@ -74,7 +83,7 @@ const CommissionsPage = () => {
               fontWeight={700}
               fontSize={{ md: 32, xs: 18 }}
             >
-              €1,000
+              €{commissionData.data.upcomingCommissions.toLocaleString()}
             </Typography>
             <Typography>
               {t("commissions.upcoming_commissions.0")}
