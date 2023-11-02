@@ -104,7 +104,7 @@ const CommissionsPage = () => {
               fontSize={{ md: 32, xs: 18 }}
               fontWeight={700}
             >
-              €10,000
+              €{commissionData.data.alltimeCommissions.toLocaleString()}
             </Typography>
             <Typography>
               {t("commissions.all_time_commissions.0")}

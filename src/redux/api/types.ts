@@ -112,3 +112,8 @@ export interface IClientTableItem {
   company: string;
   center_id: string;
 }
+
+export interface ICommissionData {
+  upcomingCommissions: number;
+  alltimeCommissions: number;
+}
