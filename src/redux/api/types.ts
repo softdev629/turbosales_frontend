@@ -116,4 +116,5 @@ export interface IClientTableItem {
 export interface ICommissionData {
   upcomingCommissions: number;
   alltimeCommissions: number;
+  testdrivesMade: number;
 }

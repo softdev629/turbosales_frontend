@@ -121,7 +121,7 @@ const CommissionsPage = () => {
               fontSize={{ md: 32, xs: 18 }}
               fontWeight={700}
             >
-              500
+              {commissionData.data.testdrivesMade}
             </Typography>
             <Typography>
               {t("commissions.testdrives_made.0")}
