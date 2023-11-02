@@ -117,4 +117,5 @@ export interface ICommissionData {
   upcomingCommissions: number;
   alltimeCommissions: number;
   testdrivesMade: number;
+  membersPaid: number;
 }

@@ -138,7 +138,7 @@ const CommissionsPage = () => {
               fontSize={{ md: 32, xs: 18 }}
               fontWeight={700}
             >
-              50
+              {commissionData.data.membersPaid}
             </Typography>
             <Typography>
               {t("commissions.members_paid.0")}
@@ -146,7 +146,7 @@ const CommissionsPage = () => {
             </Typography>
           </Box>
         </Box>
-        <Box display="flex" justifyContent="center">
+        {/* <Box display="flex" justifyContent="center">
           <Stack
             width={{ md: "70%", xs: "100%" }}
             border="1px solid #D9D9D9"
@@ -258,7 +258,7 @@ const CommissionsPage = () => {
               </Typography>
             </Box>
           </Stack>
-        </Box>
+        </Box> */}
         <Box display="flex" justifyContent="center" mt={4}>
           <Stack
             width={{ md: "70%", xs: "100%" }}
