@@ -23,9 +23,15 @@ import { ReactComponent as MarketingIcon } from "../../assets/images/ico_marketi
 // import { ReactComponent as GiftIcon } from "../../assets/images/ico_gift.svg";
 // import MoneyBagIcon from "../../assets/images/ico_moneybag.svg";
 import { ReactComponent as ContactIcon } from "../../assets/images/ico_contact.svg";
+import { useGetHQDashboardQuery } from "../../redux/api/transactionApi";
+import FullScreenLoader from "../../components/FullscreenLoader";
+import { formatNumber } from "../../util";
 
 const HQDashboardPage = () => {
   const { t } = useTranslation();
+  const stats = useGetHQDashboardQuery();
+
+  if (!stats.data || stats.isLoading) return <FullScreenLoader />;
 
   return (
     <>
@@ -47,7 +53,7 @@ const HQDashboardPage = () => {
                 <BoxIcon />
               </SvgIcon>
               <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
-                500
+                {stats.data.aiCenters}
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
                 {t("hq_dashboard.ai_centers.0")}
@@ -63,7 +69,7 @@ const HQDashboardPage = () => {
                 height={40}
               />
               <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
-                €100.6M
+                €{formatNumber(stats.data.totalIncome)}
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
                 {t("hq_dashboard.total_income.0")}
@@ -76,7 +82,7 @@ const HQDashboardPage = () => {
                 <MembersIcon />
               </SvgIcon>
               <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
-                50.2K
+                {formatNumber(stats.data.totalMembers)}
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
                 {t("hq_dashboard.total_members.0")}
@@ -89,7 +95,7 @@ const HQDashboardPage = () => {
                 <MoneyIcon />
               </SvgIcon>
               <Typography color="white" mt={2} fontSize={{ md: 32, xs: 18 }}>
-                €500.9M
+                €{formatNumber(stats.data.gmv)}
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
                 {t("hq_dashboard.gmv")}

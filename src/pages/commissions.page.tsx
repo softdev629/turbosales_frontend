@@ -20,8 +20,6 @@ const CommissionsPage = () => {
   if (!commissionData.data || commissionData.isLoading)
     return <FullScreenLoader />;
 
-  console.log(commissionData);
-
   return (
     <>
       <Container sx={{ mt: 20 }}>

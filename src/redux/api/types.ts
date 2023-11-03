@@ -125,3 +125,10 @@ export interface ICommissionData {
     commissions: number;
   }[];
 }
+
+export interface IHQDashboardData {
+  aiCenters: number;
+  totalIncome: number;
+  totalMembers: number;
+  gmv: number;
+}

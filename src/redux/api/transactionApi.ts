@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
 import customFetchBase from "./customFetchBase";
-import { ICommissionData, IGenericResponse } from "./types";
+import { ICommissionData, IHQDashboardData } from "./types";
 
 export const transactionApi = createApi({
   reducerPath: "transactionApi",
@@ -15,7 +15,17 @@ export const transactionApi = createApi({
       },
       transformResponse: (result: { data: ICommissionData }) => result.data,
     }),
+    getHQDashboard: builder.query<IHQDashboardData, void>({
+      query() {
+        return {
+          url: "/hq_dashboard",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: IHQDashboardData }) => result.data,
+    }),
   }),
 });
 
-export const { useGetCommissionsQuery } = transactionApi;
+export const { useGetCommissionsQuery, useGetHQDashboardQuery } =
+  transactionApi;

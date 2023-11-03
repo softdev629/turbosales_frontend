@@ -96,10 +96,7 @@ const MyClientsPage = () => {
               {getClients.data &&
                 getClients.data.map((row, index) =>
                   row.company.includes(search) || row.name.includes(search) ? (
-                    <StyledTableRow
-                      key={`table_row_${index}`}
-                      // sx={{ bgcolor: "white" }}
-                    >
+                    <StyledTableRow key={`table_row_${index}`}>
                       <StyledTableCell component="th" scope="row">
                         <Typography color="primary.main">
                           {row.company}
