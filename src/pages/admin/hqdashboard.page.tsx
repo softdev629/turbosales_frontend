@@ -148,7 +148,7 @@ const HQDashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €2K
+              €{formatNumber(stats.data.month_membership_packs)}
             </Typography>
             <Typography
               width="25%"
@@ -156,7 +156,7 @@ const HQDashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €10K
+              €{formatNumber(stats.data.year_membership_packs)}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
@@ -182,7 +182,7 @@ const HQDashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €10K
+              €{formatNumber(stats.data.month_frenchise_kits)}
             </Typography>
             <Typography
               width="25%"
@@ -190,7 +190,7 @@ const HQDashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €100.3K
+              €{formatNumber(stats.data.year_frenchise_kits)}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>

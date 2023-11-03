@@ -131,4 +131,8 @@ export interface IHQDashboardData {
   totalIncome: number;
   totalMembers: number;
   gmv: number;
+  month_membership_packs: number;
+  year_membership_packs: number;
+  month_frenchise_kits: number;
+  year_frenchise_kits: number;
 }
