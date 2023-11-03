@@ -78,25 +78,10 @@ const ClientModal = (props: {
 }) => {
   const { t } = useTranslation();
 
-  const [salesReferalLink, setSalesReferalLink] = useState("");
   const user = useAppSelector((state) => state.userState.user);
   const centers = useAppSelector((state) => state.centerState.centers);
 
   const [addClient, addState] = useAddClientMutation();
-
-  useEffect(() => {
-    if (user?.role === "admin") return;
-    fetch(
-      `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
-      {
-        credentials: "include",
-      }
-    )
-      .then((res) => res.json())
-      .then((data: { sales_rep_referal_link: string }) =>
-        setSalesReferalLink(data.sales_rep_referal_link)
-      );
-  }, [props.open]);
 
   useEffect(() => {
     if (addState.isSuccess) {
@@ -184,21 +169,7 @@ const ClientModal = (props: {
                             },
                           }}
                           value={value}
-                          onChange={() => {
-                            fetch(
-                              `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link`,
-                              {
-                                credentials: "include",
-                              }
-                            )
-                              .then((res) => res.json())
-                              .then(
-                                (data: { sales_rep_referal_link: string }) =>
-                                  setSalesReferalLink(
-                                    data.sales_rep_referal_link
-                                  )
-                              );
-                          }}
+                          onChange={onChange}
                           error={!!errors["center_id"]}
                           fullWidth
                         />
@@ -216,18 +187,6 @@ const ClientModal = (props: {
                         label={t("hq_dashboard.ai_center")}
                         defaultValue=""
                         size="small"
-                        onChange={(event) => {
-                          fetch(
-                            `${process.env.REACT_APP_SERVER_ENDPOINT}/api/clients/sales-rep-referal-link?center_id=${event.target.value}`,
-                            {
-                              credentials: "include",
-                            }
-                          )
-                            .then((res) => res.json())
-                            .then((data: { sales_rep_referal_link: string }) =>
-                              setSalesReferalLink(data.sales_rep_referal_link)
-                            );
-                        }}
                       >
                         {centers.map((item, index) => (
                           <MenuItem key={`center_item_${index}`} value={item}>
@@ -236,53 +195,6 @@ const ClientModal = (props: {
                         ))}
                       </Select>
                     </FormControl>
-                  )}
-                </Box>
-                <Box width={288}>
-                  {user?.role !== "admin" ? (
-                    <Controller
-                      control={control}
-                      name="sales_rep_referal_link"
-                      defaultValue={salesReferalLink}
-                      render={({ field: { onChange, value } }) => (
-                        <TextField
-                          required
-                          label={t(
-                            "home.new_client_modal.sales_rep_referal_link"
-                          )}
-                          helperText={errors["sales_rep_referal_link"]?.message}
-                          fullWidth
-                          size="small"
-                          disabled
-                          sx={{
-                            ".Mui-disabled": {
-                              bgcolor: "rgba(217, 217,217, .41)",
-                            },
-                            ".MuiInputBase-input": {
-                              textAlign: "center",
-                            },
-                          }}
-                          value={value}
-                          onChange={onChange}
-                        />
-                      )}
-                    />
-                  ) : (
-                    <TextField
-                      label={t("home.new_client_modal.sales_rep_referal_link")}
-                      fullWidth
-                      size="small"
-                      disabled
-                      sx={{
-                        ".Mui-disabled": {
-                          bgcolor: "rgba(217, 217,217, .41)",
-                        },
-                        ".MuiInputBase-input": {
-                          textAlign: "center",
-                        },
-                      }}
-                      value={salesReferalLink}
-                    />
                   )}
                 </Box>
               </Box>

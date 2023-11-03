@@ -118,4 +118,10 @@ export interface ICommissionData {
   alltimeCommissions: number;
   testdrivesMade: number;
   membersPaid: number;
+  membersData: {
+    company: string;
+    expiration: string;
+    purchases: number;
+    commissions: number;
+  }[];
 }

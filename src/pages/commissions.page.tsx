@@ -310,102 +310,40 @@ const CommissionsPage = () => {
                 {t("header.commissions")}
               </Typography>
             </Box>
-            <Box display="flex">
-              <Typography
-                width="25%"
-                sx={{ color: "#595959" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                ABC
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                2023-02-13
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                sx={{ overflowWrap: "break-word" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                €2,000.00
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                sx={{ overflowWrap: "break-word" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                €300.00
-              </Typography>
-            </Box>
-            <Box display="flex">
-              <Typography
-                width="25%"
-                sx={{ color: "#595959" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                DEF
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                2023-02-14
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                sx={{ overflowWrap: "break-word" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                Not yet
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                sx={{ overflowWrap: "break-word" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                NA
-              </Typography>
-            </Box>
-            <Box display="flex">
-              <Typography
-                width="25%"
-                sx={{ color: "#595959" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                GHI
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                2023-03-15
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                sx={{ overflowWrap: "break-word" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                €60,000.00
-              </Typography>
-              <Typography
-                width="25%"
-                textAlign="center"
-                sx={{ overflowWrap: "break-word" }}
-                fontSize={{ md: 18, xs: 12 }}
-              >
-                €3,000.00
-              </Typography>
-            </Box>
+            {commissionData.data.membersData.map((item, index) => (
+              <Box display="flex" key={`members_paid_item_${index}`}>
+                <Typography
+                  width="25%"
+                  sx={{ color: "#595959" }}
+                  fontSize={{ md: 18, xs: 12 }}
+                >
+                  {item.company}
+                </Typography>
+                <Typography
+                  width="25%"
+                  textAlign="center"
+                  fontSize={{ md: 18, xs: 12 }}
+                >
+                  {item.expiration}
+                </Typography>
+                <Typography
+                  width="25%"
+                  textAlign="center"
+                  sx={{ overflowWrap: "break-word" }}
+                  fontSize={{ md: 18, xs: 12 }}
+                >
+                  €{item.purchases}
+                </Typography>
+                <Typography
+                  width="25%"
+                  textAlign="center"
+                  sx={{ overflowWrap: "break-word" }}
+                  fontSize={{ md: 18, xs: 12 }}
+                >
+                  €{item.commissions}
+                </Typography>
+              </Box>
+            ))}
           </Stack>
         </Box>
       </Container>
