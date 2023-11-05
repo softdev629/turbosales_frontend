@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Typography,
@@ -9,16 +9,28 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  TextField,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { LoadingButton } from "@mui/lab";
 
 import CenterModal from "../../components/modals/center.modal";
 import { ReactComponent as PlusIcon } from "../../assets/images/ico_plus.svg";
 import { ReactComponent as MinusIcon } from "../../assets/images/ico_minus.svg";
+import {
+  useGetTermsQuery,
+  useUpdateTermsMutation,
+} from "../../redux/api/authApi";
+import { toast } from "react-toastify";
 
 const HQSettingsPage = () => {
   const { t } = useTranslation();
   const [openCenter, setOpenSenter] = useState(false);
+
+  const termsData = useGetTermsQuery();
+  const [updateTerms, termsStatus] = useUpdateTermsMutation();
+
+  const [terms, setTerms] = useState("");
 
   // const [hqSettings, setHQSettings] = useState<{
   //   center_referal_amount: number;
@@ -26,6 +38,18 @@ const HQSettingsPage = () => {
   //   tiktok_spending_amount: number;
   //   tiktok_spending_type: string;
   // }>();
+
+  useEffect(() => {
+    if (termsData.isSuccess) {
+      setTerms(termsData.data);
+    }
+  }, [termsData]);
+
+  useEffect(() => {
+    if (termsStatus.isSuccess) {
+      toast.success("Terms saved successfully.");
+    }
+  }, [termsStatus]);
 
   return (
     <>
@@ -176,6 +200,36 @@ const HQSettingsPage = () => {
                 </Box>
               </Box>
             </Box>
+          </Box>
+        </Box>
+        <Box display="flex" justifyContent="center" mt={8}>
+          <Box
+            maxWidth={1000}
+            width="100%"
+            bgcolor="rgba(217, 217, 217, 0.2)"
+            borderRadius={4}
+            p={6}
+          >
+            <Box display="flex" justifyContent="space-between">
+              <Typography color="primary.main" variant="h5">
+                {t("hq_settings.set_terms")}
+              </Typography>
+              <LoadingButton
+                variant="contained"
+                onClick={() => updateTerms({ terms })}
+                loading={termsStatus.isLoading}
+              >
+                {t("hq_settings.save")}
+              </LoadingButton>
+            </Box>
+            <TextField
+              multiline
+              fullWidth
+              sx={{ mt: 4, bgcolor: "white" }}
+              rows={30}
+              value={terms}
+              onChange={(event) => setTerms(event.target.value)}
+            />
           </Box>
         </Box>
         <CenterModal open={openCenter} setOpen={setOpenSenter} />

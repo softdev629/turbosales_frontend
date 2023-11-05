@@ -21,6 +21,8 @@ export interface IUser {
   mobile?: string;
   role: string;
   center_id?: string;
+  is_freeze?: boolean;
+  referral_link?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -135,4 +137,11 @@ export interface IHQDashboardData {
   year_membership_packs: number;
   month_frenchise_kits: number;
   year_frenchise_kits: number;
+}
+
+export interface IDashboardData {
+  month_membership_sales: number;
+  year_membership_sales: number;
+  month_ai_referral: number;
+  year_ai_referral: number;
 }

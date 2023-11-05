@@ -25,14 +25,38 @@ export const authApi = createApi({
       },
     }),
     logoutUser: builder.mutation<IGenericResponse, void>({
-      query(data) {
+      query() {
         return {
           url: "/auth/logout",
           credentials: "include",
         };
       },
     }),
+    getTerms: builder.query<string, void>({
+      query() {
+        return {
+          url: "/terms",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: string }) => result.data,
+    }),
+    updateTerms: builder.mutation<IGenericResponse, { terms: string }>({
+      query(data) {
+        return {
+          method: "PATCH",
+          url: "/terms",
+          credentials: "include",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useLogoutUserMutation } = authApi;
+export const {
+  useLoginUserMutation,
+  useLogoutUserMutation,
+  useGetTermsQuery,
+  useUpdateTermsMutation,
+} = authApi;
