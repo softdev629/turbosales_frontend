@@ -71,9 +71,8 @@ const MyClientsPage = () => {
           />
         </Box>
         <Typography textAlign="center" color="#999999" mt={5}>
-          {t("my_clients.status")}: P = {t("my_clients.pitch")}, T ={" "}
-          {t("home.testdrive")}, M = {t("my_clients.member")} (
-          {t("commissions.members_paid.1")})
+          {t("my_clients.status")}: T = {t("home.testdrive")}, M ={" "}
+          {t("my_clients.member")} ({t("commissions.members_paid.1")})
         </Typography>
 
         <TableContainer sx={{ px: 4, mt: 3 }}>

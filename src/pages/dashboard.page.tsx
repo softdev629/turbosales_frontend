@@ -27,12 +27,14 @@ import { useGetDashboardQuery } from "../redux/api/transactionApi";
 import FullScreenLoader from "../components/FullscreenLoader";
 import { formatNumber } from "../util";
 import { useGetCenterInfoQuery } from "../redux/api/centerApi";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
   const user = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
   const dashboardData = useGetDashboardQuery();
   const centerData = useGetCenterInfoQuery();
+  const navigate = useNavigate();
 
   if (!dashboardData.data || !centerData.data) return <FullScreenLoader />;
 
@@ -289,12 +291,16 @@ const DashboardPage = () => {
                 {t("dashboard.membership_remaining")}:
               </Typography>
               <Typography color="primary.main" fontSize={{ md: 44, xs: 24 }}>
-                80
+                {centerData.data.membership_remaining}
               </Typography>
             </Box>
             <Button
               variant="contained"
               sx={{ height: { md: 48, xs: 36 }, fontSize: { md: 18, xs: 12 } }}
+              onClick={() => {
+                if (centerData.data?.subdomain)
+                  window.location.href = `https://${centerData.data?.subdomain}`;
+              }}
             >
               {t("dashboard.recharge")}
             </Button>
@@ -305,7 +311,11 @@ const DashboardPage = () => {
             bgcolor="rgba(217, 217, 217, 0.5)"
             mt={4}
           >
-            <Box bgcolor="#4CC366" width="80%" height="100%" />
+            <Box
+              bgcolor="#4CC366"
+              width={`${centerData.data.membership_remaining}%`}
+              height="100%"
+            />
           </Box>
           <Box display="flex" justifyContent="space-between" mt={1}>
             {[0, 25, 50, 75, 100].map((item, index) => (
@@ -321,7 +331,7 @@ const DashboardPage = () => {
                 <TestdriveIcon />
               </SvgIcon>
               <Typography variant="h4" color="white" mt={2}>
-                100
+                {dashboardData.data.month_testdrives}
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
                 {t("hq_dashboard.month")}
@@ -334,7 +344,7 @@ const DashboardPage = () => {
                 <MembersIcon />
               </SvgIcon>
               <Typography variant="h4" color="white" mt={2}>
-                500
+                {dashboardData.data.total_members}
               </Typography>
               <Typography color="#D9D9D9" textAlign="center" mt={1}>
                 {t("hq_dashboard.total_members.0")}
