@@ -23,10 +23,18 @@ import { ReactComponent as QuestionIcon } from "../assets/images/ico_question.sv
 import { ReactComponent as ContactIcon } from "../assets/images/ico_contact.svg";
 
 import { useAppSelector } from "../redux/store";
+import { useGetDashboardQuery } from "../redux/api/transactionApi";
+import FullScreenLoader from "../components/FullscreenLoader";
+import { formatNumber } from "../util";
+import { useGetCenterInfoQuery } from "../redux/api/centerApi";
 
 const DashboardPage = () => {
   const user = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
+  const dashboardData = useGetDashboardQuery();
+  const centerData = useGetCenterInfoQuery();
+
+  if (!dashboardData.data || !centerData.data) return <FullScreenLoader />;
 
   return (
     <>
@@ -75,7 +83,7 @@ const DashboardPage = () => {
                 {t("dashboard.level")}
               </Typography>
               <Typography variant="h5" color="white" width="40%">
-                Bronze
+                {centerData.data.level}
               </Typography>
             </Box>
           </Box>
@@ -133,7 +141,7 @@ const DashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €2K
+              €{formatNumber(dashboardData.data.month_membership_sales)}
             </Typography>
             <Typography
               width="25%"
@@ -141,7 +149,7 @@ const DashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €10K
+              €{formatNumber(dashboardData.data.year_membership_sales)}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
@@ -172,7 +180,7 @@ const DashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €10K
+              €{formatNumber(dashboardData.data.month_ai_referral)}
             </Typography>
             <Typography
               width="25%"
@@ -180,7 +188,7 @@ const DashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €100.3K
+              €{formatNumber(dashboardData.data.year_ai_referral)}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" p={2}>
@@ -200,7 +208,9 @@ const DashboardPage = () => {
                 width={{ md: 150, xs: 120 }}
                 fontSize={{ md: 24, xs: 18 }}
               >
-                {t("dashboard.marketing_services")}
+                {t("hq_dashboard.tiktok_services.0")}
+                <br />
+                {t("hq_dashboard.tiktok_services.1")}
               </Typography>
             </Box>
             <Typography
@@ -243,7 +253,7 @@ const DashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €2K
+              €{formatNumber(dashboardData.data.month_total_income)}
             </Typography>
             <Typography
               width="25%"
@@ -251,7 +261,7 @@ const DashboardPage = () => {
               color="primary.main"
               textAlign="center"
             >
-              €10K
+              €{formatNumber(dashboardData.data.year_total_income)}
             </Typography>
           </Box>
         </Box>

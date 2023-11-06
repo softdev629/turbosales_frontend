@@ -86,6 +86,7 @@ export interface ICenter {
   center_id: string;
   settings: ICenterSettings;
   subdomain: string;
+  level: string;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
@@ -144,4 +145,6 @@ export interface IDashboardData {
   year_membership_sales: number;
   month_ai_referral: number;
   year_ai_referral: number;
+  month_total_income: number;
+  year_total_income: number;
 }

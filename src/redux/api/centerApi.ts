@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
-import { ICenterSettings, ICenters, IGenericResponse } from "./types";
+import { ICenter, ICenterSettings, ICenters, IGenericResponse } from "./types";
 import { NewCenterSaveSchema } from "../../components/modals/center.modal";
 import { setSettings, setCenters } from "../features/centerSlice";
 
@@ -81,6 +81,15 @@ export const centerApi = createApi({
         } catch (error) {}
       },
     }),
+    getCenterInfo: builder.query<ICenter, void>({
+      query() {
+        return {
+          url: "/centers/info",
+          credentials: "include",
+        };
+      },
+      transformResponse: (result: { data: ICenter }) => result.data,
+    }),
   }),
 });
 
@@ -91,4 +100,5 @@ export const {
   useLazyGetCenterSettingsQuery,
   useUpdateCenterSettingsMutation,
   useGetAllCentersQuery,
+  useGetCenterInfoQuery,
 } = centerApi;
