@@ -83,6 +83,8 @@ export interface ICenter {
   owner: string;
   manager: string;
   address: IAddress;
+  center_email: string;
+  center_mobile: string;
   center_id: string;
   settings: ICenterSettings;
   subdomain: string;

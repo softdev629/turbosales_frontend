@@ -63,6 +63,12 @@ const newCenterSchema = object({
   city: string().min(1, "City is required"),
   zip_code: string().min(1, "Zip Code is required"),
   country: string().min(1, "Country is required"),
+  center_email: string()
+    .min(1, "Center email is required")
+    .email("Invalid email format"),
+  center_mobile: string()
+    .min(1, "Center mobile is required")
+    .regex(/^\+(?:[0-9] ?){6,14}[0-9]$/, "Invalid mobile format"),
   subdomain: string().min(1, "Subdomain is required"),
   center_id: string().min(1, "Center ID is required"),
 });
@@ -294,6 +300,20 @@ const CenterModal = (props: {
                     }}
                   />
                 )}
+              />
+              <TextField
+                {...register("center_email")}
+                label="Center Email"
+                size="small"
+                error={!!errors["center_email"]}
+                helperText={errors["center_email"]?.message}
+              />
+              <TextField
+                {...register("center_mobile")}
+                label="Center Mobile"
+                size="small"
+                error={!!errors["center_mobile"]}
+                helperText={errors["center_mobile"]?.message}
               />
               <Box
                 sx={{ border: "2px solid #ea2049" }}
